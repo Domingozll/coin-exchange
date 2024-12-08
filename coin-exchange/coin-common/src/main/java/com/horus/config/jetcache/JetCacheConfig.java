@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableCreateCacheAnnotation
-@EnableMethodCache(basePackages = "com.lx.service.impl")
+@EnableMethodCache(basePackages = "com.horus.service.impl")
 public class JetCacheConfig {
 
 }

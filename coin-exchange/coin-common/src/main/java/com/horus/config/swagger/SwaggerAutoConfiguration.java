@@ -37,7 +37,7 @@ public class SwaggerAutoConfiguration {
                 .select()
                 //给这个路径生成文档(给哪些接口生成文档 )
                  .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
-//                .apis(RequestHandlerSelectors.basePackage("com.lx.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("com.horus.controller"))
                 .paths(PathSelectors.any())
                 .build();
         // 安全的配置
