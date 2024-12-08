@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lx.mapper.CashRechargeAuditRecordMapper">
+<mapper namespace="com.horus.mapper.CashRechargeAuditRecordMapper">
   <resultMap id="BaseResultMap" type="com.horus.domain.CashRechargeAuditRecord">
     <!--@mbg.generated-->
     <!--@Table cash_recharge_audit_record-->
