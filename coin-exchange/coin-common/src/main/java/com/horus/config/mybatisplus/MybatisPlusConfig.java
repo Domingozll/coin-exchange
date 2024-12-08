@@ -17,18 +17,19 @@ public class MybatisPlusConfig {
      * 分页插件
      */
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
+    public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         paginationInterceptor.setDbType(DbType.MYSQL);
-        return paginationInterceptor ;
+        return paginationInterceptor;
     }
 
     /**
      * 乐观锁插件
+     *
      * @Version
      */
     @Bean
-    public OptimisticLockerInterceptor optimisticLockerInterceptor(){
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
     }
 
@@ -38,10 +39,11 @@ public class MybatisPlusConfig {
      * ID_WORK_STR 字符串
      * 特殊的一些类使用
      * 默认使用
+     *
      * @return
      */
     @Bean
-    public IKeyGenerator iKeyGenerator(){
+    public IKeyGenerator iKeyGenerator() {
         return new H2KeyGenerator();
     }
 

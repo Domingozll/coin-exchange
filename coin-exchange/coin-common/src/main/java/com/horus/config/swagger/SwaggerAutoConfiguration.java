@@ -24,8 +24,8 @@ public class SwaggerAutoConfiguration {
     private SwaggerProperties swaggerProperties;
 
     /*
-    *  使用构造器进行注入ioc
-    * */
+     *  使用构造器进行注入ioc
+     * */
     public SwaggerAutoConfiguration(SwaggerProperties swaggerProperties) {
         this.swaggerProperties = swaggerProperties;
     }
@@ -36,7 +36,7 @@ public class SwaggerAutoConfiguration {
                 .apiInfo(apiInfo()) //api 信息
                 .select()
                 //给这个路径生成文档(给哪些接口生成文档 )
-                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
+                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
 //                .apis(RequestHandlerSelectors.basePackage("com.horus.controller"))
                 .paths(PathSelectors.any())
                 .build();
@@ -48,6 +48,7 @@ public class SwaggerAutoConfiguration {
 
     /**
      * <h2>安全的上下文</h2>
+     *
      * @param
      **/
     private List<SecurityContext> securityContexts() {
@@ -59,6 +60,7 @@ public class SwaggerAutoConfiguration {
 
     /**
      * <h2>安全的规则配置</h2>
+     *
      * @param
      **/
     private List<SecurityScheme> securitySchemes() {
@@ -72,11 +74,11 @@ public class SwaggerAutoConfiguration {
      **/
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().contact(
-                new Contact(
-                        swaggerProperties.getName(),
-                        swaggerProperties.getUrl(),
-                        swaggerProperties.getEmail())
-        )
+                        new Contact(
+                                swaggerProperties.getName(),
+                                swaggerProperties.getUrl(),
+                                swaggerProperties.getEmail())
+                )
                 .title(swaggerProperties.getTitle())
                 .description(swaggerProperties.getDescription())
                 .version(swaggerProperties.getVersion())

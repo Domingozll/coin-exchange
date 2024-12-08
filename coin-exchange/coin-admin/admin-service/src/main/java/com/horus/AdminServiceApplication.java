@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 /*
-*  admin-service 启动类
-* */
+ *  admin-service 启动类
+ * */
 @SpringBootApplication
 @EnableFeignClients
 @EnableDiscoveryClient
@@ -18,7 +18,7 @@ public class AdminServiceApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminServiceApplication.class,args);
+        SpringApplication.run(AdminServiceApplication.class, args);
     }
 
 }
