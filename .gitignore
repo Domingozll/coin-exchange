@@ -3,3 +3,5 @@
 *target
 .vscode
 doc
+node_modules
+.DS_Store
