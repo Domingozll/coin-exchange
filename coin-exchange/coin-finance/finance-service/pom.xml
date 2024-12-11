@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>coin-finance</artifactId>
-        <groupId>org.lx</groupId>
+        <groupId>org.horus</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -14,26 +14,26 @@
     <dependencies>
         <!-- 实现api -->
         <dependency>
-            <groupId>org.lx</groupId>
+            <groupId>org.horus</groupId>
             <artifactId>finance-api</artifactId>
             <version>1.0</version>
         </dependency>
         <!-- 添加member-api 用于远程调用 -->
         <dependency>
-            <groupId>org.lx</groupId>
+            <groupId>org.horus</groupId>
             <artifactId>member-api</artifactId>
             <version>1.0</version>
         </dependency>
         <!-- 添加admin-api 用于远程调用 -->
         <dependency>
-            <groupId>org.lx</groupId>
+            <groupId>org.horus</groupId>
             <artifactId>admin-api</artifactId>
             <version>1.0</version>
         </dependency>
 
         <!-- 添加exchange-api 用于远程调用 -->
         <dependency>
-            <groupId>org.lx</groupId>
+            <groupId>org.horus</groupId>
             <artifactId>exchange-api</artifactId>
             <version>1.0</version>
         </dependency>
@@ -48,7 +48,7 @@
 
         <!-- 依赖common -->
         <dependency>
-            <groupId>org.lx</groupId>
+            <groupId>org.horus</groupId>
             <artifactId>coin-common</artifactId>
             <version>1.0</version>
         </dependency>
