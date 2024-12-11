@@ -88,5 +88,5 @@ spring:
   redis:
     host: redis-server
     port: 6379
-    password: 123456
+#    password: 123456
 # 我们演示了sentinel-dashboard 的规则的定义，而且规则定义好了后，我们的网关立马能感知到（nacos感知不到），但是我们下次重启，会丢失规则。

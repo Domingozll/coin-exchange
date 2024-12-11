@@ -10,7 +10,7 @@ spring:
   datasource:
     url: jdbc:mysql://mysql-server:3306/coin-exchange?useSSL=false&serverTimezon=GMT%28&allowPublicKeyRetrieval=true
     username: root
-    password: 2539417782@Qq
+    password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
 #  redis:
 #    host: redis-server
