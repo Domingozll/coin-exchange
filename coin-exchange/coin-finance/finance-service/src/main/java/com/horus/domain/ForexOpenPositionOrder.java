@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 开仓订单信息
     */
-@ApiModel(value="com-lx-domain-ForexOpenPositionOrder")
+@ApiModel(value="com-horus-domain-ForexOpenPositionOrder")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

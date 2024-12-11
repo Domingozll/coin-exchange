@@ -13,7 +13,7 @@ import java.util.Date;
 /**
 * 角色
 */
-@ApiModel(value="com-lx-domain-SysRole")
+@ApiModel(value="com-horus-domain-SysRole")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

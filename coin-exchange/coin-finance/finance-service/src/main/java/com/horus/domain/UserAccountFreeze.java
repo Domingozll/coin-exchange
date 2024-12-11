@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@ApiModel(value="com-lx-domain-UserAccountFreeze")
+@ApiModel(value="com-horus-domain-UserAccountFreeze")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

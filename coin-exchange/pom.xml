@@ -55,6 +55,7 @@
         <csv.version>2.4.0</csv.version>
         <affinity.version>3.1.7</affinity.version>
         <tio.version>3.5.5.v20191010-RELEASE</tio.version>
+        <mysql-connector-java.version>6.0.6</mysql-connector-java.version>
     </properties>
 
     <!--  子模块继承父模块之后，提供作用：锁定版本 + 子模块不用再写 version  -->
@@ -219,6 +220,13 @@
                 <artifactId>tio-websocket-spring-boot-starter</artifactId>
                 <version>${tio.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 币种余额
     */
-@ApiModel(value="com-lx-domain-CoinBalance")
+@ApiModel(value="com-horus-domain-CoinBalance")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

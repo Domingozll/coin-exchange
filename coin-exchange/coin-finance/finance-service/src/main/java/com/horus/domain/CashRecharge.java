@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 充值表
     */
-@ApiModel(value="com-lx-domain-CashRecharge")
+@ApiModel(value="com-horus-domain-CashRecharge")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

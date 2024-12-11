@@ -12,7 +12,7 @@ import java.util.Date;
 /**
 * 工单记录
 */
-@ApiModel(value="com-lx-domain-WorkIssue")
+@ApiModel(value="com-horus-domain-WorkIssue")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

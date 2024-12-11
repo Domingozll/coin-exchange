@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 /**
     * 用户收藏交易市场
     */
-@ApiModel(value="com-lx-domain-UserFavoriteMarket")
+@ApiModel(value="com-horus-domain-UserFavoriteMarket")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -14,7 +14,7 @@ import java.util.Date;
 /**
 * 系统资讯公告信息
 */
-@ApiModel(value="com-lx-domain-Notice")
+@ApiModel(value="com-horus-domain-Notice")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

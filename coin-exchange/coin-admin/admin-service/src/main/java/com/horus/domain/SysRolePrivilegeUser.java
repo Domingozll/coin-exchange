@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 /**
 * 用户权限配置
 */
-@ApiModel(value="com-lx-domain-SysRolePrivilegeUser")
+@ApiModel(value="com-horus-domain-SysRolePrivilegeUser")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

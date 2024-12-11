@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 币种配置信息
     */
-@ApiModel(value="com-lx-domain-Coin")
+@ApiModel(value="com-horus-domain-Coin")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

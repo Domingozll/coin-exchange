@@ -13,7 +13,7 @@ import java.util.Date;
 /**
 * 网站配置信息
 */
-@ApiModel(value="com-lx-domain-WebConfig")
+@ApiModel(value="com-horus-domain-WebConfig")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

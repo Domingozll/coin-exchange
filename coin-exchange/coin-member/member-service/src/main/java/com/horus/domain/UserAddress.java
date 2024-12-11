@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 用户钱包地址信息
     */
-@ApiModel(value="com-lx-domain-UserAddress")
+@ApiModel(value="com-horus-domain-UserAddress")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

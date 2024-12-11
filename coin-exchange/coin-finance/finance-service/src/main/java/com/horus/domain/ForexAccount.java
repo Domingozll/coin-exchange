@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 创新交易持仓信息
     */
-@ApiModel(value="com-lx-domain-ForexAccount")
+@ApiModel(value="com-horus-domain-ForexAccount")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

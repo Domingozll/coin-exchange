@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 /**
     * 币种配置信息
     */
-@ApiModel(value="com-lx-domain-CoinConfig")
+@ApiModel(value="com-horus-domain-CoinConfig")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

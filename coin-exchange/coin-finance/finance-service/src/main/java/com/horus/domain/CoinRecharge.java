@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 数字货币充值记录
     */
-@ApiModel(value="com-lx-domain-CoinRecharge")
+@ApiModel(value="com-horus-domain-CoinRecharge")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

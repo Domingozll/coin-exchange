@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 资金账户流水
     */
-@ApiModel(value="com-lx-domain-AccountDetail")
+@ApiModel(value="com-horus-domain-AccountDetail")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

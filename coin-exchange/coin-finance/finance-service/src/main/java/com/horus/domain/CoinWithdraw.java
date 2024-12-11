@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 数字货币提现记录
     */
-@ApiModel(value="com-lx-domain-CoinWithdraw")
+@ApiModel(value="com-horus-domain-CoinWithdraw")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

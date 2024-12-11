@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 /**
     * 平台归账手续费等账户
     */
-@ApiModel(value="com-lx-domain-AdminAddress")
+@ApiModel(value="com-horus-domain-AdminAddress")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

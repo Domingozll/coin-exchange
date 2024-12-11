@@ -14,7 +14,7 @@ import java.util.Date;
 /**
     * 币种类型
     */
-@ApiModel(value="com-lx-domain-CoinType")
+@ApiModel(value="com-horus-domain-CoinType")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 成交数据
     */
-@ApiModel(value="com-lx-domain-TurnoverRecord")
+@ApiModel(value="com-horus-domain-TurnoverRecord")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 委托订单信息
     */
-@ApiModel(value="com-lx-domain-EntrustOrder")
+@ApiModel(value="com-horus-domain-EntrustOrder")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

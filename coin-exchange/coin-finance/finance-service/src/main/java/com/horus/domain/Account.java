@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 用户财产记录
     */
-@ApiModel(value="com-lx-domain-Account")
+@ApiModel(value="com-horus-domain-Account")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

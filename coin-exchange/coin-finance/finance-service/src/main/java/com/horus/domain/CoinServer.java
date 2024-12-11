@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 监测当前服务器Ip状态
     */
-@ApiModel(value="com-lx-domain-CoinServer")
+@ApiModel(value="com-horus-domain-CoinServer")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

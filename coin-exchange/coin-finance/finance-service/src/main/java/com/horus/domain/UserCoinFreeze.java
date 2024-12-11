@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value="com-lx-domain-UserCoinFreeze")
+@ApiModel(value="com-horus-domain-UserCoinFreeze")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

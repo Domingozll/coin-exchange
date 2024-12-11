@@ -12,7 +12,7 @@ import java.util.Date;
 /**
     * 实名认证审核信息
     */
-@ApiModel(value="com-lx-domain-UserAuthAuditRecord")
+@ApiModel(value="com-horus-domain-UserAuthAuditRecord")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

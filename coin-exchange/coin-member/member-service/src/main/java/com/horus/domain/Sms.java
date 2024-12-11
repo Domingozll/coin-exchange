@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 短信信息
     */
-@ApiModel(value="com-lx-domain-Sms")
+@ApiModel(value="com-horus-domain-Sms")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

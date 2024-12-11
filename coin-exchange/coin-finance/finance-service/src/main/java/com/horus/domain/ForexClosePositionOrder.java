@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 平仓详情
     */
-@ApiModel(value="com-lx-domain-ForexClosePositionOrder")
+@ApiModel(value="com-horus-domain-ForexClosePositionOrder")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * 人民币充值卡号管理
  */
-@ApiModel(value="com-lx-domain-AdminBank")
+@ApiModel(value="com-horus-domain-AdminBank")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

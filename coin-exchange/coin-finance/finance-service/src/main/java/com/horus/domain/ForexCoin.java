@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 创新交易币种表
     */
-@ApiModel(value="com-lx-domain-ForexCoin")
+@ApiModel(value="com-horus-domain-ForexCoin")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

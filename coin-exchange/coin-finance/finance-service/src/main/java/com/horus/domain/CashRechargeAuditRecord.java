@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 充值审核记录
     */
-@ApiModel(value="com-lx-domain-CashRechargeAuditRecord")
+@ApiModel(value="com-horus-domain-CashRechargeAuditRecord")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

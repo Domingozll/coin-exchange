@@ -16,7 +16,7 @@ import java.util.Date;
 /**
     * 持仓账户流水
     */
-@ApiModel(value="com-lx-domain-ForexAccountDetail")
+@ApiModel(value="com-horus-domain-ForexAccountDetail")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

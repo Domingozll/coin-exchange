@@ -17,7 +17,7 @@ import java.util.List;
 /**
 * 系统菜单
 */
-@ApiModel(value="com-lx-domain-SysMenu")
+@ApiModel(value="com-horus-domain-SysMenu")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -15,7 +15,7 @@ import java.util.Date;
 /**
 * 系统日志
 */
-@ApiModel(value="com-lx-domain-SysUserLog")
+@ApiModel(value="com-horus-domain-SysUserLog")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

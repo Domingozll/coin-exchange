@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 用户人民币提现地址
     */
-@ApiModel(value="com-lx-domain-UserBank")
+@ApiModel(value="com-horus-domain-UserBank")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

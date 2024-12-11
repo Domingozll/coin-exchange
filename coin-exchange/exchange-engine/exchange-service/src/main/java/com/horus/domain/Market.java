@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 交易对配置信息
     */
-@ApiModel(value="com-lx-domain-Market")
+@ApiModel(value="com-horus-domain-Market")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

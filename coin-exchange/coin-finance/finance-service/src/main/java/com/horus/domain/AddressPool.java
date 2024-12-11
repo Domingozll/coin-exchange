@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 /**
     * 用户的地址池
     */
-@ApiModel(value="com-lx-domain-AddressPool")
+@ApiModel(value="com-horus-domain-AddressPool")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

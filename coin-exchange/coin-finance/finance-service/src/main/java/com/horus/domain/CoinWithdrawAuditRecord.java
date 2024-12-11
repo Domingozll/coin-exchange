@@ -15,7 +15,7 @@ import java.util.Date;
 /**
     * 提币审核记录
     */
-@ApiModel(value="com-lx-domain-CoinWithdrawAuditRecord")
+@ApiModel(value="com-horus-domain-CoinWithdrawAuditRecord")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

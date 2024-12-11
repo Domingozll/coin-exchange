@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 交易区
     */
-@ApiModel(value="com-lx-domain-TradeArea")
+@ApiModel(value="com-horus-domain-TradeArea")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

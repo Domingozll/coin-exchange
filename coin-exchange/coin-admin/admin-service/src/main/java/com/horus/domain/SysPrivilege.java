@@ -13,7 +13,7 @@ import java.util.Date;
 /**
 * 权限配置
 */
-@ApiModel(value="com-lx-domain-SysPrivilege")
+@ApiModel(value="com-horus-domain-SysPrivilege")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

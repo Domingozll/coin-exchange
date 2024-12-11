@@ -13,7 +13,7 @@ import java.util.Date;
 /**
     * 成交订单
     */
-@ApiModel(value="com-lx-domain-TurnoverOrder")
+@ApiModel(value="com-horus-domain-TurnoverOrder")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

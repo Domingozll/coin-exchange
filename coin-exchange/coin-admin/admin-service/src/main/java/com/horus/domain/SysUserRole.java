@@ -12,7 +12,7 @@ import java.util.Date;
 /**
 * 用户角色配置
 */
-@ApiModel(value="com-lx-domain-SysUserRole")
+@ApiModel(value="com-horus-domain-SysUserRole")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

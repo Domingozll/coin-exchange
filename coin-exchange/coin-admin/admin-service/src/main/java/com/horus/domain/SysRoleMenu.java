@@ -15,7 +15,7 @@ import java.util.Date;
 /**
 * 角色菜单
 */
-@ApiModel(value="com-lx-domain-SysRoleMenu")
+@ApiModel(value="com-horus-domain-SysRoleMenu")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
