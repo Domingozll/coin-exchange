@@ -19,7 +19,7 @@ spring:
           lower-case-service-id: true
       # 自定义路由规则
       routes:
-          # 后台管理服务的网关
+          # 1、后台管理服务的网关
         - id: admin-service-router
           # 转发到哪个目的地
           uri: lb://admin-service
@@ -28,7 +28,7 @@ spring:
             - Path=/admin/**
           filters:
             - StripPrefix=1 # 当前访问/admin/login -> login将admin自动的去掉
-        # 会员服务的网关
+        # 2、会员服务的网关
         - id: member-service-router
           # 转发到哪个目的地
           uri: lb://member-service
@@ -37,7 +37,7 @@ spring:
             - Path=/user/**
           filters:
             - StripPrefix=1 # 当前访问/user/login -> login将user自动的去掉
-        # 财务系统的网关
+        # 3、财务系统的网关
         - id: finance-service-router
           # 转发到哪个目的地
           uri: lb://finance-service
@@ -46,7 +46,7 @@ spring:
             - Path=/finance/**
           filters:
             - StripPrefix=1 # 当前访问/finance/login -> login将finance自动的去掉
-        # 交易系统的网关
+        # 4、交易系统的网关
         - id: exchange-service-router # 交易系统的路由
           # 转发到哪个目的地
           uri: lb://exchange-service
@@ -67,7 +67,7 @@ spring:
       transport:
         dashboard: sentinel-server:8858
         # 客户端ip和端口
-        client-ip: 192.168.31.183
+        client-ip: 192.168.1.8
         port: 8719
       datasource:
 #        ds1.file:
