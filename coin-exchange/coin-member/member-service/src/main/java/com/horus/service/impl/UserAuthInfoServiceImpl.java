@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+
 @Service
-public class UserAuthInfoServiceImpl extends ServiceImpl<UserAuthInfoMapper, UserAuthInfo> implements UserAuthInfoService{
+public class UserAuthInfoServiceImpl extends ServiceImpl<UserAuthInfoMapper, UserAuthInfo> implements UserAuthInfoService {
 
     /*
      *  通过认证的Code 来查询用户的认证详情
@@ -18,7 +19,7 @@ public class UserAuthInfoServiceImpl extends ServiceImpl<UserAuthInfoMapper, Use
     @Override
     public List<UserAuthInfo> getUserAuthInfoByCode(Long authCode) {
         return list(new LambdaQueryWrapper<UserAuthInfo>()
-                    .eq(UserAuthInfo::getAuthCode,authCode) //通过认证的唯一Code 来查询用户的认证信息
+                .eq(UserAuthInfo::getAuthCode, authCode) //通过认证的唯一Code 来查询用户的认证信息
         );
     }
 
@@ -28,6 +29,6 @@ public class UserAuthInfoServiceImpl extends ServiceImpl<UserAuthInfoMapper, Use
     @Override
     public List<UserAuthInfo> getUserAuthInfoByUserId(Long id) {
         List<UserAuthInfo> list = list(new LambdaQueryWrapper<UserAuthInfo>().eq(UserAuthInfo::getUserId, id));
-        return  list == null ? Collections.emptyList() : list; //处理null
+        return list == null ? Collections.emptyList() : list; //处理null
     }
 }

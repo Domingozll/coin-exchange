@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-    * 币种余额
-    */
-@ApiModel(value="com-horus-domain-CoinBalance")
+ * 币种余额
+ */
+@ApiModel(value = "com-horus-domain-CoinBalance")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,73 +26,73 @@ public class CoinBalance {
      * 主键
      */
     @TableId(value = "id", type = IdType.INPUT)
-    @ApiModelProperty(value="主键")
+    @ApiModelProperty(value = "主键")
     private Long id;
 
     /**
      * 币种ID
      */
     @TableField(value = "coin_id")
-    @ApiModelProperty(value="币种ID")
+    @ApiModelProperty(value = "币种ID")
     private Long coinId;
 
     /**
      * 币种名称
      */
     @TableField(value = "coin_name")
-    @ApiModelProperty(value="币种名称")
+    @ApiModelProperty(value = "币种名称")
     private String coinName;
 
     /**
      * 系统余额（根据充值提币计算）
      */
     @TableField(value = "system_balance")
-    @ApiModelProperty(value="系统余额（根据充值提币计算）")
+    @ApiModelProperty(value = "系统余额（根据充值提币计算）")
     private BigDecimal systemBalance;
 
     /**
      * 币种类型
      */
     @TableField(value = "coin_type")
-    @ApiModelProperty(value="币种类型")
+    @ApiModelProperty(value = "币种类型")
     private String coinType;
 
     /**
      * 归集账户余额
      */
     @TableField(value = "collect_account_balance")
-    @ApiModelProperty(value="归集账户余额")
+    @ApiModelProperty(value = "归集账户余额")
     private BigDecimal collectAccountBalance;
 
     /**
      * 钱包账户余额
      */
     @TableField(value = "loan_account_balance")
-    @ApiModelProperty(value="钱包账户余额")
+    @ApiModelProperty(value = "钱包账户余额")
     private BigDecimal loanAccountBalance;
 
     /**
      * 手续费账户余额(eth转账需要手续费)
      */
     @TableField(value = "fee_account_balance")
-    @ApiModelProperty(value="手续费账户余额(eth转账需要手续费)")
+    @ApiModelProperty(value = "手续费账户余额(eth转账需要手续费)")
     private BigDecimal feeAccountBalance;
 
     /**
      * 更新时间
      */
     @TableField(value = "last_update_time")
-    @ApiModelProperty(value="更新时间")
+    @ApiModelProperty(value = "更新时间")
     private Date lastUpdateTime;
 
     /**
      * 创建时间
      */
     @TableField(value = "created")
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 
     @TableField(value = "recharge_account_balance")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private BigDecimal rechargeAccountBalance;
 }

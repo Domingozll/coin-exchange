@@ -4,7 +4,7 @@ package com.horus.enums;
  * K线类型
  */
 public enum KlineType {
-    
+
     ONE_MINUTES("1min"),
     FIVE_MINUTES("5min"),
     FIFTEEN_MINUTES("15min"),
@@ -25,10 +25,6 @@ public enum KlineType {
         this.value = value;
     }
 
-    public String getValue(){
-        return this.value;
-    }
-
     public static KlineType getByValue(String value) {
         for (KlineType klineType : KlineType.values()) {
             if (klineType.getValue().equals(value)) {
@@ -36,5 +32,9 @@ public enum KlineType {
             }
         }
         return null;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 }

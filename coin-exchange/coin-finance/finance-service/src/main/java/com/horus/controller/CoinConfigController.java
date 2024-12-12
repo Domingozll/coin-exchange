@@ -22,9 +22,9 @@ public class CoinConfigController {
     @GetMapping("/info/{coinId}")
     @ApiOperation(value = "查询币种的配置信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinId",value = "币种的id值")
+            @ApiImplicitParam(name = "coinId", value = "币种的id值")
     })
-    public R<CoinConfig> getCoinConfig(@PathVariable("coinId") Long coinId){
+    public R<CoinConfig> getCoinConfig(@PathVariable("coinId") Long coinId) {
         CoinConfig coinConfig = coinConfigService.findByCoinId(coinId);
         return R.ok(coinConfig);
     }
@@ -32,11 +32,11 @@ public class CoinConfigController {
     @PatchMapping
     @ApiOperation(value = "币种配置的修改操作")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinConfig",value = "coinConfig的json数据")
+            @ApiImplicitParam(name = "coinConfig", value = "coinConfig的json数据")
     })
-    public R update(@RequestBody @Validated CoinConfig coinConfig){
+    public R update(@RequestBody @Validated CoinConfig coinConfig) {
         boolean saveOrUpdate = coinConfigService.updateOrSave(coinConfig);
-        if (saveOrUpdate){
+        if (saveOrUpdate) {
             return R.ok();
         }
         return R.fail("修改失败");

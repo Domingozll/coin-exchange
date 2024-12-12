@@ -53,14 +53,14 @@ public class MarketController implements MarketServiceFeign {
     @GetMapping
     @ApiOperation(value = "交易市场的分页查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数"),
-            @ApiImplicitParam(name = "tradeAreaId",value = "交易区域的id"),
-            @ApiImplicitParam(name = "status",value = "交易区域的状态"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
+            @ApiImplicitParam(name = "tradeAreaId", value = "交易区域的id"),
+            @ApiImplicitParam(name = "status", value = "交易区域的状态"),
     })
     @PreAuthorize("hasAuthority('trade_market_query')")
-    public R<Page<Market>> findByPage(@ApiIgnore Page<Market> page, Long tradeAreaId, Byte status){
-        Page<Market> pageData = marketService.findByPage(page,tradeAreaId,status);
+    public R<Page<Market>> findByPage(@ApiIgnore Page<Market> page, Long tradeAreaId, Byte status) {
+        Page<Market> pageData = marketService.findByPage(page, tradeAreaId, status);
         return R.ok(pageData);
     }
 
@@ -68,12 +68,12 @@ public class MarketController implements MarketServiceFeign {
     @PostMapping("/setStatus")
     @ApiOperation(value = "启用、禁用交易市场")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "market",value = "market的JSON数据")
+            @ApiImplicitParam(name = "market", value = "market的JSON数据")
     })
     @PreAuthorize("hasAuthority('trade_market_update')")
-    public R setStatus(@RequestBody Market market){
+    public R setStatus(@RequestBody Market market) {
         boolean update = marketService.updateById(market);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("状态设置失败");
@@ -82,12 +82,12 @@ public class MarketController implements MarketServiceFeign {
     @PostMapping
     @ApiOperation(value = "新增一个市场")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "market",value = "marketjson")
+            @ApiImplicitParam(name = "market", value = "marketjson")
     })
     @PreAuthorize("hasAuthority('trade_market_create')")
-    public R save(@RequestBody @Validated Market market){
+    public R save(@RequestBody @Validated Market market) {
         boolean save = marketService.save(market);
-        if (save){
+        if (save) {
             return R.ok();
         }
         return R.fail("新增失败");
@@ -96,12 +96,12 @@ public class MarketController implements MarketServiceFeign {
     @PatchMapping
     @ApiOperation(value = "修改一个市场")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "market",value = "marketjson")
+            @ApiImplicitParam(name = "market", value = "marketjson")
     })
     @PreAuthorize("hasAuthority('trade_market_update')")
-    public R update(@RequestBody @Validated Market market){
+    public R update(@RequestBody @Validated Market market) {
         boolean update = marketService.updateById(market);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("修改失败");
@@ -109,7 +109,7 @@ public class MarketController implements MarketServiceFeign {
 
     @GetMapping("/all")
     @ApiOperation(value = "查询所有的交易市场")
-    public R<List<Market>> listMarkets(){
+    public R<List<Market>> listMarkets() {
         return R.ok(marketService.list());
     }
 
@@ -119,7 +119,7 @@ public class MarketController implements MarketServiceFeign {
             @ApiImplicitParam(name = "symbol", value = "交易对"),
             @ApiImplicitParam(name = "dept", value = "深度类型"),
     })
-    public R<DepthsVo> findDeptVosSymbol(@PathVariable("symbol") String symbol, @PathVariable("dept")String dept) {
+    public R<DepthsVo> findDeptVosSymbol(@PathVariable("symbol") String symbol, @PathVariable("dept") String dept) {
         // 交易市场
         Market market = marketService.getMarketBySymbol(symbol);
 
@@ -153,22 +153,22 @@ public class MarketController implements MarketServiceFeign {
      * @return
      */
     @ApiImplicitParams(
-            {@ApiImplicitParam(name = "symbol" ,value = "交易对"),
-                    @ApiImplicitParam(name = "type" ,value = "k线类型")}
+            {@ApiImplicitParam(name = "symbol", value = "交易对"),
+                    @ApiImplicitParam(name = "type", value = "k线类型")}
     )
     @GetMapping("/kline/{symbol}/{type}")
     public R<List<JSONArray>> queryKLine(@PathVariable("symbol") String symbol, @PathVariable("type") String type) {
         // 我们的K 线放在Redis 里面
         String redisKey = new StringBuilder(Constants.REDIS_KEY_TRADE_KLINE).append(symbol.toLowerCase()).append(":").append(type).toString();
         List<String> klines = redisTemplate.opsForList().range(redisKey, 0, Constants.REDIS_MAX_CACHE_KLINE_SIZE - 1);
-        List<JSONArray> result =  new ArrayList<>(klines.size()) ;
+        List<JSONArray> result = new ArrayList<>(klines.size());
 
         if (!CollectionUtils.isEmpty(klines)) {
             for (String kline : klines) {
                 // 先把字符串转化为json的数组
                 JSONArray objects = JSON.parseArray(kline);
                 // 这样前端获取到的就是数字类型
-                result.add(objects) ;
+                result.add(objects);
             }
             return R.ok(result);
         }
@@ -177,13 +177,12 @@ public class MarketController implements MarketServiceFeign {
     }
 
 
-
     /*
-    *  使用报价货币 以及 出售的货币的iD
-    * */
+     *  使用报价货币 以及 出售的货币的iD
+     * */
     @Override
     public MarketDto findByCoinId(Long buyCoinId, Long sellCoinId) {
-        MarketDto marketDto = marketService.findByCoinId(buyCoinId,sellCoinId);
+        MarketDto marketDto = marketService.findByCoinId(buyCoinId, sellCoinId);
         return marketDto;
     }
 
@@ -195,16 +194,16 @@ public class MarketController implements MarketServiceFeign {
 
 
     /**
-     *  查询所有的交易市场
-     * */
+     * 查询所有的交易市场
+     */
     @Override
     public List<MarketDto> tradeMarkets() {
         return marketService.queryAllMarkets();
     }
 
     /**
-     *  查询该交易对下的盘口数据
-     * */
+     * 查询该交易对下的盘口数据
+     */
     @Override
     public String depthData(String symbol, int value) {
         R<DepthsVo> deptVosSymbol = findDeptVosSymbol(symbol, value + "");
@@ -213,12 +212,12 @@ public class MarketController implements MarketServiceFeign {
     }
 
     /**
-    *  根据交易区域市场的ids查询市场
-    * */
+     * 根据交易区域市场的ids查询市场
+     */
     @Override
     public List<TradeMarketDto> queryMarkesByIds(List<Long> marketIds) {
         List<Market> markets = marketService.listByIds(marketIds);
-        if (CollectionUtils.isEmpty(markets)){
+        if (CollectionUtils.isEmpty(markets)) {
             return Collections.emptyList();
         }
         List<TradeMarketDto> marketDtos = new ArrayList<>();
@@ -238,8 +237,8 @@ public class MarketController implements MarketServiceFeign {
     }
 
     /**
-    *  通过交易对查询该交易对下的具体交易
-    * */
+     * 通过交易对查询该交易对下的具体交易
+     */
     @Override
     public String trades(String symbol) {
         List<TurnoverOrder> turnoverOrderList = turnoverOrderService.findBySymbol(symbol);
@@ -248,8 +247,8 @@ public class MarketController implements MarketServiceFeign {
     }
 
     /**
-     *  通过交易对更新24小时成交记录
-     * */
+     * 通过交易对更新24小时成交记录
+     */
     @Override
     public void refresh24hour(String symbol) {
 

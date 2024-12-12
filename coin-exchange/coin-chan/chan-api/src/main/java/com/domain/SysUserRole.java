@@ -3,42 +3,42 @@ package com.domain;
 import java.util.Date;
 
 /**
-    * 用户角色配置
-    */
+ * 用户角色配置
+ */
 public class SysUserRole {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 角色ID
-    */
+     * 角色ID
+     */
     private Long roleId;
 
     /**
-    * 用户ID
-    */
+     * 用户ID
+     */
     private Long userId;
 
     /**
-    * 创建人
-    */
+     * 创建人
+     */
     private Long createBy;
 
     /**
-    * 修改人
-    */
+     * 修改人
+     */
     private Long modifyBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date created;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date lastUpdateTime;
 
     public Long getId() {

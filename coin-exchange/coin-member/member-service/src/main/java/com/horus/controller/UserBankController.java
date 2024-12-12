@@ -29,29 +29,29 @@ public class UserBankController implements UserBankServiceFeign {
     @GetMapping
     @ApiOperation(value = "分页查询用户的银行卡")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "usrId",value = "会员的id"),
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数")
+            @ApiImplicitParam(name = "usrId", value = "会员的id"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数")
     })
     @PreAuthorize("hasAuthority('user_bank_query')")
-    public R<Page<UserBank>> findByPage(Page<UserBank> page,Long usrId){
+    public R<Page<UserBank>> findByPage(Page<UserBank> page, Long usrId) {
         page.addOrder(OrderItem.desc("last_update_time"));
-        Page<UserBank> userBankPage = userBankService.findByPage(page,usrId);
+        Page<UserBank> userBankPage = userBankService.findByPage(page, usrId);
         return R.ok(userBankPage);
     }
 
     @PostMapping("status")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value = "银行卡的Id"),
-            @ApiImplicitParam(name = "status",value = "银行卡的状态")
+            @ApiImplicitParam(name = "id", value = "银行卡的Id"),
+            @ApiImplicitParam(name = "status", value = "银行卡的状态")
     })
     @ApiOperation(value = "修改银行卡的状态")
-    public R updateStatus(Long id,Byte status){
+    public R updateStatus(Long id, Byte status) {
         UserBank userBank = new UserBank();
         userBank.setId(id);
         userBank.setStatus(status);
         boolean b = userBankService.updateById(userBank);
-        if (b){
+        if (b) {
             return R.ok();
         }
         return R.fail("银行卡状态修改失败!");
@@ -59,12 +59,12 @@ public class UserBankController implements UserBankServiceFeign {
 
     @PatchMapping
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userBank",value = "银行卡的json数据"),
+            @ApiImplicitParam(name = "userBank", value = "银行卡的json数据"),
     })
     @ApiOperation(value = "修改银行卡")
-    public R updateStatus(@RequestBody @Validated UserBank userBank){
+    public R updateStatus(@RequestBody @Validated UserBank userBank) {
         boolean b = userBankService.updateById(userBank);
-        if (b){
+        if (b) {
             return R.ok();
         }
         return R.fail("银行卡状态修改失败!");
@@ -72,7 +72,7 @@ public class UserBankController implements UserBankServiceFeign {
 
     @GetMapping("/current")
     @ApiOperation(value = "查询当前用户的银行卡")
-    public R<UserBank> getCurrentUserBank(){
+    public R<UserBank> getCurrentUserBank() {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         UserBank userBank = userBankService.getCurrentUserBank(userId);
         return R.ok(userBank);
@@ -80,18 +80,18 @@ public class UserBankController implements UserBankServiceFeign {
 
     @PostMapping("/bind")
     @ApiOperation(value = "绑定银行卡")
-    public R bindBank(@RequestBody @Validated UserBank userBank){
+    public R bindBank(@RequestBody @Validated UserBank userBank) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        boolean isOk = userBankService.bindBank(userId,userBank);
-        if (isOk){
+        boolean isOk = userBankService.bindBank(userId, userBank);
+        if (isOk) {
             return R.ok();
         }
         return R.fail("绑定失败");
     }
 
     /*
-    *  远程调用，获取用户的银行卡信息
-    * */
+     *  远程调用，获取用户的银行卡信息
+     * */
     @Override
     public UserBankDto getUserBankInfo(Long userId) {
         UserBank currentUserBank = userBankService.getCurrentUserBank(userId);

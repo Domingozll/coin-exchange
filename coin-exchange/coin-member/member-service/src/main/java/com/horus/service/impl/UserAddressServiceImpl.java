@@ -8,12 +8,13 @@ import com.horus.domain.UserAddress;
 import com.horus.mapper.UserAddressMapper;
 import com.horus.service.UserAddressService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class UserAddressServiceImpl extends ServiceImpl<UserAddressMapper, UserAddress> implements UserAddressService{
+public class UserAddressServiceImpl extends ServiceImpl<UserAddressMapper, UserAddress> implements UserAddressService {
 
     @Override
     public Page<UserAddress> findByPage(Page<UserAddress> page, Long userId) {
-        return page(page,new LambdaQueryWrapper<UserAddress>().eq(UserAddress::getUserId,userId));
+        return page(page, new LambdaQueryWrapper<UserAddress>().eq(UserAddress::getUserId, userId));
     }
 
     /*
@@ -22,7 +23,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressMapper, UserA
     @Override
     public UserAddress getUserAddressByUserIdAndCoinId(Long coinId, Long userId) {
         LambdaQueryWrapper<UserAddress> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(UserAddress::getCoinId,coinId).eq(UserAddress::getUserId,userId);
+        queryWrapper.eq(UserAddress::getCoinId, coinId).eq(UserAddress::getUserId, userId);
         return getOne(queryWrapper);
     }
 

@@ -11,9 +11,9 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
-    * 用户人民币提现地址
-    */
-@ApiModel(value="com-horus-domain-UserBank")
+ * 用户人民币提现地址
+ */
+@ApiModel(value = "com-horus-domain-UserBank")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,28 +23,28 @@ public class UserBank {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="自增id")
+    @ApiModelProperty(value = "自增id")
     private Long id;
 
     /**
      * 用户id
      */
     @TableField(value = "user_id")
-    @ApiModelProperty(value="用户id")
+    @ApiModelProperty(value = "用户id")
     private Long userId;
 
     /**
      * 银行卡名称
      */
     @TableField(value = "remark")
-    @ApiModelProperty(value="银行卡名称")
+    @ApiModelProperty(value = "银行卡名称")
     private String remark;
 
     /**
      * 开户人
      */
     @TableField(value = "real_name")
-    @ApiModelProperty(value="开户人")
+    @ApiModelProperty(value = "开户人")
     @NotBlank
     private String realName;
 
@@ -52,7 +52,7 @@ public class UserBank {
      * 开户行
      */
     @TableField(value = "bank")
-    @ApiModelProperty(value="开户行")
+    @ApiModelProperty(value = "开户行")
     @NotBlank
     private String bank;
 
@@ -60,28 +60,28 @@ public class UserBank {
      * 开户省
      */
     @TableField(value = "bank_prov")
-    @ApiModelProperty(value="开户省")
+    @ApiModelProperty(value = "开户省")
     private String bankProv;
 
     /**
      * 开户市
      */
     @TableField(value = "bank_city")
-    @ApiModelProperty(value="开户市")
+    @ApiModelProperty(value = "开户市")
     private String bankCity;
 
     /**
      * 开户地址
      */
     @TableField(value = "bank_addr")
-    @ApiModelProperty(value="开户地址")
+    @ApiModelProperty(value = "开户地址")
     private String bankAddr;
 
     /**
      * 开户账号
      */
     @TableField(value = "bank_card")
-    @ApiModelProperty(value="开户账号")
+    @ApiModelProperty(value = "开户账号")
     @NotBlank
     private String bankCard;
 
@@ -89,21 +89,21 @@ public class UserBank {
      * 状态：0，禁用；1，启用；
      */
     @TableField(value = "status")
-    @ApiModelProperty(value="状态：0，禁用；1，启用；")
+    @ApiModelProperty(value = "状态：0，禁用；1，启用；")
     private Byte status;
 
     /**
      * 更新时间
      */
-    @TableField(value = "last_update_time",fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value="更新时间")
+    @TableField(value = "last_update_time", fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "更新时间")
     private Date lastUpdateTime;
 
     /**
      * 创建时间
      */
-    @TableField(value = "created",fill = FieldFill.INSERT)
-    @ApiModelProperty(value="创建时间")
+    @TableField(value = "created", fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 
     @ApiModelProperty(value = "交易密码")

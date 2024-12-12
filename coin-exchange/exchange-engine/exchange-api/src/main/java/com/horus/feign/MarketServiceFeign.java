@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "exchange-service",contextId = "marketServiceFeign",configuration = OAuth2FeignConfig.class,path = "markets")
+@FeignClient(name = "exchange-service", contextId = "marketServiceFeign", configuration = OAuth2FeignConfig.class, path = "markets")
 public interface MarketServiceFeign {
 
     /**
-    *  使用报价货币(你自己的) 以及出售货币(你要买的)的ID 查询
-    * */
+     * 使用报价货币(你自己的) 以及出售货币(你要买的)的ID 查询
+     */
     @GetMapping("/getMarket")
-    MarketDto findByCoinId(@RequestParam("buyCoinId") Long buyCoinId, @RequestParam("sellCoinId")Long sellCoinId);
+    MarketDto findByCoinId(@RequestParam("buyCoinId") Long buyCoinId, @RequestParam("sellCoinId") Long sellCoinId);
 
     @GetMapping("/getMarket/symbol")
     MarketDto findBySymbol(@RequestParam("symbol") String symbol);
 
     /**
-     *  查询所有的交易市场
-     * */
+     * 查询所有的交易市场
+     */
     @GetMapping("/tradeMarkets")
     List<MarketDto> tradeMarkets();
 
     /**
-     *  查询该交易对下的盘口数据
-     * */
+     * 查询该交易对下的盘口数据
+     */
     @GetMapping("/depthData/{symbol}/{type}")
-    String depthData(@PathVariable("symbol") String symbol,  @PathVariable("type")  int value);
+    String depthData(@PathVariable("symbol") String symbol, @PathVariable("type") int value);
 
     /**
      * 使用市场的ids 查询该市场的交易趋势

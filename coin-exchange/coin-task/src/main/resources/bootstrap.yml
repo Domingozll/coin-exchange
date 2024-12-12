@@ -8,7 +8,7 @@ spring:
       server-addr: nacos-server:8848
       config:
         file-extension: yaml
-# 拉取的配置文件的dataID = task-service-dev.yaml
+    # 拉取的配置文件的dataID = task-service-dev.yaml
     # rocketMQ的配置
     stream:
       rocketmq:
@@ -16,6 +16,6 @@ spring:
           name-server: rocket-server:9876
       bindings:
         # 生产者
-        group_message_out: {destination: tio_group, content-type: application/plain, group: order-group, consumer.maxAttempts: 1}
+        group_message_out: { destination: tio_group, content-type: application/plain, group: order-group, consumer.maxAttempts: 1 }
         # 消费者
-        exchange_trades_in: {destination: exchange_trades_out, content-type: application/plain}
+        exchange_trades_in: { destination: exchange_trades_out, content-type: application/plain }

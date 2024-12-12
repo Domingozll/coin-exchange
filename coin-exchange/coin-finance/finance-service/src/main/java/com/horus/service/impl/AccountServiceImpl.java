@@ -33,7 +33,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements AccountService{
+public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements AccountService {
 
     @Autowired
     private AccountDetailService accountDetailService;
@@ -48,8 +48,8 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     private MarketServiceFeign marketServiceFeign;
 
     /*
-    *  获取资金账户
-    * */
+     *  获取资金账户
+     * */
     private Account getCoinAccount(Long userId, Long coinId) {
         return getOne(new LambdaQueryWrapper<Account>()
                 .eq(Account::getUserId, userId)
@@ -63,9 +63,9 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public Boolean transferAccountAmount(Long adminId, Long userId, Long coinId, BigDecimal num, BigDecimal fee, Long orderNum,String remark,String businessType,Byte direction) {
+    public Boolean transferAccountAmount(Long adminId, Long userId, Long coinId, BigDecimal num, BigDecimal fee, Long orderNum, String remark, String businessType, Byte direction) {
         Account coinAccount = getCoinAccount(userId, coinId);
-        if (coinAccount == null){
+        if (coinAccount == null) {
             throw new IllegalArgumentException("用户当前的该币种的余额不存在");
         }
         // 增加一条流水记录
@@ -82,7 +82,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         accountDetail.setDirection(direction);
         accountDetail.setCreated(new Date());
         boolean save = accountDetailService.save(accountDetail);
-        if (save){
+        if (save) {
             // 用户余额的增加
             coinAccount.setBalanceAmount(coinAccount.getBalanceAmount().add(num));
             boolean update = updateById(coinAccount);
@@ -99,7 +99,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     public Boolean decreaseAccountAmount(Long adminId, Long userId, Long coinId, BigDecimal num, BigDecimal fee, Long orderNum, String remark, String businessType, byte direction) {
         // 查询充钱、扣钱账户是否存在
         Account coinAccount = getCoinAccount(userId, coinId);
-        if (coinAccount == null){
+        if (coinAccount == null) {
             throw new IllegalArgumentException("账户不存在");
         }
         AccountDetail accountDetail = new AccountDetail();
@@ -114,15 +114,15 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         accountDetail.setDirection(direction);
         // 插入账户流水
         boolean save = accountDetailService.save(accountDetail);
-        if (save){
+        if (save) {
             // 新增流水
             BigDecimal balanceAmount = coinAccount.getBalanceAmount();
             BigDecimal result = balanceAmount.add(num.multiply(BigDecimal.valueOf(-1)));
-            if (result.compareTo(BigDecimal.ONE) > 0){
+            if (result.compareTo(BigDecimal.ONE) > 0) {
                 // 账户流水扣钱
                 coinAccount.setBalanceAmount(result);
                 return updateById(coinAccount);
-            }else{
+            } else {
                 throw new IllegalArgumentException("余额不足");
             }
         }
@@ -138,14 +138,14 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
         // 先根据货币名称查询出货币id
         Coin coin = coinService.getCoinByCoinName(coinName);
-        if (coin == null){
+        if (coin == null) {
             throw new IllegalArgumentException("货币不存在");
         }
         Account account = getOne(new LambdaQueryWrapper<Account>()
                 .eq(Account::getUserId, userId)
                 .eq(Account::getCoinId, coin.getId()));
 
-        if (account == null){
+        if (account == null) {
             throw new IllegalArgumentException("该资产不存在");
         }
         // 在config表中查询出 cny的买入卖出比率
@@ -164,19 +164,19 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     public void lockUserAmount(Long userId, Long coinId, BigDecimal mum, String type, Long orderId, BigDecimal fee) {
         Account account = getOne(new LambdaQueryWrapper<Account>().eq(Account::getUserId, userId)
                 .eq(Account::getCoinId, coinId));
-        if (account == null){
+        if (account == null) {
             throw new IllegalArgumentException("您输入的资产类型不存在");
         }
         BigDecimal balanceAmount = account.getBalanceAmount();
         // 判断余额够不够 是否满足扣减状态
-        if (balanceAmount.compareTo(mum) < 0){
+        if (balanceAmount.compareTo(mum) < 0) {
             throw new IllegalArgumentException("账户的资金不足");
         }
         // 库存的操作
         account.setBalanceAmount(balanceAmount.subtract(mum));
         account.setFreezeAmount(account.getFreezeAmount().add(mum));
         boolean update = updateById(account);
-        if (update){
+        if (update) {
             // 如果扣减成功 增加流水记录
             AccountDetail accountDetail = new AccountDetail(
                     null,
@@ -212,7 +212,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         // 用户的总资产位于Account里面
         List<Account> accounts = list(new LambdaQueryWrapper<Account>()
                 .eq(Account::getUserId, userId));
-        if (CollectionUtils.isEmpty(accounts)){
+        if (CollectionUtils.isEmpty(accounts)) {
             userTotalAccountVo.setAssertList(assertList);
             userTotalAccountVo.setAmountUs(BigDecimal.ZERO);
             userTotalAccountVo.setAmount(BigDecimal.ZERO);
@@ -225,7 +225,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             AccountVo accountVo = mappers.toConvertVo(account);
             Long coinId = account.getCoinId();
             Coin coin = coinService.getById(coinId);
-            if (coin == null || coin.getStatus()!= (byte)1){
+            if (coin == null || coin.getStatus() != (byte) 1) {
                 continue;
             }
 
@@ -258,26 +258,26 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
 
     /*
-    *  获取当前币的价格
-    *   使用我们的基础币兑换该币的价格
-    * */
+     *  获取当前币的价格
+     *   使用我们的基础币兑换该币的价格
+     * */
     private BigDecimal getCurrentCoinPrice(Long coinId) {
         // 1.查询我们的基础币是什么
         Config configBasicCoin = configService.getConfigByCode("PLATFORM_COIN_ID"); //基础币
-        if (configBasicCoin == null){
+        if (configBasicCoin == null) {
             throw new IllegalArgumentException("请配置基础币后使用");
         }
         Long basicCoinId = Long.valueOf(configBasicCoin.getValue());
-        if (coinId.equals(basicCoinId)){
+        if (coinId.equals(basicCoinId)) {
             // 该币就是基础币
             return BigDecimal.ONE;
         }
         // 不等于，我们需要查询交易市场，使用基础币作为我们报价货币，使用报价货币的金额 来计算当前币的价格
         MarketDto market = marketServiceFeign.findByCoinId(basicCoinId, coinId);
-        if (market!=null){
+        if (market != null) {
             //  存在这个交易对
             return market.getOpenPrice();
-        }else {
+        } else {
             // 该交易对不存在
             log.error("不存在当前币和平台币兑换的市场,请后台人员即时添加");
             return BigDecimal.ZERO;

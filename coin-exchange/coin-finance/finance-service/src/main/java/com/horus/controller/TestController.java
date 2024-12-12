@@ -12,7 +12,7 @@ public class TestController {
 
     @GetMapping("/test")
     @ApiOperation(value = "财务系统的测试接口")
-    public R test(){
+    public R test() {
         return R.ok("测试成功");
     }
 }

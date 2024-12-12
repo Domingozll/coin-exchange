@@ -6,8 +6,9 @@ import com.horus.domain.UserFavoriteMarket;
 import com.horus.mapper.UserFavoriteMarketMapper;
 import com.horus.service.UserFavoriteMarketService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class UserFavoriteMarketServiceImpl extends ServiceImpl<UserFavoriteMarketMapper, UserFavoriteMarket> implements UserFavoriteMarketService{
+public class UserFavoriteMarketServiceImpl extends ServiceImpl<UserFavoriteMarketMapper, UserFavoriteMarket> implements UserFavoriteMarketService {
 
     /*
      *  用户取消收藏
@@ -15,7 +16,7 @@ public class UserFavoriteMarketServiceImpl extends ServiceImpl<UserFavoriteMarke
     @Override
     public boolean deleteUserFavoriteMarket(Long marketId, Long userId) {
         return remove(new LambdaQueryWrapper<UserFavoriteMarket>()
-                .eq(UserFavoriteMarket::getMarketId,marketId)
-                .eq(UserFavoriteMarket::getUserId,userId));
+                .eq(UserFavoriteMarket::getMarketId, marketId)
+                .eq(UserFavoriteMarket::getUserId, userId));
     }
 }

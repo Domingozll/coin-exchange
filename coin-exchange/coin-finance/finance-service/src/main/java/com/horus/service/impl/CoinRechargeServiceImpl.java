@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class CoinRechargeServiceImpl extends ServiceImpl<CoinRechargeMapper, CoinRecharge> implements CoinRechargeService{
+public class CoinRechargeServiceImpl extends ServiceImpl<CoinRechargeMapper, CoinRecharge> implements CoinRechargeService {
 
     @Autowired
     private UserServiceFeign userServiceFeign;
@@ -34,45 +34,45 @@ public class CoinRechargeServiceImpl extends ServiceImpl<CoinRechargeMapper, Coi
         LambdaQueryWrapper<CoinRecharge> coinRechargeLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 1.若用户本次的查询中,带了用户的信息userId,userName,mobile ---> 本质就是要把用户的id放在我们的查询条件里面
         Map<Long, UserDto> basicUsers = null;
-        if (userId!=null || !StringUtils.isEmpty(userName) || !StringUtils.isEmpty(mobile)){
+        if (userId != null || !StringUtils.isEmpty(userName) || !StringUtils.isEmpty(mobile)) {
             // 使用用户的信息查询
             // 需要远程调用查询用户的信息
             // 这远程调用接口不仅仅通过ids进行批量查询，还通过userName和mobile进行查询UserDto的值
             basicUsers = userServiceFeign.getBasicUsers(userId == null ? null : Arrays.asList(userId), userName, mobile);
-            if (CollectionUtils.isEmpty(basicUsers)){
+            if (CollectionUtils.isEmpty(basicUsers)) {
                 // 找不到这样的用户
                 return page;
             }
             Set<Long> userIds = basicUsers.keySet();
-            coinRechargeLambdaQueryWrapper.in(!CollectionUtils.isEmpty(userIds), CoinRecharge::getUserId,userIds);
+            coinRechargeLambdaQueryWrapper.in(!CollectionUtils.isEmpty(userIds), CoinRecharge::getUserId, userIds);
         }
         // 2.若用户本次的查询中，没有带用户的信息
-        coinRechargeLambdaQueryWrapper.eq(coinId!=null,CoinRecharge::getCoinId,coinId)
-                .eq(status!=null,CoinRecharge::getStatus,status)
+        coinRechargeLambdaQueryWrapper.eq(coinId != null, CoinRecharge::getCoinId, coinId)
+                .eq(status != null, CoinRecharge::getStatus, status)
                 .between(
-                        !(StringUtils.isEmpty(numMin)||StringUtils.isEmpty(numMax)),
+                        !(StringUtils.isEmpty(numMin) || StringUtils.isEmpty(numMax)),
                         CoinRecharge::getAmount,
-                        new BigDecimal(StringUtils.isEmpty(numMin) ? "0":numMin),
-                        new BigDecimal(StringUtils.isEmpty(numMax) ? "0":numMax)
+                        new BigDecimal(StringUtils.isEmpty(numMin) ? "0" : numMin),
+                        new BigDecimal(StringUtils.isEmpty(numMax) ? "0" : numMax)
                 )
                 .between(
-                        !(StringUtils.isEmpty(startTime)||StringUtils.isEmpty(endTime)),
+                        !(StringUtils.isEmpty(startTime) || StringUtils.isEmpty(endTime)),
                         CoinRecharge::getCreated,
                         startTime,
                         endTime + " 23:59:59"
                 );
         Page<CoinRecharge> coinRechargePage = page(page, coinRechargeLambdaQueryWrapper);
         List<CoinRecharge> records = coinRechargePage.getRecords();
-        if (!CollectionUtils.isEmpty(records)){
+        if (!CollectionUtils.isEmpty(records)) {
             List<Long> userIds = records.stream().map(CoinRecharge::getUserId).collect(Collectors.toList());
-            if (CollectionUtils.isEmpty(basicUsers)){
-                basicUsers = userServiceFeign.getBasicUsers(userIds,null,null);
+            if (CollectionUtils.isEmpty(basicUsers)) {
+                basicUsers = userServiceFeign.getBasicUsers(userIds, null, null);
             }
             Map<Long, UserDto> finalBasicUsers = basicUsers;
             records.forEach(coinRecharge -> {
                 // 需要远程调用查询用户的信息
                 UserDto userDto = finalBasicUsers.get(coinRecharge.getUserId());
-                if (userDto != null){
+                if (userDto != null) {
                     coinRecharge.setUsername(userDto.getUsername());
                     coinRecharge.setRealName(userDto.getRealName());
                 }
@@ -86,8 +86,8 @@ public class CoinRechargeServiceImpl extends ServiceImpl<CoinRechargeMapper, Coi
      * */
     @Override
     public Page<CoinRecharge> findUserCoinRecharge(Page<CoinRecharge> page, Long coinId, Long userId) {
-        return page(page,new LambdaQueryWrapper<CoinRecharge>()
-                .eq(coinId!=null,CoinRecharge::getCoinId,coinId)
-                .eq(userId!=null,CoinRecharge::getUserId,userId));
+        return page(page, new LambdaQueryWrapper<CoinRecharge>()
+                .eq(coinId != null, CoinRecharge::getCoinId, coinId)
+                .eq(userId != null, CoinRecharge::getUserId, userId));
     }
 }

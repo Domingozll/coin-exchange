@@ -13,13 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 /*
-*  jackson json序列化处理
-* */
+ *  jackson json序列化处理
+ * */
 @Configuration
 public class JacksonConfig {
 
     /**
      * 配置ObjectMapper
+     *
      * @return
      */
     @Bean

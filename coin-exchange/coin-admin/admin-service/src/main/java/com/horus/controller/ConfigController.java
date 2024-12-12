@@ -50,39 +50,38 @@ public class ConfigController {
     @PostMapping
     @ApiOperation(value = "新增一个参数")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "config",value = "config 的json数据")
+            @ApiImplicitParam(name = "config", value = "config 的json数据")
     })
     @PreAuthorize("hasAuthority('config_create')")
-    public R add(@RequestBody @Validated Config config){
+    public R add(@RequestBody @Validated Config config) {
         boolean success = configService.save(config);
-        return success ? R.ok() : R.fail("新增失败") ;
+        return success ? R.ok() : R.fail("新增失败");
     }
-
 
 
     @PatchMapping
     @ApiOperation(value = "修改一个参数")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "config",value = "config 的json数据")
+            @ApiImplicitParam(name = "config", value = "config 的json数据")
     })
     @PreAuthorize("hasAuthority('config_update')")
-    public R update(@RequestBody @Validated  Config config){
+    public R update(@RequestBody @Validated Config config) {
         boolean success = configService.updateById(config);
-        return success ? R.ok() : R.fail("修改失败") ;
+        return success ? R.ok() : R.fail("修改失败");
     }
 
     @PostMapping("/delete")
     @ApiOperation(value = "删除一个参数")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids",value = "参数的IDS")
+            @ApiImplicitParam(name = "ids", value = "参数的IDS")
     })
     @PreAuthorize("hasAuthority('config_delete')")
-    public R update(@RequestBody String[] ids){
+    public R update(@RequestBody String[] ids) {
         if (ids == null || ids.length == 0) {
             return R.fail("删除失败");
         }
         List<Long> list = Arrays.stream(ids).map(Long::valueOf).collect(Collectors.toList());
         boolean success = configService.removeByIds(list);
-        return success ? R.ok() : R.fail("删除失败") ;
+        return success ? R.ok() : R.fail("删除失败");
     }
 }

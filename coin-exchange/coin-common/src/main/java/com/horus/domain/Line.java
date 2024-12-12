@@ -25,12 +25,12 @@ public class Line {
     /**
      * 最高价
      */
-    private BigDecimal high= BigDecimal.ZERO;
+    private BigDecimal high = BigDecimal.ZERO;
 
     /**
      * 最低价
      */
-    private BigDecimal low =  BigDecimal.ZERO;
+    private BigDecimal low = BigDecimal.ZERO;
 
     /**
      * 收盘价

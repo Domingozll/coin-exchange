@@ -27,30 +27,30 @@ public class UserAddressController {
     @GetMapping
     @ApiOperation(value = "查询用户的钱包地址")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",value = "用户的Id"),
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每一页显示的条数"),
+            @ApiImplicitParam(name = "userId", value = "用户的Id"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每一页显示的条数"),
     })
-    public R<Page<UserAddress>> findByPage(@ApiIgnore Page<UserAddress> page,Long userId){
+    public R<Page<UserAddress>> findByPage(@ApiIgnore Page<UserAddress> page, Long userId) {
         page.addOrder(OrderItem.desc("last_update_time"));
-        Page<UserAddress> userAddressPage = userAddressService.findByPage(page,userId);
+        Page<UserAddress> userAddressPage = userAddressService.findByPage(page, userId);
         return R.ok(userAddressPage);
     }
 
     @GetMapping("/getCoinAddress/{coinId}")
     @ApiOperation(value = "查询用户某种币的钱包地址")
-    public R<String> getCoinAddress(@PathVariable("coinId") Long coinId){
+    public R<String> getCoinAddress(@PathVariable("coinId") Long coinId) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        UserAddress userAddress = userAddressService.getUserAddressByUserIdAndCoinId(coinId,userId);
+        UserAddress userAddress = userAddressService.getUserAddressByUserIdAndCoinId(coinId, userId);
         return R.ok(userAddress.getAddress());
     }
 
     @PostMapping("/withdraw")
     @ApiOperation(value = "用户对某种币提现到钱包")
-    public R withdrawCoin(@RequestBody @Validated CoinWithdraw coinWithdraw){
+    public R withdrawCoin(@RequestBody @Validated CoinWithdraw coinWithdraw) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        boolean isOk = userAddressService.withdrawCoin(userId,coinWithdraw);
-        if (isOk){
+        boolean isOk = userAddressService.withdrawCoin(userId, coinWithdraw);
+        if (isOk) {
             return R.ok("提现成功");
         }
         return R.fail("提现失败");

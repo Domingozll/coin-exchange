@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /*
-* id 生成器
-* */
+ * id 生成器
+ * */
 @Configuration
 public class IDGenConfig {
 
@@ -19,8 +19,8 @@ public class IDGenConfig {
 
     // 雪花算法
     @Bean
-    public Snowflake snowflake(){
-        Snowflake snowflake = new Snowflake(appCode,machineCode);
+    public Snowflake snowflake() {
+        Snowflake snowflake = new Snowflake(appCode, machineCode);
         return snowflake;
     }
 }

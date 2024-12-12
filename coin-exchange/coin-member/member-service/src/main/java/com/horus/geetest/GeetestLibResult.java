@@ -27,28 +27,28 @@ public class GeetestLibResult {
      */
     private String msg = "";
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public int getStatus() {
         return status;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getData() {
         return data;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getMsg() {
         return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public void setAll(int status, String data, String msg) {

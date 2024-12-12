@@ -17,14 +17,14 @@ public class ExchangeTradesListener {
 
 
     /**
-     *  监听exchange_trades_in流入的消息,进行消费
-     * */
+     * 监听exchange_trades_in流入的消息,进行消费
+     */
     @StreamListener("exchange_trades_in")
     public void handlerExchangeTrades(List<ExchangeTrade> exchangeTrades) {
         log.info("接收到撮合引擎的数据===>{}", exchangeTrades);
         if (!CollectionUtils.isEmpty(exchangeTrades)) {
             for (ExchangeTrade exchangeTrade : exchangeTrades) {
-                if(exchangeTrade==null){
+                if (exchangeTrade == null) {
                     return;
                 }
 //                mongoTemplate.insert(exchangeTrade) ;

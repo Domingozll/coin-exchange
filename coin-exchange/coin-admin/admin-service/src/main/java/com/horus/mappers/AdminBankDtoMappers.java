@@ -13,22 +13,22 @@ public interface AdminBankDtoMappers {
     AdminBankDtoMappers INSTANCE = Mappers.getMapper(AdminBankDtoMappers.class);
 
     /*
-    *  Dto -> Entity
-    * */
+     *  Dto -> Entity
+     * */
     AdminBank toConvertEntity(AdminBankDto source);
 
     /*
-    *  Entity -> Dto
-    * */
+     *  Entity -> Dto
+     * */
     AdminBankDto toConvertDto(AdminBank source);
 
     /*
-    *  List<Dto> -> List<Entity>
-    * */
+     *  List<Dto> -> List<Entity>
+     * */
     List<AdminBank> toConvertEntity(List<AdminBankDto> source);
 
     /*
-    *  List<Entity> -> List<Dto>
-    * */
+     *  List<Entity> -> List<Dto>
+     * */
     List<AdminBankDto> toConvertDto(List<AdminBank> source);
 }

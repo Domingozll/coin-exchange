@@ -8,16 +8,17 @@ import com.horus.service.UserAuthAuditRecordService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class UserAuthAuditRecordServiceImpl extends ServiceImpl<UserAuthAuditRecordMapper, UserAuthAuditRecord> implements UserAuthAuditRecordService{
+public class UserAuthAuditRecordServiceImpl extends ServiceImpl<UserAuthAuditRecordMapper, UserAuthAuditRecord> implements UserAuthAuditRecordService {
 
     /*
-    *  获取用户的一个审核记录
-    * */
+     *  获取用户的一个审核记录
+     * */
     @Override
     public List<UserAuthAuditRecord> getUserAuthAuditRecordList(Long id) {
         return list(new LambdaQueryWrapper<UserAuthAuditRecord>()
-                .eq(UserAuthAuditRecord::getUserId,id)
+                .eq(UserAuthAuditRecord::getUserId, id)
                 .orderByDesc(UserAuthAuditRecord::getCreated)
                 .last("limit 3"));
     }

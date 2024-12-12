@@ -12,8 +12,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 /*
-*  交易数据的监听
-* */
+ *  交易数据的监听
+ * */
 @Component
 @Slf4j
 public class ExchangeTradeListener {
@@ -23,13 +23,13 @@ public class ExchangeTradeListener {
 
     @Transactional
     @StreamListener("exchange_trade_in")
-    public void receiveExchangeTrade(List<ExchangeTrade> exchangeTrades){
-        if (CollectionUtils.isEmpty(exchangeTrades)){
+    public void receiveExchangeTrade(List<ExchangeTrade> exchangeTrades) {
+        if (CollectionUtils.isEmpty(exchangeTrades)) {
             return;
         }
         // 更新委托单的账户信息
         for (ExchangeTrade exchangeTrade : exchangeTrades) {
-            if (exchangeTrade != null){
+            if (exchangeTrade != null) {
                 // 交易完成之后，更新数据库
                 entrustOrderService.doMatch(exchangeTrade);
             }
@@ -37,7 +37,7 @@ public class ExchangeTradeListener {
     }
 
     @StreamListener("cancel_order_in")
-    public void receiveCancelOrder(String orderId){
+    public void receiveCancelOrder(String orderId) {
         entrustOrderService.cancleEntrustOrderToDb(orderId);
     }
 }

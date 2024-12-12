@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * 人民币充值卡号管理
  */
-@ApiModel(value="com-horus-domain-AdminBank")
+@ApiModel(value = "com-horus-domain-AdminBank")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,14 +25,14 @@ public class AdminBank {
      * 主键
      */
     @TableId(value = "id", type = IdType.INPUT)
-    @ApiModelProperty(value="主键")
+    @ApiModelProperty(value = "主键")
     private Long id;
 
     /**
      * 开户人姓名
      */
     @TableField(value = "`name`")
-    @ApiModelProperty(value="开户人姓名")
+    @ApiModelProperty(value = "开户人姓名")
     @NotBlank
     private String name;
 
@@ -40,7 +40,7 @@ public class AdminBank {
      * 开户行名称
      */
     @TableField(value = "bank_name")
-    @ApiModelProperty(value="开户行名称")
+    @ApiModelProperty(value = "开户行名称")
     @NotBlank
     private String bankName;
 
@@ -48,7 +48,7 @@ public class AdminBank {
      * 卡号
      */
     @TableField(value = "bank_card")
-    @ApiModelProperty(value="卡号")
+    @ApiModelProperty(value = "卡号")
     @NotBlank
     private String bankCard;
 
@@ -56,20 +56,20 @@ public class AdminBank {
      * 充值转换换币种ID
      */
     @TableField(value = "coin_id")
-    @ApiModelProperty(value="充值转换换币种ID")
+    @ApiModelProperty(value = "充值转换换币种ID")
     private Long coinId;
 
     /**
      * 币种名称
      */
     @TableField(value = "coin_name")
-    @ApiModelProperty(value="币种名称")
+    @ApiModelProperty(value = "币种名称")
     private String coinName;
 
     /**
      * 状态：0-无效；1-有效；
      */
     @TableField(value = "`status`")
-    @ApiModelProperty(value="状态：0-无效；1-有效；")
+    @ApiModelProperty(value = "状态：0-无效；1-有效；")
     private Byte status;
 }

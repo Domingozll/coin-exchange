@@ -26,14 +26,14 @@ public class TurnoverOrderController {
     @GetMapping
     @ApiOperation(value = "成交记录的查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "显示的条数"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "显示的条数"),
             @ApiImplicitParam(name = "symbol", value = "交易对"),
             @ApiImplicitParam(name = "type", value = "类型"),
     })
-    public R<Page<TurnoverOrder>> findByPage(@ApiIgnore Page<TurnoverOrder> page,String symbol,Integer type){
+    public R<Page<TurnoverOrder>> findByPage(@ApiIgnore Page<TurnoverOrder> page, String symbol, Integer type) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        Page<TurnoverOrder> pageData = turnoverOrderService.findByPage(page,userId,symbol,type);
+        Page<TurnoverOrder> pageData = turnoverOrderService.findByPage(page, userId, symbol, type);
         return R.ok(pageData);
     }
 }

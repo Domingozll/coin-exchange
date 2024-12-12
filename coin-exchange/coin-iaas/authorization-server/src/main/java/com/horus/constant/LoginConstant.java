@@ -1,18 +1,18 @@
 package com.horus.constant;
 
 /*
-*  登录常量
-* */
+ *  登录常量
+ * */
 public class LoginConstant {
 
     /*
-    *  后台管理人员
-    * */
+     *  后台管理人员
+     * */
     public static final String ADMIN_TYPE = "admin_type";
 
     /*
-    *  普通的会员
-    * */
+     *  普通的会员
+     * */
     public static final String MEMBER_TYPE = "member_type";
 
     /**
@@ -45,7 +45,7 @@ public class LoginConstant {
     public static final String ADMIN_ROLE_CODE = "ROLE_ADMIN";
 
     /**
-     *  会员查询sql
+     * 会员查询sql
      **/
     public static final String QUERY_MEMBER_SQL =
             "SELECT `id`,`password`, `status` FROM `user` WHERE mobile = ? or email = ? ";
@@ -53,15 +53,15 @@ public class LoginConstant {
     /**
      * token的刷新
      */
-    public static  final  String REFRESH_TYPE= "REFRESH_TOKEN" ;
+    public static final String REFRESH_TYPE = "REFRESH_TOKEN";
 
     /**
      * 使用后台会员的id 查询会员名称
      */
-    public static  final  String QUERY_ADMIN_USER_WITH_ID = "SELECT `username` FROM sys_user where id = ?" ;
+    public static final String QUERY_ADMIN_USER_WITH_ID = "SELECT `username` FROM sys_user where id = ?";
 
     /**
      * 使用前台用户的id 查询用户名称
      */
-    public static  final  String QUERY_MEMBER_USER_WITH_ID = "SELECT `mobile` FROM user where id = ?" ;
+    public static final String QUERY_MEMBER_USER_WITH_ID = "SELECT `mobile` FROM user where id = ?";
 }

@@ -20,8 +20,9 @@ public class AdminBankServiceImpl extends ServiceImpl<AdminBankMapper, AdminBank
 
     /**
      * <h2>条件查询公司银行卡</h2>
-     * @param page 分页参数
-     * @param bankCard  公司的银行卡
+     *
+     * @param page     分页参数
+     * @param bankCard 公司的银行卡
      **/
     @Override
     public Page<AdminBank> findByPage(Page<AdminBank> page, String bankCard) {
@@ -36,7 +37,7 @@ public class AdminBankServiceImpl extends ServiceImpl<AdminBankMapper, AdminBank
     @Override
     public List<AdminBankDto> getAllAdminBanks() {
         List<AdminBank> adminBanks = list(new LambdaQueryWrapper<AdminBank>().eq(AdminBank::getStatus, 1));
-        if (CollectionUtils.isEmpty(adminBanks)){
+        if (CollectionUtils.isEmpty(adminBanks)) {
             return Collections.emptyList();
         }
         // adminBank -> adminBankDto 实体转换

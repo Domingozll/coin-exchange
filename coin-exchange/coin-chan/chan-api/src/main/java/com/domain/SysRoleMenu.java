@@ -3,8 +3,8 @@ package com.domain;
 import java.util.Date;
 
 /**
-    * 角色菜单
-    */
+ * 角色菜单
+ */
 public class SysRoleMenu {
     private Long id;
 
@@ -13,23 +13,23 @@ public class SysRoleMenu {
     private Long menuId;
 
     /**
-    * 创建人
-    */
+     * 创建人
+     */
     private Long createBy;
 
     /**
-    * 修改人
-    */
+     * 修改人
+     */
     private Long modifyBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date created;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date lastUpdateTime;
 
     public Long getId() {

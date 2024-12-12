@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class TurnoverOrderServiceImpl extends ServiceImpl<TurnoverOrderMapper, TurnoverOrder> implements TurnoverOrderService{
+public class TurnoverOrderServiceImpl extends ServiceImpl<TurnoverOrderMapper, TurnoverOrder> implements TurnoverOrderService {
 
 
     /*
@@ -22,19 +22,19 @@ public class TurnoverOrderServiceImpl extends ServiceImpl<TurnoverOrderMapper, T
     public Page<TurnoverOrder> findByPage(Page<TurnoverOrder> page, Long userId, String symbol, Integer type) {
 
         LambdaQueryWrapper<TurnoverOrder> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(TurnoverOrder::getBuyUserId,userId)
-                .eq(!StringUtils.isEmpty(symbol),TurnoverOrder::getSymbol,symbol)
-                .eq(type!=null && type!=0, TurnoverOrder::getTradeType,type)
-                .or(wrapper -> wrapper.eq(TurnoverOrder::getSellUserId,userId)
-                        .eq(!StringUtils.isEmpty(symbol),TurnoverOrder::getSymbol,symbol)
-                        .eq(type!=null && type!=0, TurnoverOrder::getTradeType,type));
+        lambdaQueryWrapper.eq(TurnoverOrder::getBuyUserId, userId)
+                .eq(!StringUtils.isEmpty(symbol), TurnoverOrder::getSymbol, symbol)
+                .eq(type != null && type != 0, TurnoverOrder::getTradeType, type)
+                .or(wrapper -> wrapper.eq(TurnoverOrder::getSellUserId, userId)
+                        .eq(!StringUtils.isEmpty(symbol), TurnoverOrder::getSymbol, symbol)
+                        .eq(type != null && type != 0, TurnoverOrder::getTradeType, type));
 /*        lambdaQueryWrapper.eq(TurnoverOrder::getBuyUserId,userId)
                 .eq(!StringUtils.isEmpty(symbol),TurnoverOrder::getSymbol,symbol)
                 .eq(type!=null && type!=0, TurnoverOrder::getTradeType,type);*/
 /*        lambdaQueryWrapper.eq(TurnoverOrder::getSellUserId,userId)
                 .eq(!StringUtils.isEmpty(symbol),TurnoverOrder::getSymbol,symbol)
                 .eq(type!=null && type!=0, TurnoverOrder::getTradeType,type);*/
-        return page(page,lambdaQueryWrapper);
+        return page(page, lambdaQueryWrapper);
     }
 
     /*
@@ -46,7 +46,7 @@ public class TurnoverOrderServiceImpl extends ServiceImpl<TurnoverOrderMapper, T
                 new LambdaQueryWrapper<TurnoverOrder>()
                         .eq(TurnoverOrder::getSymbol, symbol)
                         .orderByDesc(TurnoverOrder::getCreated)
-                        .eq(TurnoverOrder::getStatus,1)
+                        .eq(TurnoverOrder::getStatus, 1)
                         .last("limit 60")
         );
         return turnoverOrders;

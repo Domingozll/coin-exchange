@@ -6,17 +6,17 @@ import com.horus.domain.TurnoverOrder;
 
 import java.util.List;
 
-public interface TurnoverOrderService extends IService<TurnoverOrder>{
+public interface TurnoverOrderService extends IService<TurnoverOrder> {
 
 
     /*
-    *  查询分页数据
-    * */
+     *  查询分页数据
+     * */
     Page<TurnoverOrder> findByPage(Page<TurnoverOrder> page, Long userId, String symbol, Integer type);
 
     /*
-    *  查询成交记录
-    * */
+     *  查询成交记录
+     * */
     List<TurnoverOrder> findBySymbol(String symbol);
 
     /**

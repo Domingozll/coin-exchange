@@ -37,8 +37,8 @@ public class WebLogAdminAspect {
 
     /**
      * 雪花算法
-     *  参数一：机器id
-     *  参数二：应用id
+     * 参数一：机器id
+     * 参数二：应用id
      **/
     private final Snowflake snowflake = new Snowflake(1, 1);
 
@@ -47,8 +47,8 @@ public class WebLogAdminAspect {
 
 
     /**
-     *  定义切入点:
-     *  controller 包里面所有类，类里面的所有方法，都有该切面
+     * 定义切入点:
+     * controller 包里面所有类，类里面的所有方法，都有该切面
      **/
     @Pointcut("execution(* com.horus.controller.*.*(..))")
     public void webLog() {
@@ -56,6 +56,7 @@ public class WebLogAdminAspect {
 
     /**
      * 记录日志的环绕通知
+     *
      * @param
      **/
     @Around("webLog()")
@@ -117,6 +118,7 @@ public class WebLogAdminAspect {
 
     /**
      * 获取方法的参数
+     *
      * @param method
      * @param args
      **/

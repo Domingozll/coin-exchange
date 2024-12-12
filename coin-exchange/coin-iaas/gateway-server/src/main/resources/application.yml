@@ -19,7 +19,7 @@ spring:
           lower-case-service-id: true
       # 自定义路由规则
       routes:
-          # 1、后台管理服务的网关
+        # 1、后台管理服务的网关
         - id: admin-service-router
           # 转发到哪个目的地
           uri: lb://admin-service
@@ -70,16 +70,16 @@ spring:
         client-ip: 192.168.1.8
         port: 8719
       datasource:
-#        ds1.file:
-#          file: classpath:gw-flow.json #网关 + API分组的限流
-#          ruleType: gw_flow
+        #        ds1.file:
+        #          file: classpath:gw-flow.json #网关 + API分组的限流
+        #          ruleType: gw_flow
         ds1.nacos:
           serverAddr: nacos-server:8848
           dataId: gw-flow
           ruleType: gw_flow
-#        ds2.file:
-#          file: classpath:api-group.json
-#          ruleType: gw_api_group
+        #        ds2.file:
+        #          file: classpath:api-group.json
+        #          ruleType: gw_api_group
         ds2.nacos:
           serverAddr: nacos-server:8848
           dataId: api-group

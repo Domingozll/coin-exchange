@@ -11,12 +11,12 @@ public class GeetestAutoConfiguration {
 
     private GeetestProperties geetestProperties;
 
-    public GeetestAutoConfiguration(GeetestProperties geetestProperties){
+    public GeetestAutoConfiguration(GeetestProperties geetestProperties) {
         this.geetestProperties = geetestProperties;
     }
 
     @Bean
-    public GeetestLib geetestLib(){
+    public GeetestLib geetestLib() {
         GeetestLib geetestLib = new GeetestLib(geetestProperties.getGeetestId(), geetestProperties.getGeetestKey());
         return geetestLib;
     }

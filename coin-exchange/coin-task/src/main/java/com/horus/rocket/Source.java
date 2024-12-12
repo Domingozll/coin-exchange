@@ -9,8 +9,8 @@ import org.springframework.messaging.MessageChannel;
 public interface Source {
 
     /**
-     *  往前端订阅的group_message_out的topic里面发送数据
-     * */
+     * 往前端订阅的group_message_out的topic里面发送数据
+     */
     @Output("group_message_out")
-    MessageChannel subscribeGroupOutput() ;
+    MessageChannel subscribeGroupOutput();
 }

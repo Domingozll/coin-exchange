@@ -7,14 +7,14 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 /*
-*  会员系统的启动类
-* */
+ *  会员系统的启动类
+ * */
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class MemberServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MemberServiceApplication.class,args);
+        SpringApplication.run(MemberServiceApplication.class, args);
     }
 }

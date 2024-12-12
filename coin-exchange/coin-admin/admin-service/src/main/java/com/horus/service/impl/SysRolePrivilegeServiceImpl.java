@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("all")
 @Service
-public class SysRolePrivilegeServiceImpl extends ServiceImpl<SysRolePrivilegeMapper, SysRolePrivilege> implements SysRolePrivilegeService{
+public class SysRolePrivilegeServiceImpl extends ServiceImpl<SysRolePrivilegeMapper, SysRolePrivilege> implements SysRolePrivilegeService {
 
     @Autowired
     private SysMenuService sysMenuService;
@@ -59,6 +59,7 @@ public class SysRolePrivilegeServiceImpl extends ServiceImpl<SysRolePrivilegeMap
 
     /**
      * <h2>给角色授权</h2>
+     *
      * @param rolePrivilegesParam
      **/
     @Transactional

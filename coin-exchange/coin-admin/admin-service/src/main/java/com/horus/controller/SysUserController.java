@@ -22,7 +22,7 @@ import java.util.Arrays;
 @Api(tags = "员工管理")
 @RestController
 @RequestMapping("/users")
-public class    SysUserController {
+public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
@@ -30,10 +30,10 @@ public class    SysUserController {
     @GetMapping
     @ApiOperation(value = "分页条件查询员工")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current" ,value = "当前页") ,
-            @ApiImplicitParam(name = "size" ,value = "每页显示的条数") ,
-            @ApiImplicitParam(name = "mobile" ,value = "员工的手机号码") ,
-            @ApiImplicitParam(name = "fullname" ,value = "员工的全名称") ,
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
+            @ApiImplicitParam(name = "mobile", value = "员工的手机号码"),
+            @ApiImplicitParam(name = "fullname", value = "员工的全名称"),
     })
     @PreAuthorize("hasAuthority('sys_user_query')")
     public R<Page<SysUser>> findByPage(@ApiIgnore Page<SysUser> page, String mobile, String fullname) {
@@ -45,7 +45,7 @@ public class    SysUserController {
     @PostMapping("/add")
     @ApiOperation(value = "新增员工")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysUser"  ,value = "sysUser 的json数据")
+            @ApiImplicitParam(name = "sysUser", value = "sysUser 的json数据")
     })
     @PreAuthorize("hasAuthority('sys_user_create')")
     public R addUser(@RequestBody SysUser sysUser) {
@@ -56,7 +56,7 @@ public class    SysUserController {
     @PatchMapping("/update")
     @ApiOperation(value = "修改员工")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysUser"  ,value = "sysUser 的json数据")
+            @ApiImplicitParam(name = "sysUser", value = "sysUser 的json数据")
     })
     @PreAuthorize("hasAuthority('sys_user_update')")
     public R updateUser(@RequestBody SysUser sysUser) {

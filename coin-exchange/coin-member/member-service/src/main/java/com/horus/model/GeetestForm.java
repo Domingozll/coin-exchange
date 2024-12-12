@@ -26,7 +26,7 @@ public class GeetestForm {
     private String geetest_validate;
     private String uuid;
 
-    public void check(GeetestLib geetestLib, RedisTemplate<String,Object> redisTemplate){
+    public void check(GeetestLib geetestLib, RedisTemplate<String, Object> redisTemplate) {
         String challenge = this.getGeetest_challenge();
         String validate = this.getGeetest_validate();
         String seccode = this.getGeetest_seccode();
@@ -54,8 +54,8 @@ public class GeetestForm {
             result = geetestLib.failValidate(challenge, validate, seccode);
         }
 
-        if (result.getStatus() != 1){
-            log.error("验证异常",JSON.toJSONString(result,true));
+        if (result.getStatus() != 1) {
+            log.error("验证异常", JSON.toJSONString(result, true));
             throw new IllegalArgumentException("验证码验证异常");
         }
     }

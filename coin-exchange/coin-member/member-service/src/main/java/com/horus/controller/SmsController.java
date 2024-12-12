@@ -22,11 +22,11 @@ public class SmsController {
     @PostMapping("/sendTo")
     @ApiOperation(value = "发送短信")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sms",value = "smsjson数据")
+            @ApiImplicitParam(name = "sms", value = "smsjson数据")
     })
-    public R sendSms(@RequestBody Sms sms){
+    public R sendSms(@RequestBody Sms sms) {
         boolean isOk = smsService.sendSms(sms);
-        if (isOk){
+        if (isOk) {
             return R.ok();
         }
         return R.fail("发送失败");

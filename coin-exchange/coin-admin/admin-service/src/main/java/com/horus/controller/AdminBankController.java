@@ -39,18 +39,18 @@ public class AdminBankController implements AdminBankServiceFeign {
             @ApiImplicitParam(name = "size", value = "每页显示的条数")
     })
     @PreAuthorize("hasAuthority('admin_bank_query')")
-    public R<Page<AdminBank>> findByPage(@ApiIgnore Page<AdminBank> page , String bankCard){
-        Page<AdminBank> adminBankPage = adminBankService.findByPage(page, bankCard) ;
-        return R.ok(adminBankPage) ;
+    public R<Page<AdminBank>> findByPage(@ApiIgnore Page<AdminBank> page, String bankCard) {
+        Page<AdminBank> adminBankPage = adminBankService.findByPage(page, bankCard);
+        return R.ok(adminBankPage);
     }
 
     @PostMapping
     @ApiOperation(value = "新增一个银行卡")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "adminBank" ,value = "adminBank json数据")
+            @ApiImplicitParam(name = "adminBank", value = "adminBank json数据")
     })
     @PreAuthorize("hasAuthority('admin_bank_create')")
-    public R add(@RequestBody @Validated AdminBank adminBank){
+    public R add(@RequestBody @Validated AdminBank adminBank) {
         boolean success = adminBankService.save(adminBank);
         return success ? R.ok() : R.fail("新增失败");
     }
@@ -59,10 +59,10 @@ public class AdminBankController implements AdminBankServiceFeign {
     @PatchMapping
     @ApiOperation(value = "修改一个银行卡")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "adminBank" ,value = "adminBank json数据")
+            @ApiImplicitParam(name = "adminBank", value = "adminBank json数据")
     })
     @PreAuthorize("hasAuthority('admin_bank_update')")
-    public R update(@RequestBody @Validated AdminBank adminBank){
+    public R update(@RequestBody @Validated AdminBank adminBank) {
         boolean success = adminBankService.updateById(adminBank);
         return success ? R.ok() : R.fail("修改失败");
     }
@@ -71,11 +71,11 @@ public class AdminBankController implements AdminBankServiceFeign {
     @PostMapping("/adminUpdateBankStatus")
     @ApiOperation(value = "修改银行卡的状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bankId" ,value = "要修改的银行卡的ID"),
-            @ApiImplicitParam(name = "status" ,value = "要修改为的状态")
+            @ApiImplicitParam(name = "bankId", value = "要修改的银行卡的ID"),
+            @ApiImplicitParam(name = "status", value = "要修改为的状态")
     })
     @PreAuthorize("hasAuthority('admin_bank_update')")
-    public R changeStatus(Long bankId ,Byte status){
+    public R changeStatus(Long bankId, Byte status) {
         AdminBank adminBank = new AdminBank();
         adminBank.setId(bankId);
         adminBank.setStatus(status);
@@ -86,10 +86,10 @@ public class AdminBankController implements AdminBankServiceFeign {
     @PostMapping("/delete")
     @ApiOperation(value = "修改银行卡的状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bankIds" ,value = "要删除的银行卡的ID"),
+            @ApiImplicitParam(name = "bankIds", value = "要删除的银行卡的ID"),
     })
     @PreAuthorize("hasAuthority('admin_bank_delete')")
-    public R delete(@RequestBody String[] ids){
+    public R delete(@RequestBody String[] ids) {
         if (ids == null || ids.length == 0) {
             return R.fail("删除失败");
         }
@@ -99,8 +99,8 @@ public class AdminBankController implements AdminBankServiceFeign {
     }
 
     /*
-    *  adminBank的远程调用实现
-    * */
+     *  adminBank的远程调用实现
+     * */
     @Override
     public List<AdminBankDto> getAllAdminBanks() {
         List<AdminBankDto> adminBankDtos = adminBankService.getAllAdminBanks();

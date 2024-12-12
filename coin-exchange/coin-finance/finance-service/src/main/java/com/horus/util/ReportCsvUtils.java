@@ -13,8 +13,8 @@ import java.net.URLEncoder;
 import java.util.List;
 
 /*
-*  导出工具类
-* */
+ *  导出工具类
+ * */
 public class ReportCsvUtils {
 
     public static void reportList(
@@ -23,19 +23,20 @@ public class ReportCsvUtils {
             String[] properties,
             String filename,
             List<?> sourceList
-    ) throws Exception{
+    ) throws Exception {
         reportList(response, headers, properties, filename, sourceList, null);
     }
 
     /**
      * 导出CSV
-     * @param response      响应
-     * @param headers       cav头(文字)
-     * @param properties    csv对应的bean属性
-     * @param filename      文件名
-     * @param sourceList    源数据
-     * @param processors    单元格处理器
-     * @throws Exception    异常
+     *
+     * @param response   响应
+     * @param headers    cav头(文字)
+     * @param properties csv对应的bean属性
+     * @param filename   文件名
+     * @param sourceList 源数据
+     * @param processors 单元格处理器
+     * @throws Exception 异常
      */
     public static void reportList(
             HttpServletResponse response,

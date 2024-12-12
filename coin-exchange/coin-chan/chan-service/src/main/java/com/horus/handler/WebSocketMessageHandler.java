@@ -23,47 +23,47 @@ import java.util.Objects;
 public class WebSocketMessageHandler implements IWsMsgHandler {
 
     /*
-    *  处理握手
-    * */
+     *  处理握手
+     * */
     @Override
     public HttpResponse handshake(HttpRequest httpRequest, HttpResponse httpResponse, ChannelContext channelContext) throws Exception {
         String clientIp = httpRequest.getClientIp();
-        log.info("开始和{}客户端建立连接",clientIp);
+        log.info("开始和{}客户端建立连接", clientIp);
         return httpResponse;
     }
 
     /*
-    *  和客户端握手之后
-    * */
+     *  和客户端握手之后
+     * */
     @Override
     public void onAfterHandshaked(HttpRequest httpRequest, HttpResponse httpResponse, ChannelContext channelContext) throws Exception {
         log.info("和客户端连接成功");
     }
 
     /*
-    *  当前websocket 前端发送一个Byte时，我们要做的处理
-    * */
+     *  当前websocket 前端发送一个Byte时，我们要做的处理
+     * */
     @Override
     public Object onBytes(WsRequest wsRequest, byte[] bytes, ChannelContext channelContext) throws Exception {
         return null;
     }
 
     /*
-    *  当前端发一个close方法时,我们怎么处理
-    * */
+     *  当前端发一个close方法时,我们怎么处理
+     * */
     @Override
     public Object onClose(WsRequest wsRequest, byte[] bytes, ChannelContext channelContext) throws Exception {
-        Tio.remove(channelContext,"remove channelContext");
+        Tio.remove(channelContext, "remove channelContext");
         return null;
     }
 
     /*
-    *  当前端发送文本过来,我们如何处理
-    * */
+     *  当前端发送文本过来,我们如何处理
+     * */
     @Override
     public Object onText(WsRequest wsRequest, String text, ChannelContext channelContext) throws Exception {
-        if(Objects.equals("ping",text)){
-            return "pong" ;
+        if (Objects.equals("ping", text)) {
+            return "pong";
         }
         log.info(text);
         JSONObject payload = JSON.parseObject(text);
@@ -75,29 +75,29 @@ public class WebSocketMessageHandler implements IWsMsgHandler {
         String authorization = payload.getString("authorization");
 
         // 判断是否有内容,如果有内容,则订阅该组
-        if(StringUtils.hasText(sub)){ // 订阅的组有内容
-            Tio.bindGroup(channelContext,sub);
+        if (StringUtils.hasText(sub)) { // 订阅的组有内容
+            Tio.bindGroup(channelContext, sub);
         }
-        if(StringUtils.hasText(cancel)){
-            Tio.unbindGroup(cancel,channelContext) ;
+        if (StringUtils.hasText(cancel)) {
+            Tio.unbindGroup(cancel, channelContext);
         }
-        if(StringUtils.hasText(authorization) && authorization.startsWith("bearer ")){
-            String token = authorization.replaceAll("bearer ","") ;
+        if (StringUtils.hasText(authorization) && authorization.startsWith("bearer ")) {
+            String token = authorization.replaceAll("bearer ", "");
             // 2 查询我们的菜单数据
             Jwt jwt = JwtHelper.decode(token);
             String jwtJsonStr = jwt.getClaims();
             JSONObject jwtJson = JSON.parseObject(jwtJsonStr);
-            String userId = jwtJson.getString("user_name") ;
+            String userId = jwtJson.getString("user_name");
             // 有用户时绑定用户，并不是绑定一个组而是单独某一类用户
-            Tio.unbindUser(channelContext.getTioConfig(),userId);
+            Tio.unbindUser(channelContext.getTioConfig(), userId);
         }
         ResponseEntity responseEntity = new ResponseEntity();
-        responseEntity.setCanceled(cancel) ;
-        responseEntity.setSubbed(sub) ;
-        responseEntity.setId(id) ;
-        responseEntity.setStatus("OK") ;
-        responseEntity.setCh(sub) ;
-        responseEntity.setEvent(req) ;
-        return responseEntity.build() ;
+        responseEntity.setCanceled(cancel);
+        responseEntity.setSubbed(sub);
+        responseEntity.setId(id);
+        responseEntity.setStatus("OK");
+        responseEntity.setCh(sub);
+        responseEntity.setEvent(req);
+        return responseEntity.build();
     }
 }

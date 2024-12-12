@@ -18,7 +18,8 @@ public class DepthItemVo implements Comparable<DepthItemVo> {
      * 价格
      */
     @ApiModelProperty(value = "价格")
-    private BigDecimal price = BigDecimal.ZERO;;
+    private BigDecimal price = BigDecimal.ZERO;
+    ;
 
     /**
      * 数量

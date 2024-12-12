@@ -20,21 +20,19 @@ import java.util.List;
 @Component
 public class DepthEvent implements Event {
 
-    @Autowired
-    private Source source;
-
-    @Autowired
-    private MarketServiceFeign marketServiceFeign;
-
     /**
      * RocketMQ中盘口深度数据的群(组/频道)
      * 1:%s 具体的那个交易对   %s 深度的类型
      */
     private static final String DEPTH_GROUP = "market.%s.depth.step%s";
+    @Autowired
+    private Source source;
+    @Autowired
+    private MarketServiceFeign marketServiceFeign;
 
     /**
-     *  推送市场合并深度
-     * */
+     * 推送市场合并深度
+     */
     @Override
     public void handle() {
 

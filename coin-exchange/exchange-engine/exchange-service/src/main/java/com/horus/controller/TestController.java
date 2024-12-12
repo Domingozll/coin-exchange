@@ -12,7 +12,7 @@ public class TestController {
 
     @GetMapping("/test")
     @ApiOperation(value = "交易系统测试")
-    public R<String> test(){
+    public R<String> test() {
         return R.ok("交易系统测试成功");
     }
 }

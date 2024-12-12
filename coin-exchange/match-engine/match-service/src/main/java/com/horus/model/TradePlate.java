@@ -55,7 +55,7 @@ public class TradePlate {
             // 2 我们的buy 队列是: 从大到小
             DepthItemVo depthItemVo = items.get(i);
             if (
-                    // 盘口价格小于我出的委托单价格(我出的价格可能高得多)
+                // 盘口价格小于我出的委托单价格(我出的价格可能高得多)
                     (direction == OrderDirection.BUY && order.getPrice().compareTo(depthItemVo.getPrice()) == -1)
                             ||
                             // 盘口价格大于我出的价格(我卖的价格可能低得多)
@@ -77,8 +77,8 @@ public class TradePlate {
         }
 
         /*
-        *  当前深度小于最大深度,可以进行买入或者卖出
-        * */
+         *  当前深度小于最大深度,可以进行买入或者卖出
+         * */
         if (i < maxDepth) {
             DepthItemVo depthItemVo = new DepthItemVo();
             depthItemVo.setPrice(order.getPrice());
@@ -112,8 +112,8 @@ public class TradePlate {
             return;
         }
         /*
-        *  判断该盘口的委托量能否被吃完,吃完则移除
-        * */
+         *  判断该盘口的委托量能否被吃完,吃完则移除
+         * */
         Iterator<DepthItemVo> iterator = items.iterator();
         while (iterator.hasNext()) {
             DepthItemVo next = iterator.next();

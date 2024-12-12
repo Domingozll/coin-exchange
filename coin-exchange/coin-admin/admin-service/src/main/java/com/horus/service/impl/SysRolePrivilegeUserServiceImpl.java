@@ -5,7 +5,8 @@ import com.horus.domain.SysRolePrivilegeUser;
 import com.horus.mapper.SysRolePrivilegeUserMapper;
 import com.horus.service.SysRolePrivilegeUserService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class SysRolePrivilegeUserServiceImpl extends ServiceImpl<SysRolePrivilegeUserMapper, SysRolePrivilegeUser> implements SysRolePrivilegeUserService{
+public class SysRolePrivilegeUserServiceImpl extends ServiceImpl<SysRolePrivilegeUserMapper, SysRolePrivilegeUser> implements SysRolePrivilegeUserService {
 
 }

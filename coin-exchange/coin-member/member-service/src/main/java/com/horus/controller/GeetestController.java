@@ -27,22 +27,22 @@ public class GeetestController {
     private GeetestLib geetestLib;
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @GetMapping("/register")
     @ApiOperation(value = "获取极验的第一次数据包---")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "uuid",value = "用户验证的一个凭证")
+            @ApiImplicitParam(name = "uuid", value = "用户验证的一个凭证")
     })
-    public R<String> register(String uuid){
+    public R<String> register(String uuid) {
         //GeetestLib gtLib = new GeetestLib(GeetestConfig.GEETEST_ID, GeetestConfig.GEETEST_KEY);
         String digestmod = "md5";
-        Map<String,String> paramMap = new HashMap<String, String>();
+        Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("digestmod", digestmod);
         paramMap.put("user_id", uuid);
         paramMap.put("client_type", "web");
         // 从上下文对象中获取request对象
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         paramMap.put("ip_address", IpUtil.getIpAddr(servletRequestAttributes.getRequest()));
 
 
@@ -54,8 +54,8 @@ public class GeetestController {
         // request.getSession().setAttribute("userId", userId);
 
         // 由于我们是分布式环境，所以考虑将结果状态放入到redis中
-        redisTemplate.opsForValue().set(GeetestLib.GEETEST_SERVER_STATUS_SESSION_KEY,result.getStatus(),180, TimeUnit.SECONDS);
-        redisTemplate.opsForValue().set(GeetestLib.GEETEST_SERVER_USER_KEY + ":" + uuid,uuid,180, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(GeetestLib.GEETEST_SERVER_STATUS_SESSION_KEY, result.getStatus(), 180, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(GeetestLib.GEETEST_SERVER_USER_KEY + ":" + uuid, uuid, 180, TimeUnit.SECONDS);
 
 
         // 注意，不要更改返回的结构和值类型

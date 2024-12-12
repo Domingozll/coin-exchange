@@ -22,23 +22,23 @@ public class AdminAddressController {
     @GetMapping
     @ApiOperation(value = "查询归集地址")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinId",value = "币种的id"),
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数")
+            @ApiImplicitParam(name = "coinId", value = "币种的id"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数")
     })
-    public R<Page<AdminAddress>> findByPage(@ApiIgnore Page<AdminAddress> page, Long coinId){
-        Page<AdminAddress> adminAddressPage = adminAddressService.findByPage(page,coinId);
+    public R<Page<AdminAddress>> findByPage(@ApiIgnore Page<AdminAddress> page, Long coinId) {
+        Page<AdminAddress> adminAddressPage = adminAddressService.findByPage(page, coinId);
         return R.ok(adminAddressPage);
     }
 
     @PostMapping
     @ApiOperation(value = "归集地址的新增")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "adminAddress",value = "adminAddress的json数据")
+            @ApiImplicitParam(name = "adminAddress", value = "adminAddress的json数据")
     })
-    public R save(@RequestBody @Validated AdminAddress adminAddress){
+    public R save(@RequestBody @Validated AdminAddress adminAddress) {
         boolean save = adminAddressService.save(adminAddress);
-        if (save){
+        if (save) {
             return R.ok();
         }
         return R.fail("新增失败");
@@ -47,11 +47,11 @@ public class AdminAddressController {
     @PatchMapping
     @ApiOperation(value = "归集地址的修改")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "adminAddress",value = "adminAddress的json数据")
+            @ApiImplicitParam(name = "adminAddress", value = "adminAddress的json数据")
     })
-    public R update(@RequestBody @Validated AdminAddress adminAddress){
+    public R update(@RequestBody @Validated AdminAddress adminAddress) {
         boolean update = adminAddressService.updateById(adminAddress);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("修改失败");

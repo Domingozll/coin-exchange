@@ -9,8 +9,9 @@ import com.horus.service.CoinConfigService;
 import com.horus.service.CoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 @Service
-public class CoinConfigServiceImpl extends ServiceImpl<CoinConfigMapper, CoinConfig> implements CoinConfigService{
+public class CoinConfigServiceImpl extends ServiceImpl<CoinConfigMapper, CoinConfig> implements CoinConfigService {
 
     @Autowired
     private CoinService coinService;
@@ -21,7 +22,7 @@ public class CoinConfigServiceImpl extends ServiceImpl<CoinConfigMapper, CoinCon
     @Override
     public CoinConfig findByCoinId(Long coinId) {
         // coinConfig的id和Coin的id 值是相同的
-        return getOne(new LambdaQueryWrapper<CoinConfig>().eq(CoinConfig::getId,coinId));
+        return getOne(new LambdaQueryWrapper<CoinConfig>().eq(CoinConfig::getId, coinId));
     }
 
     /*
@@ -31,7 +32,7 @@ public class CoinConfigServiceImpl extends ServiceImpl<CoinConfigMapper, CoinCon
     public boolean updateOrSave(CoinConfig coinConfig) {
         // 查询出coinType
         Coin coin = coinService.getById(coinConfig.getId());
-        if (coin == null){
+        if (coin == null) {
             throw new IllegalArgumentException("coin-Id不存在");
         }
         coinConfig.setCoinType(coin.getType());
@@ -39,10 +40,10 @@ public class CoinConfigServiceImpl extends ServiceImpl<CoinConfigMapper, CoinCon
 
         // 是新增还是修改?
         CoinConfig config = getById(coinConfig.getId());
-        if (config == null){
+        if (config == null) {
             // 新增操作
             return save(coinConfig);
-        }else {
+        } else {
             // 修改操作
             return updateById(coinConfig);
         }

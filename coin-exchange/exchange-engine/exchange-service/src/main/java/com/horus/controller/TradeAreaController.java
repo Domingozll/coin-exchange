@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @Api(tags = "交易区域的数据接口")
 @RequestMapping("/tradeAreas")
-public class TradeAreaController implements TradingAreaServiceClient{
+public class TradeAreaController implements TradingAreaServiceClient {
 
     @Autowired
     private TradeAreaService tradeAreaService;
@@ -32,27 +32,27 @@ public class TradeAreaController implements TradingAreaServiceClient{
     @GetMapping
     @ApiOperation(value = "交易区域的分页查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数"),
-            @ApiImplicitParam(name = "name",value = "交易区域的名称"),
-            @ApiImplicitParam(name = "status",value = "交易区域的状态")
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
+            @ApiImplicitParam(name = "name", value = "交易区域的名称"),
+            @ApiImplicitParam(name = "status", value = "交易区域的状态")
     })
     @PreAuthorize("hasAuthority('trade_area_query')")
-    public R<Page<TradeArea>> findByPage(@ApiIgnore Page<TradeArea> page,String name,Byte status){
+    public R<Page<TradeArea>> findByPage(@ApiIgnore Page<TradeArea> page, String name, Byte status) {
         page.addOrder(OrderItem.desc("last_update_time"));
-        Page<TradeArea> pageData = tradeAreaService.findByPage(page,name,status);
+        Page<TradeArea> pageData = tradeAreaService.findByPage(page, name, status);
         return R.ok(pageData);
     }
 
     @PostMapping
     @ApiOperation(value = "新增一个交易区域")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "tradeArea",value = "tradeArea json数据")
+            @ApiImplicitParam(name = "tradeArea", value = "tradeArea json数据")
     })
     @PreAuthorize("hasAuthority('trade_area_create')")
-    public R save(@RequestBody TradeArea tradeArea){
+    public R save(@RequestBody TradeArea tradeArea) {
         boolean save = tradeAreaService.save(tradeArea);
-        if (save){
+        if (save) {
             return R.ok();
         }
         return R.fail("新增失败");
@@ -61,12 +61,12 @@ public class TradeAreaController implements TradingAreaServiceClient{
     @PatchMapping
     @ApiOperation(value = "修改一个交易区域")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "tradeArea",value = "tradeArea json数据")
+            @ApiImplicitParam(name = "tradeArea", value = "tradeArea json数据")
     })
     @PreAuthorize("hasAuthority('trade_area_update')")
-    public R update(@RequestBody TradeArea tradeArea){
+    public R update(@RequestBody TradeArea tradeArea) {
         boolean update = tradeAreaService.updateById(tradeArea);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("修改失败");
@@ -75,12 +75,12 @@ public class TradeAreaController implements TradingAreaServiceClient{
     @PostMapping("/status")
     @ApiOperation(value = "修改一个交易区域的状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "tradeArea",value = "tradeArea json数据")
+            @ApiImplicitParam(name = "tradeArea", value = "tradeArea json数据")
     })
     @PreAuthorize("hasAuthority('trade_area_update')")
-    public R updateStatus(@RequestBody TradeArea tradeArea){
+    public R updateStatus(@RequestBody TradeArea tradeArea) {
         boolean update = tradeAreaService.updateById(tradeArea);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("修改状态失败");
@@ -89,35 +89,35 @@ public class TradeAreaController implements TradingAreaServiceClient{
     @GetMapping("/all")
     @ApiOperation(value = "查询交易区域")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "status",value = "交易区域的状态")
+            @ApiImplicitParam(name = "status", value = "交易区域的状态")
     })
     @PreAuthorize("hasAuthority('trade_area_query')")
-    public R<List<TradeArea>> findAll(Byte status){
+    public R<List<TradeArea>> findAll(Byte status) {
         List<TradeArea> tradeAreas = tradeAreaService.findAll(status);
         return R.ok(tradeAreas);
     }
 
     @GetMapping("/markets")
     @ApiOperation(value = "查询交易区域，以及区域下面的市场")
-    public R<List<TradeAreaMarketVo>> getTradeAreaMarkets(){
+    public R<List<TradeAreaMarketVo>> getTradeAreaMarkets() {
         List<TradeAreaMarketVo> tradeAreaMarketVos = tradeAreaService.findTradeAreaMarket();
         return R.ok(tradeAreaMarketVos);
     }
 
     @GetMapping("/market/favorite")
     @ApiOperation(value = "用户收藏的交易市场")
-    public R<List<TradeAreaMarketVo>> getUserFavoriteMarkets(){
+    public R<List<TradeAreaMarketVo>> getUserFavoriteMarkets() {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         List<TradeAreaMarketVo> tradeAreaMarketVos = tradeAreaService.getUserFavoriteMarkets(userId);
         return R.ok(tradeAreaMarketVos);
     }
 
     /**
-     *  远程调用提供者
-     * */
+     * 远程调用提供者
+     */
     @Override
     public List<TradeAreaDto> tradeAreas() {
-        List<TradeAreaDto> tradeAreaDtoList =  tradeAreaService.findAllTradeAreaAndMarket();
-        return tradeAreaDtoList ;
+        List<TradeAreaDto> tradeAreaDtoList = tradeAreaService.findAllTradeAreaAndMarket();
+        return tradeAreaDtoList;
     }
 }

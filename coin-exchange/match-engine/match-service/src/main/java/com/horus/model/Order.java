@@ -85,7 +85,7 @@ public class Order implements Serializable {
      */
     private Long cancelTime;
 
-    private boolean isCancelOrder ;
+    private boolean isCancelOrder;
 
     /**
      * 已经成功的水平订单

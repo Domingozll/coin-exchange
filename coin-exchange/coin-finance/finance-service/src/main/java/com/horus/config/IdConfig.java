@@ -16,11 +16,11 @@ public class IdConfig {
     private Integer dataId;
 
     /*
-    *  雪花算法
-    * */
+     *  雪花算法
+     * */
     @Bean
-    public Snowflake snowflake(){
-        Snowflake snowflake = new Snowflake(appId,dataId);
+    public Snowflake snowflake() {
+        Snowflake snowflake = new Snowflake(appId, dataId);
         return snowflake;
     }
 }

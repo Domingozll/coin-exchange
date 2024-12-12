@@ -30,7 +30,7 @@ public class SysRolePrivilegeController {
     @GetMapping("/roles_privileges")
     @ApiOperation(value = "查询角色的权限列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleId" ,value = "角色的ID")
+            @ApiImplicitParam(name = "roleId", value = "角色的ID")
     })
     public R<List<SysMenu>> findSysMenuAndPrivileges(long roleId) {
         List<SysMenu> sysMenus = sysRolePrivilegeService.findSysMenuAndPrivileges(roleId);
@@ -40,7 +40,7 @@ public class SysRolePrivilegeController {
     @PostMapping("/grant_privileges")
     @ApiOperation(value = "授予角色某种权限")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "rolePrivilegesParam" ,value = "rolePrivilegesParam json数")
+            @ApiImplicitParam(name = "rolePrivilegesParam", value = "rolePrivilegesParam json数")
     })
     public R grantPrivileges(@RequestBody RolePrivilegesParam rolePrivilegesParam) {
         System.out.println(rolePrivilegesParam);

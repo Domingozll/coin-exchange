@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Set;
 
 /*
-*  撮合引擎的配置类
-* */
+ *  撮合引擎的配置类
+ * */
 @Configuration
 @EnableConfigurationProperties(value = MatchEngineProperties.class)
 public class MatchEngineAutoConfiguration {
@@ -27,8 +27,8 @@ public class MatchEngineAutoConfiguration {
     }
 
     /*
-    *  ringBuffer里面的消息(订单)的处理器的处理方式
-    * */
+     *  ringBuffer里面的消息(订单)的处理器的处理方式
+     * */
     @Bean("eventHandlers")
     public EventHandler<OrderEvent>[] eventHandlers() {
         Map<String, MatchEngineProperties.CoinScale> symbols = matchEngineProperties.getSymbols();

@@ -3,27 +3,27 @@ package com.domain;
 import java.util.Date;
 
 /**
-    * 权限配置
-    */
+ * 权限配置
+ */
 public class SysPrivilege {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 所属菜单Id
-    */
+     * 所属菜单Id
+     */
     private Long menuId;
 
     /**
-    * 功能点名称
-    */
+     * 功能点名称
+     */
     private String name;
 
     /**
-    * 功能描述
-    */
+     * 功能描述
+     */
     private String description;
 
     private String url;
@@ -31,23 +31,23 @@ public class SysPrivilege {
     private String method;
 
     /**
-    * 创建人
-    */
+     * 创建人
+     */
     private Long createBy;
 
     /**
-    * 修改人
-    */
+     * 修改人
+     */
     private Long modifyBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date created;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date lastUpdateTime;
 
     public Long getId() {

@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 
 
 @Service
-public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> implements ConfigService{
+public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> implements ConfigService {
     /**
      * <h2>条件分页查询后台参数</h2>
      *
@@ -31,6 +31,6 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
 
     @Override
     public Config getConfigByCode(String code) {
-        return getOne(new LambdaQueryWrapper<Config>().eq(Config::getCode,code));
+        return getOne(new LambdaQueryWrapper<Config>().eq(Config::getCode, code));
     }
 }

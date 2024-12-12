@@ -13,19 +13,19 @@ import java.util.Set;
 public class GatewayFlowRulesController {
 
     /*
-    *  获取当前系统的限流策略
-    * */
+     *  获取当前系统的限流策略
+     * */
     @GetMapping("/gw/flow/rules")
-    public Set<GatewayFlowRule> getCurrentGatewayFlowRules(){
+    public Set<GatewayFlowRule> getCurrentGatewayFlowRules() {
         return GatewayRuleManager.getRules();
     }
 
 
     /*
-    *  获取我定义的api分组
-    * */
+     *  获取我定义的api分组
+     * */
     @GetMapping("/gw/api/groups")
-    public Set<ApiDefinition> getApiGroups(){
+    public Set<ApiDefinition> getApiGroups() {
         return GatewayApiDefinitionManager.getApiDefinitions();
     }
 }

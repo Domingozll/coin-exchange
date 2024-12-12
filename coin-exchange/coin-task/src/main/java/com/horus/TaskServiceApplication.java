@@ -16,6 +16,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class TaskServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaskServiceApplication.class,args);
+        SpringApplication.run(TaskServiceApplication.class, args);
     }
 }

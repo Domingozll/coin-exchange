@@ -18,17 +18,18 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class WorkIssueServiceImpl extends ServiceImpl<WorkIssueMapper, WorkIssue> implements WorkIssueService{
+public class WorkIssueServiceImpl extends ServiceImpl<WorkIssueMapper, WorkIssue> implements WorkIssueService {
 
     @Autowired
     private UserServiceFeign userServiceFeign;
 
     /**
      * <h2>分页条件查询工单</h2>
-     * @param page       分页参数
-     * @param status     工单当前的处理状态
-     * @param startTime  工单创建的起始时间
-     * @param endTime    工单创建的截至时间
+     *
+     * @param page      分页参数
+     * @param status    工单当前的处理状态
+     * @param startTime 工单创建的起始时间
+     * @param endTime   工单创建的截至时间
      **/
     @Override
     public Page<WorkIssue> findByPage(Page<WorkIssue> page, Integer status, String startTime, String endTime) {
@@ -42,7 +43,7 @@ public class WorkIssueServiceImpl extends ServiceImpl<WorkIssueMapper, WorkIssue
                 )
         );
         List<WorkIssue> records = pageData.getRecords();
-        if (CollectionUtils.isEmpty(records)){
+        if (CollectionUtils.isEmpty(records)) {
             return pageData;
         }
         // 远程调用member-service
@@ -69,8 +70,8 @@ public class WorkIssueServiceImpl extends ServiceImpl<WorkIssueMapper, WorkIssue
         records.forEach(workIssue -> {
             // 循环每一个workIssue,给它里面设置用户的信息 map.get(userId)
             UserDto userDto = idMapUserDtos.get(workIssue.getUserId());
-            workIssue.setUsername(userDto==null?"测试用户":userDto.getUsername());
-            workIssue.setRealName(userDto==null?"测试用户":userDto.getRealName());
+            workIssue.setUsername(userDto == null ? "测试用户" : userDto.getUsername());
+            workIssue.setRealName(userDto == null ? "测试用户" : userDto.getRealName());
         });
 
         return pageData;
@@ -80,9 +81,9 @@ public class WorkIssueServiceImpl extends ServiceImpl<WorkIssueMapper, WorkIssue
      *  前台系统查询客户工单
      * */
     @Override
-    public Page<WorkIssue> getIssueList(Page<WorkIssue> page,Long userId) {
-        return page(page,new LambdaQueryWrapper<WorkIssue>()
-                .eq(WorkIssue::getUserId,userId));
-                //.eq(WorkIssue::getStatus,1)
+    public Page<WorkIssue> getIssueList(Page<WorkIssue> page, Long userId) {
+        return page(page, new LambdaQueryWrapper<WorkIssue>()
+                .eq(WorkIssue::getUserId, userId));
+        //.eq(WorkIssue::getStatus,1)
     }
 }

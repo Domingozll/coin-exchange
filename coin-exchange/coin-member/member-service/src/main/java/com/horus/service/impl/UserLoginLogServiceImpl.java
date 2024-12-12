@@ -5,7 +5,8 @@ import com.horus.domain.UserLoginLog;
 import com.horus.mapper.UserLoginLogMapper;
 import com.horus.service.UserLoginLogService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, UserLoginLog> implements UserLoginLogService{
+public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, UserLoginLog> implements UserLoginLogService {
 
 }

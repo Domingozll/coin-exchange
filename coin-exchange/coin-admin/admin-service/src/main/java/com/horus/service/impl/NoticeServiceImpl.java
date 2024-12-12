@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> implements NoticeService{
+public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> implements NoticeService {
     /**
      * <h2>条件分页查询公告</h2>
-     * @param page  分页数据
-     * @param title 公告的标题
+     *
+     * @param page      分页数据
+     * @param title     公告的标题
      * @param startTime 公告的创建开始时间
      * @param endTime   公告的创建结束时间时间
      * @param status    公告的状态
@@ -37,8 +38,8 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
      * */
     @Override
     public Page<Notice> findNoticeSimple(Page<Notice> page) {
-        return page(page,new LambdaQueryWrapper<Notice>()
-                .eq(Notice::getStatus,1)
+        return page(page, new LambdaQueryWrapper<Notice>()
+                .eq(Notice::getStatus, 1)
                 .orderByAsc(Notice::getSort));
     }
 }

@@ -17,23 +17,23 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- *  K线的生成
- * */
+ * K线的生成
+ */
 @Component
 public class TradeKlineService implements CommandLineRunner {
 
     /**
-     *  当我们的交易完成(撮合)之后,就会触发k 线的生成
-     *  使用阻塞队列
-     * */
+     * 当我们的交易完成(撮合)之后,就会触发k 线的生成
+     * 使用阻塞队列
+     */
     public static BlockingQueue<CreateKLineDto> queue = new LinkedBlockingDeque<>();
 
     @Autowired
     private StringRedisTemplate redisTemplate;
 
     /**
-     *  该方法在boot启动时,就会执行
-     * */
+     * 该方法在boot启动时,就会执行
+     */
     @Override
     public void run(String... args) throws Exception {
 
@@ -94,7 +94,7 @@ public class TradeKlineService implements CommandLineRunner {
                 line.setOpen(historyKline.getClose());
                 line.setClose(historyKline.getClose());
                 // 设置交易量为0
-                line.setVolume(BigDecimal.ZERO) ;
+                line.setVolume(BigDecimal.ZERO);
                 // 放在Redis 里面
                 redisTemplate.opsForList().leftPush(redisKey, line.toKline());
                 return;

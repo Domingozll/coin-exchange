@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- *     字段自动填充
- *     填充判断:
- *          1、如果是主键，不填充
- *          2、根据字段名找不到字段，不填充
- *          3、字段类型与填充值类型不匹配，不填充
- *          4、字段类型需要在TableField注解里配置fill，@TableField(value = "create_by", fill = FieldFill.INSERT)
- *              没有配置或不匹配则不生效
+ * 字段自动填充
+ * 填充判断:
+ * 1、如果是主键，不填充
+ * 2、根据字段名找不到字段，不填充
+ * 3、字段类型与填充值类型不匹配，不填充
+ * 4、字段类型需要在TableField注解里配置fill，@TableField(value = "create_by", fill = FieldFill.INSERT)
+ * 没有配置或不匹配则不生效
  */
 @Component
 public class AutoFillHandler implements MetaObjectHandler {
@@ -24,6 +24,7 @@ public class AutoFillHandler implements MetaObjectHandler {
 
     /**
      * 新增时填入值
+     *
      * @param metaObject
      **/
     @Override
@@ -37,6 +38,7 @@ public class AutoFillHandler implements MetaObjectHandler {
 
     /**
      * 修改时填入值
+     *
      * @param metaObject
      **/
     @Override
@@ -56,7 +58,7 @@ public class AutoFillHandler implements MetaObjectHandler {
         if (authentication != null) {
             String principal = authentication.getPrincipal().toString(); //userId -> Long
             // 这里可能会遇到 anonymousUser匿名对象报错
-            if ("anonymousUser".equals(principal)){
+            if ("anonymousUser".equals(principal)) {
                 return null;
             }
             userId = Long.valueOf(principal);

@@ -36,8 +36,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private RedisConnectionFactory redisConnectionFactory;*/
 
     /*
-    *  添加第三方客户端
-    * */
+     *  添加第三方客户端
+     * */
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -46,9 +46,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("coin-api") //第三方客户端的名称
                 .secret(passwordEncoder.encode("coin-secret")) // 第三方客户端的密钥
                 .scopes("all") // 第三方客户端的授权范围
-                .authorizedGrantTypes("password","refresh_token")
-                .accessTokenValiditySeconds(7 * 24 *3600)   //token的有效期
-                .refreshTokenValiditySeconds(30 * 24 *3600)  //refresh_token有效期
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(7 * 24 * 3600)   //token的有效期
+                .refreshTokenValiditySeconds(30 * 24 * 3600)  //refresh_token有效期
                 .and()
                 // 添加一种应用内部的token获取方式
                 .withClient("inside-app")
@@ -59,8 +59,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         super.configure(clients);
     }
     /*
-    *  配置验证管理器，UserDetailService
-    * */
+     *  配置验证管理器，UserDetailService
+     * */
 
     // 验证管理器，统一签发、验证token
     @Override
@@ -78,13 +78,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return jwtTokenStore;
     }
 
-    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
 
         // 加载我们的私钥
         ClassPathResource classPathResource = new ClassPathResource("coinexchange.jks");
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(classPathResource, "coinexchange".toCharArray());
-        tokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair("coinexchange","coinexchange".toCharArray()));
+        tokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair("coinexchange", "coinexchange".toCharArray()));
         return tokenConverter;
     }
 

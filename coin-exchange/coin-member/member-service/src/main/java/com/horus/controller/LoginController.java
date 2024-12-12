@@ -24,9 +24,9 @@ public class LoginController {
     @PostMapping("/login")
     @ApiOperation(value = "会员的登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "loginForm",value = "登录的表单参数")
+            @ApiImplicitParam(name = "loginForm", value = "登录的表单参数")
     })
-    public R<LoginUser> login(@RequestBody @Validated LoginForm loginForm){
+    public R<LoginUser> login(@RequestBody @Validated LoginForm loginForm) {
         LoginUser loginUser = loginService.login(loginForm);
         return R.ok(loginUser);
     }

@@ -3,72 +3,72 @@ package com.domain;
 import java.util.Date;
 
 /**
-    * 系统菜单
-    */
+ * 系统菜单
+ */
 public class SysMenu {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 上级菜单ID
-    */
+     * 上级菜单ID
+     */
     private Long parentId;
 
     /**
-    * 上级菜单唯一KEY值
-    */
+     * 上级菜单唯一KEY值
+     */
     private String parentKey;
 
     /**
-    * 类型 1-分类 2-节点
-    */
+     * 类型 1-分类 2-节点
+     */
     private Byte type;
 
     /**
-    * 名称
-    */
+     * 名称
+     */
     private String name;
 
     /**
-    * 描述
-    */
+     * 描述
+     */
     private String desc;
 
     /**
-    * 目标地址
-    */
+     * 目标地址
+     */
     private String targetUrl;
 
     /**
-    * 排序索引
-    */
+     * 排序索引
+     */
     private Integer sort;
 
     /**
-    * 状态 0-无效； 1-有效；
-    */
+     * 状态 0-无效； 1-有效；
+     */
     private Byte status;
 
     /**
-    * 创建人
-    */
+     * 创建人
+     */
     private Long createBy;
 
     /**
-    * 修改人
-    */
+     * 修改人
+     */
     private Long modifyBy;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date created;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date lastUpdateTime;
 
     public Long getId() {

@@ -83,7 +83,7 @@ public class WebConfigController {
 
     @GetMapping("/banners")
     @ApiOperation(value = "获取我们的pc端的banner图")
-    public R<List<WebConfig>> banners(){
+    public R<List<WebConfig>> banners() {
         List<WebConfig> banners = webConfigService.getPcBanner();
         return R.ok(banners);
     }

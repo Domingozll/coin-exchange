@@ -37,8 +37,8 @@ public class WebLogAspect {
 
     /**
      * <h2>
-     *  1.定义切入点:
-     *  controller 包里面所有类，类里面的所有方法，都有该切面
+     * 1.定义切入点:
+     * controller 包里面所有类，类里面的所有方法，都有该切面
      * </h2>
      **/
     @Pointcut("execution(* com.horus.controller.*.*(..))")
@@ -47,9 +47,10 @@ public class WebLogAspect {
 
     /**
      * <h2>
-     *     2.记录日志的环绕通知
+     * 2.记录日志的环绕通知
      * </h2>
      * 也就是方法执行之前、之后都可以记录日志
+     *
      * @param
      **/
     @Around("webLog()")
@@ -102,8 +103,9 @@ public class WebLogAspect {
 
     /**
      * <h2>获取方法的参数</h2>
+     *
      * @param method
-     * @param args {"key_参数的名称":"value_参数的值"}
+     * @param args   {"key_参数的名称":"value_参数的值"}
      **/
     private Object getMethodParameter(Method method, Object[] args) {
         Map<String, Object> methodParametersWithValues = new HashMap<>();
@@ -116,7 +118,7 @@ public class WebLogAspect {
                 //continue;
                 // 放入方法的参数
                 methodParametersWithValues.put(parameterNames[i], "受限的支持类型");
-            }else {
+            } else {
                 // 放入方法的参数
                 methodParametersWithValues.put(parameterNames[i], args[i]);
             }

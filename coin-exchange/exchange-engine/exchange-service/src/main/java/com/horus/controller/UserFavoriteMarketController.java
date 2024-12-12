@@ -31,9 +31,9 @@ public class UserFavoriteMarketController {
     @PostMapping("/addFavorite")
     @ApiOperation(value = "用户收藏某个市场")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "market",value = "market的交易对和类型")
+            @ApiImplicitParam(name = "market", value = "market的交易对和类型")
     })
-    public R addFavorite(@RequestBody Market market){
+    public R addFavorite(@RequestBody Market market) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         UserFavoriteMarket userFavoriteMarket = new UserFavoriteMarket();
         String symbol = market.getSymbol(); // 市场的symbol
@@ -41,11 +41,11 @@ public class UserFavoriteMarketController {
         userFavoriteMarket.setUserId(userId);
 
 
-        Market marketDb =  marketService.getMarketBySymbol(symbol);
+        Market marketDb = marketService.getMarketBySymbol(symbol);
         userFavoriteMarket.setMarketId(marketDb.getId());
         userFavoriteMarket.setType(market.getType().intValue()); // 该字段暂未使用
         boolean save = userFavoriteMarketService.save(userFavoriteMarket);
-        if (save){
+        if (save) {
             return R.ok("收藏成功");
         }
         return R.fail("收藏失败");
@@ -54,13 +54,13 @@ public class UserFavoriteMarketController {
     @DeleteMapping("/{symbol}")
     @ApiOperation(value = "用户取消收藏某个市场")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "symbol",value = "symbol交易对")
+            @ApiImplicitParam(name = "symbol", value = "symbol交易对")
     })
-    public R deleteUserFavoriteMarket(@PathVariable("symbol") String symbol){
+    public R deleteUserFavoriteMarket(@PathVariable("symbol") String symbol) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         Market marketBySymbol = marketService.getMarketBySymbol(symbol);
-        boolean isOk = userFavoriteMarketService.deleteUserFavoriteMarket(marketBySymbol.getId(),userId);
-        if (isOk){
+        boolean isOk = userFavoriteMarketService.deleteUserFavoriteMarket(marketBySymbol.getId(), userId);
+        if (isOk) {
             return R.ok();
         }
         return R.fail("取消收藏失败");

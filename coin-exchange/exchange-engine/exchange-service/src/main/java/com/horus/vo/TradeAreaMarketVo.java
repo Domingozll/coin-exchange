@@ -11,14 +11,14 @@ import java.util.List;
 public class TradeAreaMarketVo {
 
     /*
-    *  交易区域的名称
-    * */
+     *  交易区域的名称
+     * */
     @ApiModelProperty(value = "交易区域的名称")
     private String areaName;
 
     /*
-    *  交易区域包含的市场
-    * */
+     *  交易区域包含的市场
+     * */
     @ApiModelProperty(value = "交易区域下包含的市场")
     private List<TradeMarketVo> markets;
 }

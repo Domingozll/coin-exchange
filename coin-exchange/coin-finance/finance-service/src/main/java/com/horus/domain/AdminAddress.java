@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 
 /**
-    * 平台归账手续费等账户
-    */
-@ApiModel(value="com-horus-domain-AdminAddress")
+ * 平台归账手续费等账户
+ */
+@ApiModel(value = "com-horus-domain-AdminAddress")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,14 +25,14 @@ public class AdminAddress {
      * 编号
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="编号")
+    @ApiModelProperty(value = "编号")
     private Long id;
 
     /**
      * 币种Id
      */
     @TableField(value = "coin_id")
-    @ApiModelProperty(value="币种Id")
+    @ApiModelProperty(value = "币种Id")
     @NotNull
     private Long coinId;
 
@@ -40,35 +40,35 @@ public class AdminAddress {
      * eth keystore
      */
     @TableField(value = "keystore")
-    @ApiModelProperty(value="eth keystore")
+    @ApiModelProperty(value = "eth keystore")
     private String keystore;
 
     /**
      * eth账号密码
      */
     @TableField(value = "pwd")
-    @ApiModelProperty(value="eth账号密码")
+    @ApiModelProperty(value = "eth账号密码")
     private String pwd;
 
     /**
      * 地址
      */
     @TableField(value = "address")
-    @ApiModelProperty(value="地址")
+    @ApiModelProperty(value = "地址")
     private String address;
 
     /**
      * 1:归账(冷钱包地址),2:打款,3:手续费
      */
     @TableField(value = "status")
-    @ApiModelProperty(value="1:归账(冷钱包地址),2:打款,3:手续费")
+    @ApiModelProperty(value = "1:归账(冷钱包地址),2:打款,3:手续费")
     private Integer status;
 
     /**
      * 类型
      */
     @TableField(value = "coin_type")
-    @ApiModelProperty(value="类型")
+    @ApiModelProperty(value = "类型")
     //@NotBlank
     private String coinType;
 }

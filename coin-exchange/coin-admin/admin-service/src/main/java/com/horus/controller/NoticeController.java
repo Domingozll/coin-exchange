@@ -82,36 +82,36 @@ public class NoticeController {
     @PostMapping
     @ApiOperation(value = "新增一个公告")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "notice" ,value = "notice的json数据")
+            @ApiImplicitParam(name = "notice", value = "notice的json数据")
     })
     @PreAuthorize("hasAuthority('notice_create')")
-    public R add(@RequestBody @Validated Notice notice){
+    public R add(@RequestBody @Validated Notice notice) {
         notice.setStatus(1);
         boolean success = noticeService.save(notice);
-        return success ? R.ok() : R.fail("新增公告失败") ;
+        return success ? R.ok() : R.fail("新增公告失败");
     }
 
     @PatchMapping
     @ApiOperation(value = "修改一个公告")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "notice" ,value = "notice的json数据")
+            @ApiImplicitParam(name = "notice", value = "notice的json数据")
     })
     @PreAuthorize("hasAuthority('notice_update')")
-    public R update(@RequestBody  @Validated  Notice notice){
+    public R update(@RequestBody @Validated Notice notice) {
         boolean success = noticeService.updateById(notice);
-        return success ? R.ok() : R.fail("修改公告失败") ;
+        return success ? R.ok() : R.fail("修改公告失败");
     }
 
     /*
-    *  simple 就是给用户/会员看的
-    * */
+     *  simple 就是给用户/会员看的
+     * */
     @GetMapping("/simple")
     @ApiOperation(value = "查询前台展示的notice")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数")
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数")
     })
-    public R<Page<Notice>> findNoticeForSimple(@ApiIgnore Page<Notice> page){
+    public R<Page<Notice>> findNoticeForSimple(@ApiIgnore Page<Notice> page) {
         Page<Notice> pageData = noticeService.findNoticeSimple(page);
         return R.ok(pageData);
     }
@@ -119,9 +119,9 @@ public class NoticeController {
     @GetMapping("/simple/{id}")
     @ApiOperation(value = "查询某条Notice的详情")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value = "notice的id")
+            @ApiImplicitParam(name = "id", value = "notice的id")
     })
-    public R<Notice> noticeSimpleInfo(@PathVariable("id") Long id){
+    public R<Notice> noticeSimpleInfo(@PathVariable("id") Long id) {
         Notice notice = noticeService.getById(id);
         return R.ok(notice);
     }

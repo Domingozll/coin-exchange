@@ -30,17 +30,17 @@ public class AccountController implements AccountServiceFeign {
     @GetMapping("/{coinName}")
     @ApiOperation(value = "获取当前用户的货币的资产情况")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinName",value = "货币的名称")
+            @ApiImplicitParam(name = "coinName", value = "货币的名称")
     })
-    public R<Account> getUserAccount(@PathVariable("coinName") String coinName){
+    public R<Account> getUserAccount(@PathVariable("coinName") String coinName) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        Account account = accountService.findByUserAndCoin(userId,coinName);
+        Account account = accountService.findByUserAndCoin(userId, coinName);
         return R.ok(account);
     }
 
     @GetMapping("/total")
     @ApiOperation(value = "计算用户的总资产")
-    public R<UserTotalAccountVo> total(){
+    public R<UserTotalAccountVo> total() {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         UserTotalAccountVo userTotalAccountVo = accountService.getUserTotalAccount(userId);
         return R.ok(userTotalAccountVo);
@@ -55,11 +55,11 @@ public class AccountController implements AccountServiceFeign {
     }
 
     /*
-    *  远程调用提供方
-    * */
+     *  远程调用提供方
+     * */
     @Override
     public void lockUserAmount(Long userId, Long coinId, BigDecimal mum, String type, Long orderId, BigDecimal fee) {
-        accountService.lockUserAmount(userId,coinId,mum,type,orderId,fee);
+        accountService.lockUserAmount(userId, coinId, mum, type, orderId, fee);
     }
 
     /**

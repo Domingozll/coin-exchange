@@ -1,7 +1,6 @@
 package com.horus.task;
 
 
-
 import com.horus.event.DepthEvent;
 import com.horus.event.MarketEvent;
 import com.horus.event.TradeEvent;
@@ -10,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /*
-*  事件触发器,用于触发自己定义的事件
-* */
+ *  事件触发器,用于触发自己定义的事件
+ * */
 //@Component
 public class MarketTickerTask {
 
     @Autowired
-    private MarketServiceFeign marketServiceFeign ;
+    private MarketServiceFeign marketServiceFeign;
 
     /**
      * 市场的事件

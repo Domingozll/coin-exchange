@@ -16,13 +16,13 @@ public class DepthsVo {
      * 委托买单
      */
     @ApiModelProperty(value = "委托买单")
-    private List<DepthItemVo> bids = Collections.emptyList() ;
+    private List<DepthItemVo> bids = Collections.emptyList();
 
     /**
      * 委托卖单
      */
     @ApiModelProperty(value = "委托卖单")
-    private List<DepthItemVo> asks = Collections.emptyList() ;
+    private List<DepthItemVo> asks = Collections.emptyList();
 
     /**
      * 当前成交价(GCN)
@@ -34,5 +34,5 @@ public class DepthsVo {
      * 当前成交价对应CNY价格
      */
     @ApiModelProperty(value = "当前成交价CNY")
-    private BigDecimal cnyPrice =  BigDecimal.ZERO;
+    private BigDecimal cnyPrice = BigDecimal.ZERO;
 }

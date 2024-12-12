@@ -1,24 +1,24 @@
 package com.domain;
 
 /**
-    * 用户权限配置
-    */
+ * 用户权限配置
+ */
 public class SysRolePrivilegeUser {
     private Long id;
 
     /**
-    * 角色Id
-    */
+     * 角色Id
+     */
     private Long roleId;
 
     /**
-    * 用户Id
-    */
+     * 用户Id
+     */
     private Long userId;
 
     /**
-    * 权限Id
-    */
+     * 权限Id
+     */
     private Long privilegeId;
 
     public Long getId() {

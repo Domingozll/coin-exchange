@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
-public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, CashRecharge> implements CashRechargeService{
+public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, CashRecharge> implements CashRechargeService {
 
     @Autowired
     private UserServiceFeign userServiceFeign;
@@ -61,14 +61,14 @@ public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, Cas
     private AdminBankServiceFeign adminBankServiceFeign;
 
     /*
-    *  雪花算法
-    * */
+     *  雪花算法
+     * */
     @Autowired
     private Snowflake snowflake;
 
     /*
-    *  创建分布式锁
-    * */
+     *  创建分布式锁
+     * */
     @CreateCache(name = "CASH_RECHARGE_LOCK:", expire = 100, timeUnit = TimeUnit.SECONDS, cacheType = CacheType.BOTH)
     private Cache<String, String> lock;
 
@@ -76,49 +76,49 @@ public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, Cas
      *  分页条件查询充值记录 -- 最多进行一次远程调用
      * */
     @Override
-    public Page<CashRecharge>  findByPage(Page<CashRecharge> page, Long coinId, Long userId, String userName, String mobile, Byte status, String numMin, String numMax, String startTime, String endTime) {
+    public Page<CashRecharge> findByPage(Page<CashRecharge> page, Long coinId, Long userId, String userName, String mobile, Byte status, String numMin, String numMax, String startTime, String endTime) {
         LambdaQueryWrapper<CashRecharge> cashRechargeLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 1.若用户本次的查询中,带了用户的信息userId,userName,mobile ---> 本质就是要把用户的id放在我们的查询条件里面
         Map<Long, UserDto> basicUsers = null;
-        if (userId!=null || !StringUtils.isEmpty(userName) || !StringUtils.isEmpty(mobile)){
+        if (userId != null || !StringUtils.isEmpty(userName) || !StringUtils.isEmpty(mobile)) {
             // 使用用户的信息查询
             // 需要远程调用查询用户的信息
             // 这远程调用接口不仅仅通过ids进行批量查询，还通过userName和mobile进行查询UserDto的值
             basicUsers = userServiceFeign.getBasicUsers(userId == null ? null : Arrays.asList(userId), userName, mobile);
-            if (CollectionUtils.isEmpty(basicUsers)){
+            if (CollectionUtils.isEmpty(basicUsers)) {
                 // 找不到这样的用户
                 return page;
             }
             Set<Long> userIds = basicUsers.keySet();
-            cashRechargeLambdaQueryWrapper.in(!CollectionUtils.isEmpty(userIds), CashRecharge::getUserId,userIds);
+            cashRechargeLambdaQueryWrapper.in(!CollectionUtils.isEmpty(userIds), CashRecharge::getUserId, userIds);
         }
         // 2.若用户本次的查询中，没有带用户的信息
-        cashRechargeLambdaQueryWrapper.eq(coinId!=null,CashRecharge::getCoinId,coinId)
-                                        .eq(status!=null,CashRecharge::getStatus,status)
-                                        .between(
-                                                !(StringUtils.isEmpty(numMin)||StringUtils.isEmpty(numMax)),
-                                                CashRecharge::getNum,
-                                                new BigDecimal(StringUtils.isEmpty(numMin) ? "0":numMin),
-                                                new BigDecimal(StringUtils.isEmpty(numMax) ? "0":numMax)
-                                        )
-                                        .between(
-                                                !(StringUtils.isEmpty(startTime)||StringUtils.isEmpty(endTime)),
-                                                CashRecharge::getCreated,
-                                                startTime,
-                                                endTime + " 23:59:59"
-                                        );
+        cashRechargeLambdaQueryWrapper.eq(coinId != null, CashRecharge::getCoinId, coinId)
+                .eq(status != null, CashRecharge::getStatus, status)
+                .between(
+                        !(StringUtils.isEmpty(numMin) || StringUtils.isEmpty(numMax)),
+                        CashRecharge::getNum,
+                        new BigDecimal(StringUtils.isEmpty(numMin) ? "0" : numMin),
+                        new BigDecimal(StringUtils.isEmpty(numMax) ? "0" : numMax)
+                )
+                .between(
+                        !(StringUtils.isEmpty(startTime) || StringUtils.isEmpty(endTime)),
+                        CashRecharge::getCreated,
+                        startTime,
+                        endTime + " 23:59:59"
+                );
         Page<CashRecharge> cashRechargePage = page(page, cashRechargeLambdaQueryWrapper);
         List<CashRecharge> records = cashRechargePage.getRecords();
-        if (!CollectionUtils.isEmpty(records)){
+        if (!CollectionUtils.isEmpty(records)) {
             List<Long> userIds = records.stream().map(CashRecharge::getUserId).collect(Collectors.toList());
-            if (CollectionUtils.isEmpty(basicUsers)){
-                basicUsers = userServiceFeign.getBasicUsers(userIds,null,null);
+            if (CollectionUtils.isEmpty(basicUsers)) {
+                basicUsers = userServiceFeign.getBasicUsers(userIds, null, null);
             }
             Map<Long, UserDto> finalBasicUsers = basicUsers;
             records.forEach(cashRecharge -> {
                 // 需要远程调用查询用户的信息
                 UserDto userDto = finalBasicUsers.get(cashRecharge.getUserId());
-                if (userDto != null){
+                if (userDto != null) {
                     cashRecharge.setUsername(userDto.getUsername());
                     cashRecharge.setRealName(userDto.getRealName());
                 }
@@ -173,13 +173,13 @@ public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, Cas
                 }
             } else {
                 // 审核通过，用户账户加钱
-                Boolean isOk = accountService.transferAccountAmount(userId,cashRecharge.getUserId(),
+                Boolean isOk = accountService.transferAccountAmount(userId, cashRecharge.getUserId(),
                         cashRecharge.getCoinId(), cashRecharge.getNum(), cashRecharge.getFee(),
                         cashRecharge.getId(), "充值", "recharge_into", (byte) 1);
                 /*Boolean isOk = accountService.transferAccountAmount(userId,cashRecharge.getUserId(),
                         cashRecharge.getCoinId(), cashRecharge.getNum(), cashRecharge.getFee(),
                         cashRecharge.getId());*/
-                if (isOk){
+                if (isOk) {
                     cashRecharge.setLastTime(new Date());// 设置完成时间
                     boolean update = updateById(cashRecharge);
                     if (!update) {
@@ -252,7 +252,7 @@ public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, Cas
         cashRecharge.setRemark(remark);
         // 更新数据库
         boolean save = save(cashRecharge);
-        if (save){
+        if (save) {
             // 5.返回结果
             CashTradeVo cashTradeVo = new CashTradeVo();
             cashTradeVo.setName(adminBankDto.getName());
@@ -269,15 +269,16 @@ public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, Cas
 
     /**
      * 银行卡中随机选择一个银行卡
-     * @param adminBanks    银行卡集合
-     * @return              随机银行卡
+     *
+     * @param adminBanks 银行卡集合
+     * @return 随机银行卡
      */
     private AdminBankDto loadBalancer(List<AdminBankDto> adminBanks) {
         if (CollectionUtils.isEmpty(adminBanks)) {
             throw new IllegalArgumentException("没有可用银行卡");
         }
         int size = adminBanks.size();
-        if (size == 1){
+        if (size == 1) {
             return adminBanks.get(0);
         }
         //Random random = new Random();
@@ -286,6 +287,7 @@ public class CashRechargeServiceImpl extends ServiceImpl<CashRechargeMapper, Cas
 
     /**
      * 校验充值参数
+     *
      * @param cashParam 充值参数
      */
     private void checkCashParam(CashParam cashParam) {

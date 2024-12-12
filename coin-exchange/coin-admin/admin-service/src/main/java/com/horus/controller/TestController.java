@@ -22,9 +22,9 @@ public class TestController {
     @ApiOperation(value = "查询用户详情")
     @GetMapping("/user/info/{id}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value = "用户的ID")
+            @ApiImplicitParam(name = "id", value = "用户的ID")
     })
-    public R<SysUser> getSysUserInfo(@PathVariable("id")Long id){
+    public R<SysUser> getSysUserInfo(@PathVariable("id") Long id) {
         SysUser sysUser = sysUserService.getById(id);
         return R.ok(sysUser);
 

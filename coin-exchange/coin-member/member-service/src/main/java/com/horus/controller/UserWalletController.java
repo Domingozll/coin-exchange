@@ -29,14 +29,14 @@ public class UserWalletController {
     @GetMapping
     @ApiOperation(value = "分页查询用户的提币地址")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",value = "用户的id"),
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每一页显示的条数"),
+            @ApiImplicitParam(name = "userId", value = "用户的id"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每一页显示的条数"),
     })
     @PreAuthorize("hasAuthority('user_wallet_query')")
-    public R<Page<UserWallet>> findByPage(@ApiIgnore Page<UserWallet> page, Long userId){
+    public R<Page<UserWallet>> findByPage(@ApiIgnore Page<UserWallet> page, Long userId) {
         page.addOrder(OrderItem.desc("last_update_time"));
-        Page<UserWallet> userWalletPage = userWalletService.findByPage(page,userId);
+        Page<UserWallet> userWalletPage = userWalletService.findByPage(page, userId);
         return R.ok(userWalletPage);
     }
 
@@ -59,7 +59,7 @@ public class UserWalletController {
     public R add(@RequestBody @Validated UserWallet userWallet) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         boolean save = userWalletService.add(userId, userWallet);
-        if (save){
+        if (save) {
             return R.ok();
         }
         return R.fail("新增提现地址失败");
@@ -73,7 +73,7 @@ public class UserWalletController {
     })
     public R delete(@RequestParam(required = true) Long addressId, @RequestParam(required = true) String payPassword) {
         boolean isOk = userWalletService.delete(addressId, payPassword);
-        if (isOk){
+        if (isOk) {
             return R.ok("删除成功");
         }
         return R.ok("删除失败");

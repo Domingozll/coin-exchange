@@ -41,53 +41,53 @@ public class CoinWithdrawController {
 
     @GetMapping("/records")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数"),
-            @ApiImplicitParam(name = "coinId",value = "币种Id"),
-            @ApiImplicitParam(name = "userId",value = "用户的ID"),
-            @ApiImplicitParam(name = "userName",value = "用户的名称"),
-            @ApiImplicitParam(name = "mobile",value = "用户的手机号"),
-            @ApiImplicitParam(name = "status",value = "充值的状态"),
-            @ApiImplicitParam(name = "numMin",value = "充值金额的最小值"),
-            @ApiImplicitParam(name = "numMax",value = "充值金额的最大值"),
-            @ApiImplicitParam(name = "startTime",value = "充值开始时间"),
-            @ApiImplicitParam(name = "endTime",value = "充值结束时间")
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
+            @ApiImplicitParam(name = "coinId", value = "币种Id"),
+            @ApiImplicitParam(name = "userId", value = "用户的ID"),
+            @ApiImplicitParam(name = "userName", value = "用户的名称"),
+            @ApiImplicitParam(name = "mobile", value = "用户的手机号"),
+            @ApiImplicitParam(name = "status", value = "充值的状态"),
+            @ApiImplicitParam(name = "numMin", value = "充值金额的最小值"),
+            @ApiImplicitParam(name = "numMax", value = "充值金额的最大值"),
+            @ApiImplicitParam(name = "startTime", value = "充值开始时间"),
+            @ApiImplicitParam(name = "endTime", value = "充值结束时间")
     })
     public R<Page<CoinWithdraw>> findByPage(
             @ApiIgnore Page<CoinWithdraw> page, Long coinId,
             Long userId, String userName, String mobile,
             Byte status, String numMin, String numMax,
             String startTime, String endTime
-    ){
-        Page<CoinWithdraw> pageData = coinWithdrawService.findByPage(page,coinId,userId,userName
-                ,mobile,status,numMin,numMax,startTime,endTime);
+    ) {
+        Page<CoinWithdraw> pageData = coinWithdrawService.findByPage(page, coinId, userId, userName
+                , mobile, status, numMin, numMax, startTime, endTime);
         return R.ok(pageData);
     }
 
 
     @GetMapping("/exportList")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinId",value = "币种Id"),
-            @ApiImplicitParam(name = "userId",value = "用户的ID"),
-            @ApiImplicitParam(name = "userName",value = "用户的名称"),
-            @ApiImplicitParam(name = "mobile",value = "用户的手机号"),
-            @ApiImplicitParam(name = "status",value = "充值的状态"),
-            @ApiImplicitParam(name = "numMin",value = "充值金额的最小值"),
-            @ApiImplicitParam(name = "numMax",value = "充值金额的最大值"),
-            @ApiImplicitParam(name = "startTime",value = "充值开始时间"),
-            @ApiImplicitParam(name = "endTime",value = "充值结束时间")
+            @ApiImplicitParam(name = "coinId", value = "币种Id"),
+            @ApiImplicitParam(name = "userId", value = "用户的ID"),
+            @ApiImplicitParam(name = "userName", value = "用户的名称"),
+            @ApiImplicitParam(name = "mobile", value = "用户的手机号"),
+            @ApiImplicitParam(name = "status", value = "充值的状态"),
+            @ApiImplicitParam(name = "numMin", value = "充值金额的最小值"),
+            @ApiImplicitParam(name = "numMax", value = "充值金额的最大值"),
+            @ApiImplicitParam(name = "startTime", value = "充值开始时间"),
+            @ApiImplicitParam(name = "endTime", value = "充值结束时间")
     })
     public void exportList(
             Long coinId,
             Long userId, String userName, String mobile,
             Byte status, String numMin, String numMax,
             String startTime, String endTime
-    ){
+    ) {
         Page<CoinWithdraw> page = new Page<>(1, 10000);
-        Page<CoinWithdraw> pageData = coinWithdrawService.findByPage(page,coinId,userId,userName
-                ,mobile,status,numMin,numMax,startTime,endTime);
+        Page<CoinWithdraw> pageData = coinWithdrawService.findByPage(page, coinId, userId, userName
+                , mobile, status, numMin, numMax, startTime, endTime);
         List<CoinWithdraw> records = pageData.getRecords();
-        if (!CollectionUtils.isEmpty(records)){
+        if (!CollectionUtils.isEmpty(records)) {
             // 进行导出操作
             // 格式转换
             CellProcessorAdaptor longToStringAdapter = new CellProcessorAdaptor() {
@@ -99,7 +99,7 @@ public class CoinWithdrawController {
             };
             // 对于金额，需要保留8位有效数字
             DecimalFormat decimalFormat = new DecimalFormat("0.00000000");
-            CellProcessorAdaptor moneyCellProcessorAdaptor = new CellProcessorAdaptor(){
+            CellProcessorAdaptor moneyCellProcessorAdaptor = new CellProcessorAdaptor() {
                 @Override
                 public <T> T execute(Object o, CsvContext csvContext) {
                     BigDecimal num = (BigDecimal) o;
@@ -113,7 +113,7 @@ public class CoinWithdrawController {
                 public <T> T execute(Object o, CsvContext csvContext) {
                     Byte type = (Byte) o;
                     String typeName = "";
-                    switch (type){
+                    switch (type) {
                         case 0:
                             typeName = "站内";
                             break;
@@ -148,7 +148,7 @@ public class CoinWithdrawController {
                 public <T> T execute(Object o, CsvContext csvContext) {
                     Byte status = (Byte) o;
                     String statusStr = "";
-                    switch (status){
+                    switch (status) {
                         case 0:
                             statusStr = "审核中";
                             break;
@@ -178,15 +178,15 @@ public class CoinWithdrawController {
 
             // 对 headers和properties进行类型转化
             CellProcessor[] processors = new CellProcessor[]{
-                    longToStringAdapter,null,null,moneyCellProcessorAdaptor,moneyCellProcessorAdaptor,
-                    moneyCellProcessorAdaptor,null,longToStringAdapter,timeCellProcessorAdaptor,timeCellProcessorAdaptor,
-                    null,statusCellProcessorAdaptor,typeCellProcessorAdaptor,null
+                    longToStringAdapter, null, null, moneyCellProcessorAdaptor, moneyCellProcessorAdaptor,
+                    moneyCellProcessorAdaptor, null, longToStringAdapter, timeCellProcessorAdaptor, timeCellProcessorAdaptor,
+                    null, statusCellProcessorAdaptor, typeCellProcessorAdaptor, null
             };
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             try {
                 // 导出csv文件
                 ReportCsvUtils.reportList(requestAttributes.getResponse(), Constants.COIN_WITHDRAWS_HEADERS
-                        ,Constants.COIN_WITHDRAWS_PROPERTIES,"数字货币体现审核记录.csv",records,processors);
+                        , Constants.COIN_WITHDRAWS_PROPERTIES, "数字货币体现审核记录.csv", records, processors);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -196,17 +196,16 @@ public class CoinWithdrawController {
 
     @GetMapping("/user/record")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "显示的条数"),
-            @ApiImplicitParam(name = "coinId",value = "币种的Id"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "显示的条数"),
+            @ApiImplicitParam(name = "coinId", value = "币种的Id"),
     })
     @ApiOperation(value = "查询用户某种币的提币记录")
-    public R<Page<CoinWithdraw>> findUserCoinRecharge(@ApiIgnore Page<CoinWithdraw> page, Long coinId){
+    public R<Page<CoinWithdraw>> findUserCoinRecharge(@ApiIgnore Page<CoinWithdraw> page, Long coinId) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        Page<CoinWithdraw> pageData = coinWithdrawService.findUserCoinRecharge(page,coinId,userId);
+        Page<CoinWithdraw> pageData = coinWithdrawService.findUserCoinRecharge(page, coinId, userId);
         return R.ok(pageData);
     }
-
 
 
 }

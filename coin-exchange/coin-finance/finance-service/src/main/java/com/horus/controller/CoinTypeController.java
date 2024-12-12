@@ -28,14 +28,14 @@ public class CoinTypeController {
     @GetMapping
     @ApiOperation(value = "条件分页查询我们的币种类型")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数"),
-            @ApiImplicitParam(name = "code",value = "币种类型")
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
+            @ApiImplicitParam(name = "code", value = "币种类型")
     })
     @PreAuthorize("hasAuthority('trade_coin_type_query')")
-    public R<Page<CoinType>> findByPage(@ApiIgnore Page<CoinType> page,String code){
+    public R<Page<CoinType>> findByPage(@ApiIgnore Page<CoinType> page, String code) {
         page.addOrder(OrderItem.desc("last_update_time"));
-        Page<CoinType> coinTypePage = coinTypeService.findByPage(page,code);
+        Page<CoinType> coinTypePage = coinTypeService.findByPage(page, code);
         return R.ok(coinTypePage);
     }
 
@@ -43,12 +43,12 @@ public class CoinTypeController {
     @PostMapping
     @ApiOperation(value = "新增货币类型")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinType",value = "coinType的json")
+            @ApiImplicitParam(name = "coinType", value = "coinType的json")
     })
     @PreAuthorize("hasAuthority('trade_coin_type_create')")
-    public R add(@RequestBody @Validated CoinType coinType){
+    public R add(@RequestBody @Validated CoinType coinType) {
         boolean save = coinTypeService.save(coinType);
-        if (save){
+        if (save) {
             return R.ok();
         }
         return R.fail("新增失败");
@@ -57,12 +57,12 @@ public class CoinTypeController {
     @PatchMapping
     @ApiOperation(value = "修改货币类型")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "coinType",value = "coinType的json")
+            @ApiImplicitParam(name = "coinType", value = "coinType的json")
     })
     @PreAuthorize("hasAuthority('trade_coin_type_update')")
-    public R update(@RequestBody @Validated CoinType coinType){
+    public R update(@RequestBody @Validated CoinType coinType) {
         boolean update = coinTypeService.updateById(coinType);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("修改失败");
@@ -71,13 +71,13 @@ public class CoinTypeController {
     @PostMapping("/setStatus")
     @ApiOperation(value = "修改货币的状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",value = "coinType的Id"),
-            @ApiImplicitParam(name = "status",value = "修改成的状态")
+            @ApiImplicitParam(name = "id", value = "coinType的Id"),
+            @ApiImplicitParam(name = "status", value = "修改成的状态")
     })
     @PreAuthorize("hasAuthority('trade_coin_type_update')")
-    public R setStatus(@RequestBody CoinType coinType){
+    public R setStatus(@RequestBody CoinType coinType) {
         boolean update = coinTypeService.updateById(coinType);
-        if (update){
+        if (update) {
             return R.ok();
         }
         return R.fail("修改失败");
@@ -86,15 +86,13 @@ public class CoinTypeController {
     @GetMapping("/all")
     @ApiOperation(value = "查询所有的币种类型")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "status",value = "币种的状态")
+            @ApiImplicitParam(name = "status", value = "币种的状态")
     })
     @PreAuthorize("hasAuthority('trade_coin_type_query')")
-    public R<List<CoinType>> findAllCoinTypeByStatus(Byte status){
+    public R<List<CoinType>> findAllCoinTypeByStatus(Byte status) {
         List<CoinType> coinTypes = coinTypeService.listByStatus(status);
         return R.ok(coinTypes);
     }
-
-
 
 
 }

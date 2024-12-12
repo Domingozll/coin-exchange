@@ -13,8 +13,8 @@ import java.util.TreeMap;
 
 
 /*
-*  自定义数据结构,这里需要注意
-* */
+ *  自定义数据结构,这里需要注意
+ * */
 @Data
 @Slf4j
 public class OrderBooks {
@@ -94,6 +94,7 @@ public class OrderBooks {
     /**
      * 获取当前的交易的队列
      * 每一个交易队对应一个交易队列
+     *
      * @return
      */
     public TreeMap<BigDecimal, MergeOrder> getCurrentLimitPrices(OrderDirection direction) {
@@ -103,6 +104,7 @@ public class OrderBooks {
 
     /**
      * 获取当前的交易的队列迭代器
+     *
      * @param direction
      * @return
      */
@@ -125,9 +127,9 @@ public class OrderBooks {
         mergeOrder.add(order);
 
         // 将新的订单添加到盘口里面
-        if(order.getOrderDirection()==OrderDirection.BUY){
+        if (order.getOrderDirection() == OrderDirection.BUY) {
             buyTradePlate.add(order);
-        }else{
+        } else {
             sellTradePlate.add(order);
         }
 
@@ -155,9 +157,9 @@ public class OrderBooks {
         if (size == 0) { // 若我们的红黑树里面的合并订单的数据为空,我们摘除
             currentLimitPrices.remove(order.getPrice());
         }
-        if(order.getOrderDirection()==OrderDirection.BUY){
+        if (order.getOrderDirection() == OrderDirection.BUY) {
             buyTradePlate.remove(order);
-        }else{
+        } else {
             sellTradePlate.remove(order);
         }
 

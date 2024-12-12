@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.horus.domain.SysRole;
 
-public interface SysRoleService extends IService<SysRole>{
+public interface SysRoleService extends IService<SysRole> {
 
 
     /*
-    *  判断一个用户是否为超级管理员
-    * */
+     *  判断一个用户是否为超级管理员
+     * */
     boolean isSuperAdmin(Long userId);
 
     /*

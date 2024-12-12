@@ -25,8 +25,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /*
-*  完成文件上传的功能
-* */
+ *  完成文件上传的功能
+ * */
 @RestController
 @Api(tags = "文件上传的控制器")
 
@@ -52,29 +52,29 @@ public class FileController {
     @ApiOperation(value = "上传文件")
     @PostMapping("/image/AliYunImgUpload")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "file",value = "你要上传的文件")
+            @ApiImplicitParam(name = "file", value = "你要上传的文件")
     })
     public R<String> fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
         /*
-        *  1.bucketName
-        *  2.文件的名称 日期+原始的文件名(uuid)来做
-        *  3.文件的输入流
-        * */
-        String fileName = DateUtil.today().replaceAll("-","/") + "/" + file.getOriginalFilename();
-        ossClient.putObject(bucketName,fileName,file.getInputStream());
+         *  1.bucketName
+         *  2.文件的名称 日期+原始的文件名(uuid)来做
+         *  3.文件的输入流
+         * */
+        String fileName = DateUtil.today().replaceAll("-", "/") + "/" + file.getOriginalFilename();
+        ossClient.putObject(bucketName, fileName, file.getInputStream());
         // https://coin-exchange-imgs.oss-cn-beijing.aliyuncs.com/2020/10/10/xxx.jpg
-        return R.ok("https://"+ bucketName + "." + endPoint + "/" + fileName); //http://xxx.com/路径 能使用浏览器访问到的文件路径
+        return R.ok("https://" + bucketName + "." + endPoint + "/" + fileName); //http://xxx.com/路径 能使用浏览器访问到的文件路径
     }
 
     @GetMapping("/image/pre/upload")
     @ApiOperation(value = "文件的上传获取票据")
-    public R<Map<String,String>> preUploadPolicy(){
-        String dir = DateUtil.today().replaceAll("-","/") + "/";
+    public R<Map<String, String>> preUploadPolicy() {
+        String dir = DateUtil.today().replaceAll("-", "/") + "/";
         Map<String, String> map = getPolicy(30L, 3 * 1024 * 1024L, dir);
         return R.ok(map);
     }
 
-    private Map<String, String> getPolicy(long expireTime, long maxFileSize, String dir){
+    private Map<String, String> getPolicy(long expireTime, long maxFileSize, String dir) {
         try {
             long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
@@ -99,7 +99,7 @@ public class FileController {
             respMap.put("signature", postSignature);
             respMap.put("dir", dir);
             // 设置上传的主机  http://bulketName.endpoint
-            respMap.put("host", "https://"+bucketName + "." +endPoint);
+            respMap.put("host", "https://" + bucketName + "." + endPoint);
             respMap.put("expire", String.valueOf(expireEndTime / 1000));
             // respMap.put("expire", formatISO8601Date(expiration));
 

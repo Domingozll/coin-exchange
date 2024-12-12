@@ -22,11 +22,9 @@ import java.util.List;
 @Slf4j
 public class TradeEvent implements Event {
 
+    private static final String TRADE_GROUP = "market.%s.trade.detail"; // %s 代表交易对
     @Autowired
     private Source source;
-
-    private static final String TRADE_GROUP = "market.%s.trade.detail"; // %s 代表交易对
-
     @Autowired
     private MarketServiceFeign marketServiceFeign;
 

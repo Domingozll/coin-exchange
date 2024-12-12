@@ -11,16 +11,16 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TradeAreaDtoMappers {
 
-    TradeAreaDtoMappers INSTANCE = Mappers.getMapper(TradeAreaDtoMappers.class) ;
+    TradeAreaDtoMappers INSTANCE = Mappers.getMapper(TradeAreaDtoMappers.class);
 
-    TradeArea toConvertEntity(TradeAreaDto source) ;
-
-
-    TradeAreaDto toConvertDto(TradeArea source) ;
+    TradeArea toConvertEntity(TradeAreaDto source);
 
 
-    List<TradeArea> toConvertEntity(List<TradeAreaDto> source) ;
+    TradeAreaDto toConvertDto(TradeArea source);
 
 
-   List<TradeAreaDto> toConvertDto(List<TradeArea> source) ;
+    List<TradeArea> toConvertEntity(List<TradeAreaDto> source);
+
+
+    List<TradeAreaDto> toConvertDto(List<TradeArea> source);
 }

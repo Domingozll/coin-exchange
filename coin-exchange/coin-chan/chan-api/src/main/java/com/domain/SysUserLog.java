@@ -3,62 +3,62 @@ package com.domain;
 import java.util.Date;
 
 /**
-    * 系统日志
-    */
+ * 系统日志
+ */
 public class SysUserLog {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 组
-    */
+     * 组
+     */
     private String group;
 
     /**
-    * 用户Id
-    */
+     * 用户Id
+     */
     private Long userId;
 
     /**
-    * 日志类型 1查询 2修改 3新增 4删除 5导出 6审核
-    */
+     * 日志类型 1查询 2修改 3新增 4删除 5导出 6审核
+     */
     private Short type;
 
     /**
-    * 方法
-    */
+     * 方法
+     */
     private String method;
 
     /**
-    * 参数
-    */
+     * 参数
+     */
     private String params;
 
     /**
-    * 时间
-    */
+     * 时间
+     */
     private Long time;
 
     /**
-    * IP地址
-    */
+     * IP地址
+     */
     private String ip;
 
     /**
-    * 描述
-    */
+     * 描述
+     */
     private String description;
 
     /**
-    * 备注
-    */
+     * 备注
+     */
     private String remark;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date created;
 
     public Long getId() {

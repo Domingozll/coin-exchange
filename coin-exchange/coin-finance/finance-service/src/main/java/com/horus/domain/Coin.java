@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-    * 币种配置信息
-    */
-@ApiModel(value="com-horus-domain-Coin")
+ * 币种配置信息
+ */
+@ApiModel(value = "com-horus-domain-Coin")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,14 +25,14 @@ public class Coin {
      * 币种ID
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="币种ID")
+    @ApiModelProperty(value = "币种ID")
     private Long id;
 
     /**
      * 币种名称
      */
     @TableField(value = "name")
-    @ApiModelProperty(value="币种名称")
+    @ApiModelProperty(value = "币种名称")
     @NotBlank
     private String name;
 
@@ -40,37 +40,34 @@ public class Coin {
      * 币种标题
      */
     @TableField(value = "title")
-    @ApiModelProperty(value="币种标题")
+    @ApiModelProperty(value = "币种标题")
     private String title;
 
     /**
      * 币种logo
      */
     @TableField(value = "img")
-    @ApiModelProperty(value="币种logo")
+    @ApiModelProperty(value = "币种logo")
     @NotBlank
     private String img;
 
     /**
      * xnb：人民币
-default：比特币系列
-ETH：以太坊
-ethToken：以太坊代币
-
-
+     * default：比特币系列
+     * ETH：以太坊
+     * ethToken：以太坊代币
      */
     @TableField(value = "type")
-    @ApiModelProperty(value="xnb：人民币,default：比特币系列,ETH：以太坊,ethToken：以太坊代币,,")
+    @ApiModelProperty(value = "xnb：人民币,default：比特币系列,ETH：以太坊,ethToken：以太坊代币,,")
     @NotBlank
     private String type;
 
     /**
      * rgb：认购币
-qbb：钱包币
-
+     * qbb：钱包币
      */
     @TableField(value = "wallet")
-    @ApiModelProperty(value="rgb：认购币,qbb：钱包币,")
+    @ApiModelProperty(value = "rgb：认购币,qbb：钱包币,")
     @NotBlank
     private String wallet;
 
@@ -78,7 +75,7 @@ qbb：钱包币
      * 小数位数
      */
     @TableField(value = "round")
-    @ApiModelProperty(value="小数位数")
+    @ApiModelProperty(value = "小数位数")
     @NotNull
     private Byte round;
 
@@ -86,7 +83,7 @@ qbb：钱包币
      * 最小提现单位
      */
     @TableField(value = "base_amount")
-    @ApiModelProperty(value="最小提现单位")
+    @ApiModelProperty(value = "最小提现单位")
     @NotNull
     private BigDecimal baseAmount;
 
@@ -94,7 +91,7 @@ qbb：钱包币
      * 单笔最小提现数量
      */
     @TableField(value = "min_amount")
-    @ApiModelProperty(value="单笔最小提现数量")
+    @ApiModelProperty(value = "单笔最小提现数量")
     @NotNull
     private BigDecimal minAmount;
 
@@ -102,7 +99,7 @@ qbb：钱包币
      * 单笔最大提现数量
      */
     @TableField(value = "max_amount")
-    @ApiModelProperty(value="单笔最大提现数量")
+    @ApiModelProperty(value = "单笔最大提现数量")
     @NotNull
     private BigDecimal maxAmount;
 
@@ -110,16 +107,16 @@ qbb：钱包币
      * 当日最大提现数量
      */
     @TableField(value = "day_max_amount")
-    @ApiModelProperty(value="当日最大提现数量")
+    @ApiModelProperty(value = "当日最大提现数量")
     @NotNull
     private BigDecimal dayMaxAmount;
 
     /**
      * status=1：启用
-0：禁用
+     * 0：禁用
      */
     @TableField(value = "status")
-    @ApiModelProperty(value="status=1：启用,0：禁用")
+    @ApiModelProperty(value = "status=1：启用,0：禁用")
     //@NotNull
     private Byte status;
 
@@ -127,14 +124,14 @@ qbb：钱包币
      * 自动转出数量
      */
     @TableField(value = "auto_out")
-    @ApiModelProperty(value="自动转出数量")
+    @ApiModelProperty(value = "自动转出数量")
     private Double autoOut;
 
     /**
      * 手续费率
      */
     @TableField(value = "rate")
-    @ApiModelProperty(value="手续费率")
+    @ApiModelProperty(value = "手续费率")
     @NotNull
     private Double rate;
 
@@ -142,7 +139,7 @@ qbb：钱包币
      * 最低收取手续费个数
      */
     @TableField(value = "min_fee_num")
-    @ApiModelProperty(value="最低收取手续费个数")
+    @ApiModelProperty(value = "最低收取手续费个数")
     @NotNull
     private BigDecimal minFeeNum;
 
@@ -150,7 +147,7 @@ qbb：钱包币
      * 提现开关
      */
     @TableField(value = "withdraw_flag")
-    @ApiModelProperty(value="提现开关")
+    @ApiModelProperty(value = "提现开关")
     @NotNull
     private Byte withdrawFlag;
 
@@ -158,21 +155,21 @@ qbb：钱包币
      * 充值开关
      */
     @TableField(value = "recharge_flag")
-    @ApiModelProperty(value="充值开关")
+    @ApiModelProperty(value = "充值开关")
     @NotNull
     private Byte rechargeFlag;
 
     /**
      * 更新时间
      */
-    @TableField(value = "last_update_time",fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value="更新时间")
+    @TableField(value = "last_update_time", fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "更新时间")
     private Date lastUpdateTime;
 
     /**
      * 创建时间
      */
-    @TableField(value = "created",fill = FieldFill.INSERT)
-    @ApiModelProperty(value="创建时间")
+    @TableField(value = "created", fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 }

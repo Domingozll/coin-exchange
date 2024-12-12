@@ -12,10 +12,10 @@ public class MatchEngineProperties {
     /**
      * 交易对的信息
      */
-    private Map<String,CoinScale> symbols ;
+    private Map<String, CoinScale> symbols;
 
     @Data
-    public static  class  CoinScale {
+    public static class CoinScale {
         /**
          * 交易币种的精度
          */

@@ -13,6 +13,6 @@ public class GatewayServerApplication {
 
     public static void main(String[] args) {
         System.setProperty("csp.sentinel.app.type", "1");
-        SpringApplication.run(GatewayServerApplication.class,args);
+        SpringApplication.run(GatewayServerApplication.class, args);
     }
 }

@@ -14,21 +14,20 @@ public class IdProperties {
     private String url;
 
     /*
-    *
-    *   你购买的appKey
-    * */
+     *
+     *   你购买的appKey
+     * */
     private String appKey;
 
     /*
-    *  你购买的appSecret
-    * */
+     *  你购买的appSecret
+     * */
     private String appSecret;
 
     /*
-    *  你购买的appCode
-    * */
+     *  你购买的appCode
+     * */
     private String appCode;
-
 
 
 }

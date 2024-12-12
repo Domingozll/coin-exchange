@@ -26,15 +26,16 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 @Service
 @Slf4j
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
     /**
      * <h2>分页条件查询员工</h2>
-     * @param page 分页数据
-     * @param mobile 手机号
+     *
+     * @param page     分页数据
+     * @param mobile   手机号
      * @param fullname 员工全称
      **/
     @Override
@@ -44,7 +45,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .like(!StringUtils.isEmpty(fullname), SysUser::getFullname, fullname)
         );
         List<SysUser> sysUserList = userPage.getRecords();
-        if (!CollectionUtils.isEmpty(sysUserList)){
+        if (!CollectionUtils.isEmpty(sysUserList)) {
             for (SysUser sysUser : sysUserList) {
                 List<SysUserRole> userRoleList = sysUserRoleService.list(
                         new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, sysUser.getId())
@@ -64,6 +65,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * <h2>新增员工</h2>
+     *
      * @param sysUser
      **/
     @Transactional
@@ -95,6 +97,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * <h2>修改员工</h2>
+     *
      * @param sysUser
      **/
     @Transactional
@@ -129,6 +132,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * <h2>删除用户的同时删除角色</h2>
+     *
      * @param idList
      **/
     @Transactional

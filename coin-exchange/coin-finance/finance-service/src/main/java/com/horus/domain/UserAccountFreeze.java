@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@ApiModel(value="com-horus-domain-UserAccountFreeze")
+@ApiModel(value = "com-horus-domain-UserAccountFreeze")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "user_account_freeze")
 public class UserAccountFreeze {
     @TableId(value = "user_id", type = IdType.INPUT)
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long userId;
 
     @TableField(value = "freeze")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private BigDecimal freeze;
 }

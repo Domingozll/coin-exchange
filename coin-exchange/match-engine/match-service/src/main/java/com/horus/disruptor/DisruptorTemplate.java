@@ -16,8 +16,8 @@ public class DisruptorTemplate {
         }
     };
     /*
-    *  把消息放到ringBuffer里面   不加锁的高速队列
-    * */
+     *  把消息放到ringBuffer里面   不加锁的高速队列
+     * */
     private final RingBuffer<OrderEvent> ringBuffer;
 
     public DisruptorTemplate(RingBuffer<OrderEvent> ringBuffer) {
@@ -26,6 +26,7 @@ public class DisruptorTemplate {
 
     /**
      * 我们使用DisruptorTemplate 时,就使用它的onData方法
+     *
      * @param input
      */
     public void onData(Order input) {

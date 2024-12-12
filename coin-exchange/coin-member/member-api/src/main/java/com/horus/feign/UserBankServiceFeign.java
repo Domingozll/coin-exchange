@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /*
-*  若FeignClient里面的name相同时,spring创建对象就会报错,它认为它们两个对象是一样的
-* */
-@FeignClient(name = "member-service",contextId = "userBankServiceFeign",configuration = OAuth2FeignConfig.class,path = "/userBanks")
+ *  若FeignClient里面的name相同时,spring创建对象就会报错,它认为它们两个对象是一样的
+ * */
+@FeignClient(name = "member-service", contextId = "userBankServiceFeign", configuration = OAuth2FeignConfig.class, path = "/userBanks")
 public interface UserBankServiceFeign {
 
     @GetMapping("/{userId}/info")

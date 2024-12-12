@@ -16,25 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class OAuth2FeignConfig implements RequestInterceptor {
     /*
-    *  当我们发起每一次的远程调用时，都会调用这个方法
-    * */
+     *  当我们发起每一次的远程调用时，都会调用这个方法
+     * */
     @Override
     public void apply(RequestTemplate requestTemplate) {
         // 1.我们可以从request的上下文环境中获取token
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         String header = null;
-        if (requestAttributes == null){
+        if (requestAttributes == null) {
             log.info("没有请求的上下文，故无法进行token的传递");
             header = "bearer " + Constants.INSIDE_TOKEN;
-        }else{
+        } else {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
             // 获取我们请求上下文的里面的请求头
             header = request.getHeader(HttpHeaders.AUTHORIZATION);
         }
 
-        if (!StringUtils.isEmpty(header)){
-            requestTemplate.header(HttpHeaders.AUTHORIZATION,header);
-            log.info("本次token传递成功,token的值为:{}",header);
+        if (!StringUtils.isEmpty(header)) {
+            requestTemplate.header(HttpHeaders.AUTHORIZATION, header);
+            log.info("本次token传递成功,token的值为:{}", header);
         }
     }
 }

@@ -18,9 +18,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
+
 @Service
 @Slf4j
-public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsService{
+public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsService {
 
     @Autowired
     private ISmsService smsService;
@@ -32,21 +33,21 @@ public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsSe
     private StringRedisTemplate redisTemplate;
 
     /*
-    * 发送短信
-    * */
+     * 发送短信
+     * */
     @Override
     public boolean sendSms(Sms sms) {
-        log.info("发送短信{}", JSON.toJSONString(sms,true));
+        log.info("发送短信{}", JSON.toJSONString(sms, true));
         SendSmsRequest request = buildSmsRequest(sms);
         try {
             SendSmsResponse sendSmsResponse = smsService.sendSmsRequest(request);
-            log.info("发送的结果为{}",JSON.toJSONString(sendSmsResponse,true));
+            log.info("发送的结果为{}", JSON.toJSONString(sendSmsResponse, true));
             String code = sendSmsResponse.getCode();
-            if ("OK".equals(code)){
+            if ("OK".equals(code)) {
                 // 发送成功,否则失败
                 sms.setStatus(1);
                 return save(sms);
-            }else {
+            } else {
                 return false;
             }
 
@@ -57,8 +58,8 @@ public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsSe
     }
 
     /*
-    *  构建发送短信的请求对象
-    * */
+     *  构建发送短信的请求对象
+     * */
     private SendSmsRequest buildSmsRequest(Sms sms) {
         SendSmsRequest sendSmsRequest = new SendSmsRequest();
         sendSmsRequest.setPhoneNumbers(sms.getMobile()); //发送给谁
@@ -69,7 +70,7 @@ public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsSe
         sendSmsRequest.setSignName(signConfig.getValue()); // 设置签名---公司里面不会随便的改变--Config里查询签名
         // 查询数据库表来获取模板
         Config configByCode = configService.getConfigByCode(sms.getTemplateCode());
-        if (configByCode == null){
+        if (configByCode == null) {
             throw new IllegalArgumentException("您输入的签名不存在");
         }
         sendSmsRequest.setTemplateCode(configByCode.getValue()); // 模板的Code 动态改变
@@ -78,12 +79,12 @@ public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsSe
         String code = RandomUtil.randomNumbers(6);
         // 需要把code 保存到redis 里面
         // key: SMS:VERIFY_OLD_PHONE:15236966937    value: 123456
-        redisTemplate.opsForValue().set("SMS:" + sms.getTemplateCode() + ":" + sms.getMobile(),code, 5,TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set("SMS:" + sms.getTemplateCode() + ":" + sms.getMobile(), code, 5, TimeUnit.MINUTES);
         sendSmsRequest.setTemplateParam("{\"code\":\"" + code + "\"}");
 
         // 将查询到的短信模板中的 ${code} 替换成我们自己生成的code
         String desc = configByCode.getDesc(); // [sign]您的验证码${code}，该验证码5分钟内有效，请勿泄漏于他人!
-        String content = signConfig.getValue() + ":" + desc.replaceAll("\\$\\{code\\}",code);
+        String content = signConfig.getValue() + ":" + desc.replaceAll("\\$\\{code\\}", code);
         sms.setContent(content); // 最后短信的内容
         return sendSmsRequest;
     }

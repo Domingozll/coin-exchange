@@ -29,10 +29,10 @@ public class SysUserLogController {
     @GetMapping
     @ApiOperation(value = "分页查询用户的操作记录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page" ,value = "分页查询")
+            @ApiImplicitParam(name = "page", value = "分页查询")
     })
-    public R<Page<SysUserLog>> findByPage(@ApiIgnore Page<SysUserLog> page){
-        page.addOrder(OrderItem.desc("created")) ;
-        return R.ok(sysUserLogService.page(page)) ;
+    public R<Page<SysUserLog>> findByPage(@ApiIgnore Page<SysUserLog> page) {
+        page.addOrder(OrderItem.desc("created"));
+        return R.ok(sysUserLogService.page(page));
     }
 }

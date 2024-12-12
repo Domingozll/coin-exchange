@@ -74,27 +74,27 @@ public class WorkIssueController {
     @GetMapping("/issueList")
     @ApiOperation(value = "前台查询工单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
     })
-    public R<Page<WorkIssue>> getIssueList(@ApiIgnore Page<WorkIssue> page){
+    public R<Page<WorkIssue>> getIssueList(@ApiIgnore Page<WorkIssue> page) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        Page<WorkIssue> pageData = workIssueService.getIssueList(page,userId);
+        Page<WorkIssue> pageData = workIssueService.getIssueList(page, userId);
         return R.ok(pageData);
     }
 
     @PostMapping("/addWorkIssue")
     @ApiOperation(value = "会员的添加问题")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "workIssue",value = "workIssued1json数据")
+            @ApiImplicitParam(name = "workIssue", value = "workIssued1json数据")
     })
-    public R addWorkIssue(@RequestBody WorkIssue workIssue){
+    public R addWorkIssue(@RequestBody WorkIssue workIssue) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         workIssue.setUserId(userId);
         workIssue.setStatus(1);
 
         boolean save = workIssueService.save(workIssue);
-        if (save){
+        if (save) {
             return R.ok();
         }
         return R.fail("添加失败");

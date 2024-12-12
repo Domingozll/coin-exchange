@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
-* 权限配置
-*/
-@ApiModel(value="com-horus-domain-SysPrivilege")
+ * 权限配置
+ */
+@ApiModel(value = "com-horus-domain-SysPrivilege")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,14 +23,14 @@ public class SysPrivilege {
      * 主键
      */
     @TableId(value = "id", type = IdType.INPUT)
-    @ApiModelProperty(value="主键")
+    @ApiModelProperty(value = "主键")
     private Long id;
 
     /**
      * 所属菜单Id
      */
     @TableField(value = "menu_id")
-    @ApiModelProperty(value="所属菜单Id")
+    @ApiModelProperty(value = "所属菜单Id")
     @NotNull
     private Long menuId;
 
@@ -38,7 +38,7 @@ public class SysPrivilege {
      * 功能点名称
      */
     @TableField(value = "`name`")
-    @ApiModelProperty(value="功能点名称")
+    @ApiModelProperty(value = "功能点名称")
     @NotNull
     private String name;
 
@@ -46,48 +46,48 @@ public class SysPrivilege {
      * 功能描述
      */
     @TableField(value = "description")
-    @ApiModelProperty(value="功能描述")
+    @ApiModelProperty(value = "功能描述")
     private String description;
 
     @TableField(value = "url")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private String url;
 
     @TableField(value = "`method`")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private String method;
 
     /**
      * 创建人
      */
     @TableField(value = "create_by", fill = FieldFill.INSERT)
-    @ApiModelProperty(value="创建人")
+    @ApiModelProperty(value = "创建人")
     private Long createBy;
 
     /**
      * 修改人
      */
     @TableField(value = "modify_by", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value="修改人")
+    @ApiModelProperty(value = "修改人")
     private Long modifyBy;
 
     /**
      * 创建时间
      */
     @TableField(value = "created", fill = FieldFill.INSERT)
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 
     /**
      * 修改时间
      */
     @TableField(value = "last_update_time", fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value="修改时间")
+    @ApiModelProperty(value = "修改时间")
     private Date lastUpdateTime;
 
     //在使用角色查询权限时,我们也会使用该字段来标记当前的角色使用有该权限,有权限为1,否则为0
     @TableField(exist = false)
-    @ApiModelProperty(value="当前角色是否拥有这个权限")
-    private int own ;
+    @ApiModelProperty(value = "当前角色是否拥有这个权限")
+    private int own;
 
 }

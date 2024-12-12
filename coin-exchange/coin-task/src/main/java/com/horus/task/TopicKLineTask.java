@@ -1,7 +1,6 @@
 package com.horus.task;
 
 
-
 import com.horus.constant.Constants;
 import com.horus.dto.MarketDto;
 import com.horus.event.KlineEvent;
@@ -23,21 +22,21 @@ import java.util.concurrent.TimeUnit;
 public class TopicKLineTask {
 
     @Autowired
-    private MarketServiceFeign marketServiceFeign ;
+    private MarketServiceFeign marketServiceFeign;
 
 
     /**
-     *  注入Redis+ Source
-     * */
+     * 注入Redis+ Source
+     */
     @Autowired
-    private StringRedisTemplate redisTemplate ;
+    private StringRedisTemplate redisTemplate;
 
     @Autowired
-    private Source source ;
+    private Source source;
 
     /**
-     *  使用线程池
-     * */
+     * 使用线程池
+     */
     private ExecutorService executor = null;
 
     {
@@ -56,16 +55,16 @@ public class TopicKLineTask {
     @Scheduled(fixedRate = 30000)
     public void pushKline() {
         List<MarketDto> marketDtos = marketServiceFeign.tradeMarkets();
-        if(!CollectionUtils.isEmpty(marketDtos)){
+        if (!CollectionUtils.isEmpty(marketDtos)) {
             for (MarketDto marketDto : marketDtos) {
                 // 在这里生成K线数据并推送
                 // 自己的new 的对象
-                KlineEvent klineEvent = new KlineEvent(marketDto.getSymbol().toLowerCase(),"market.%s.kline.%s", Constants.REDIS_KEY_TRADE_KLINE);
+                KlineEvent klineEvent = new KlineEvent(marketDto.getSymbol().toLowerCase(), "market.%s.kline.%s", Constants.REDIS_KEY_TRADE_KLINE);
                 // 注入一个值
                 klineEvent.setRedisTemplate(redisTemplate);
                 // 注入一个值
                 klineEvent.setSource(source);
-                executor.submit(klineEvent) ;
+                executor.submit(klineEvent);
             }
         }
 

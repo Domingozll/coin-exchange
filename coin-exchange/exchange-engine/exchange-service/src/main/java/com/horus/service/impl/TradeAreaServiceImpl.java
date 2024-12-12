@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea> implements TradeAreaService{
+public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea> implements TradeAreaService {
 
     @Autowired
     private MarketService marketService;
@@ -47,9 +47,9 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
      * */
     @Override
     public Page<TradeArea> findByPage(Page<TradeArea> page, String name, Byte status) {
-        return page(page,new LambdaQueryWrapper<TradeArea>()
-                .eq(status!=null,TradeArea::getStatus,status)
-                .like(!StringUtils.isEmpty(name),TradeArea::getName,name));
+        return page(page, new LambdaQueryWrapper<TradeArea>()
+                .eq(status != null, TradeArea::getStatus, status)
+                .like(!StringUtils.isEmpty(name), TradeArea::getName, name));
     }
 
     /*
@@ -57,7 +57,7 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
      * */
     @Override
     public List<TradeArea> findAll(Byte status) {
-        return list(new LambdaQueryWrapper<TradeArea>().eq(status!=null,TradeArea::getStatus,status));
+        return list(new LambdaQueryWrapper<TradeArea>().eq(status != null, TradeArea::getStatus, status));
     }
 
     /*
@@ -68,14 +68,14 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
         // 1.查询所有的交易区域
         List<TradeArea> tradeAreas = list(new LambdaQueryWrapper<TradeArea>().eq(TradeArea::getStatus, 1)
                 .orderByAsc(TradeArea::getSort));
-        if (CollectionUtils.isEmpty(tradeAreas)){
+        if (CollectionUtils.isEmpty(tradeAreas)) {
             return Collections.emptyList();
         }
         ArrayList<TradeAreaMarketVo> tradeAreaMarketVos = new ArrayList<>();
         for (TradeArea tradeArea : tradeAreas) {
             // 2.查询我们交易区域里面包含的市场
             List<Market> markets = marketService.getMarketsByTradeAreaId(tradeArea.getId());
-            if (!CollectionUtils.isEmpty(markets)){
+            if (!CollectionUtils.isEmpty(markets)) {
                 TradeAreaMarketVo tradeAreaMarketVo = new TradeAreaMarketVo();
                 tradeAreaMarketVo.setAreaName(tradeArea.getName());
                 tradeAreaMarketVo.setMarkets(markets2marketsVos(markets));
@@ -86,8 +86,8 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
     }
 
     /*
-    *  将markets转换成 marketVos
-    * */
+     *  将markets转换成 marketVos
+     * */
     private List<TradeMarketVo> markets2marketsVos(List<Market> markets) {
         return markets.stream().map(market -> {
             return toConvertVo(market);
@@ -95,8 +95,8 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
     }
 
     /*
-    * 将一个market转换为marketVo
-    * */
+     * 将一个market转换为marketVo
+     * */
     private TradeMarketVo toConvertVo(Market market) {
         TradeMarketVo tradeMarketVo = new TradeMarketVo();
         tradeMarketVo.setImage(market.getImg()); //报价货币的图片
@@ -113,7 +113,7 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
         // 获取报价货币的名称
         Long buyCoinId = market.getBuyCoinId();
         List<CoinDto> coins = coinServiceFeign.findCoins(Arrays.asList(buyCoinId));
-        if (CollectionUtils.isEmpty(coins) || coins.size() > 1){
+        if (CollectionUtils.isEmpty(coins) || coins.size() > 1) {
             throw new IllegalArgumentException("报价货币错误");
         }
         CoinDto coinDto = coins.get(0);
@@ -150,11 +150,11 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
     }
 
     /*
-    *  获取合并的深度
-    * */
+     *  获取合并的深度
+     * */
     private List<MergeDeptVo> getMergeDepths(String mergeDepth) {
         String[] split = mergeDepth.split(",");
-        if (split.length!=3){
+        if (split.length != 3) {
             throw new IllegalArgumentException("合并深度不合法");
         }
 
@@ -196,7 +196,7 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
     public List<TradeAreaMarketVo> getUserFavoriteMarkets(Long userId) {
         List<UserFavoriteMarket> userFavoriteMarkets = userFavoriteMarketService.list(new LambdaQueryWrapper<UserFavoriteMarket>()
                 .eq(UserFavoriteMarket::getUserId, userId));
-        if (CollectionUtils.isEmpty(userFavoriteMarkets)){
+        if (CollectionUtils.isEmpty(userFavoriteMarkets)) {
             return Collections.emptyList();
         }
         List<Long> marketIds = userFavoriteMarkets.stream().map(UserFavoriteMarket::getMarketId).collect(Collectors.toList());
@@ -214,16 +214,17 @@ public class TradeAreaServiceImpl extends ServiceImpl<TradeAreaMapper, TradeArea
 
     /**
      * 查询所有的交易区域和交易区域下的市场
+     *
      * @return
      */
     @Override
     public List<TradeAreaDto> findAllTradeAreaAndMarket() {
         List<TradeArea> tradeAreas = findAll((byte) 1);
         List<TradeAreaDto> tradeAreaDtoList = TradeAreaDtoMappers.INSTANCE.toConvertDto(tradeAreas);
-        if(CollectionUtils.isEmpty(tradeAreaDtoList)){
+        if (CollectionUtils.isEmpty(tradeAreaDtoList)) {
             for (TradeAreaDto tradeAreaDto : tradeAreaDtoList) {
-                List<Market> markets = marketService.queryByAreaId(tradeAreaDto.getId()) ;
-                if(!CollectionUtils.isEmpty(markets)){
+                List<Market> markets = marketService.queryByAreaId(tradeAreaDto.getId());
+                if (!CollectionUtils.isEmpty(markets)) {
                     String marketIds = markets.stream().map(market -> market.getId().toString()).collect(Collectors.joining(","));
                     tradeAreaDto.setMarketIds(marketIds);
                 }

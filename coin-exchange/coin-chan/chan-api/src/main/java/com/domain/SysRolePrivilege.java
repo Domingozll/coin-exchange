@@ -1,8 +1,8 @@
 package com.domain;
 
 /**
-    * 角色权限配置
-    */
+ * 角色权限配置
+ */
 public class SysRolePrivilege {
     private Long id;
 

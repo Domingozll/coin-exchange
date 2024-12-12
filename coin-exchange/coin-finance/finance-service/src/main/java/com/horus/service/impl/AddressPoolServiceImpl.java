@@ -5,7 +5,8 @@ import com.horus.domain.AddressPool;
 import com.horus.mapper.AddressPoolMapper;
 import com.horus.service.AddressPoolService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class AddressPoolServiceImpl extends ServiceImpl<AddressPoolMapper, AddressPool> implements AddressPoolService{
+public class AddressPoolServiceImpl extends ServiceImpl<AddressPoolMapper, AddressPool> implements AddressPoolService {
 
 }

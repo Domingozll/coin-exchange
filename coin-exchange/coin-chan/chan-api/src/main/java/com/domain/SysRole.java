@@ -3,52 +3,52 @@ package com.domain;
 import java.util.Date;
 
 /**
-    * 角色
-    */
+ * 角色
+ */
 public class SysRole {
     /**
-    * 主键
-    */
+     * 主键
+     */
     private Long id;
 
     /**
-    * 名称
-    */
+     * 名称
+     */
     private String name;
 
     /**
-    * 代码
-    */
+     * 代码
+     */
     private String code;
 
     /**
-    * 描述
-    */
+     * 描述
+     */
     private String description;
 
     /**
-    * 创建人
-    */
+     * 创建人
+     */
     private Long createBy;
 
     /**
-    * 修改人
-    */
+     * 修改人
+     */
     private Long modifyBy;
 
     /**
-    * 状态0:禁用 1:启用
-    */
+     * 状态0:禁用 1:启用
+     */
     private Byte status;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date created;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date lastUpdateTime;
 
     public Long getId() {

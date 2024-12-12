@@ -29,10 +29,10 @@ import java.util.Map;
 
 
 /*
-*  限价交易具体的处理过程(ringBuffer里的消息)
-*  具体的处理方法
-*  基于cpu亲和锁的抢占式处理
-* */
+ *  限价交易具体的处理过程(ringBuffer里的消息)
+ *  具体的处理方法
+ *  基于cpu亲和锁的抢占式处理
+ * */
 @Service
 @Slf4j
 public class LimitPriceMatchServiceImpl implements MatchService, InitializingBean {
@@ -43,7 +43,8 @@ public class LimitPriceMatchServiceImpl implements MatchService, InitializingBea
 
     /**
      * 进行订单的撮合交易(核心)
-     *  对ringBuffer里面的订单进行撮合交易
+     * 对ringBuffer里面的订单进行撮合交易
+     *
      * @param orderBooks
      * @param order
      */
@@ -219,8 +220,8 @@ public class LimitPriceMatchServiceImpl implements MatchService, InitializingBea
     private BigDecimal calcTradeAmount(Order order) {
 
         /*
-        *  本来的数量-交易后的数量(已经成交数量)
-        * */
+         *  本来的数量-交易后的数量(已经成交数量)
+         * */
         return order.getAmount().subtract(order.getTradedAmount());
 
     }
@@ -232,8 +233,8 @@ public class LimitPriceMatchServiceImpl implements MatchService, InitializingBea
      */
     private void sendTradePlateData(TradePlate tradePlate) {
         /*
-        *  向RocketMQ发送盘口数据
-        * */
+         *  向RocketMQ发送盘口数据
+         * */
         Message<TradePlate> message = MessageBuilder
                 .withPayload(tradePlate)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
@@ -279,8 +280,8 @@ public class LimitPriceMatchServiceImpl implements MatchService, InitializingBea
 
 
     /*
-    *  对象已经创建成功，属性注入成功后执行该方法
-    * */
+     *  对象已经创建成功，属性注入成功后执行该方法
+     * */
     @Override
     public void afterPropertiesSet() throws Exception {
 

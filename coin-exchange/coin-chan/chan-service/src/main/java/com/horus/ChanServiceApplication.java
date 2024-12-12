@@ -12,7 +12,7 @@ public class ChanServiceApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(ChanServiceApplication.class,args);
+        SpringApplication.run(ChanServiceApplication.class, args);
     }
 
 }

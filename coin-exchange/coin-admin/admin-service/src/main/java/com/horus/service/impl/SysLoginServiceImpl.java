@@ -44,17 +44,17 @@ public class SysLoginServiceImpl implements SysLoginService {
 
     @Override
     public LoginResult login(String username, String password) {
-        log.info("用户{}开始登录",username);
+        log.info("用户{}开始登录", username);
         // 1.获取token 需要远程调用authorization-server服务
         System.out.println("2222222222222222222222222");
-        ResponseEntity<JwtToken> tokenResponseEntity = oAuth2FeignClient.getToken("password", username, password, "admin_type",basicToken);
+        ResponseEntity<JwtToken> tokenResponseEntity = oAuth2FeignClient.getToken("password", username, password, "admin_type", basicToken);
         System.out.println("1111111111111111111");
         System.out.println(tokenResponseEntity);
-        if (tokenResponseEntity.getStatusCode() != HttpStatus.OK){
+        if (tokenResponseEntity.getStatusCode() != HttpStatus.OK) {
             throw new ApiException(ApiErrorCode.FAILED);
         }
         JwtToken jwtToken = tokenResponseEntity.getBody();
-        log.info("远程调用授权服务器成功，获取的token为{}", JSON.toJSONString(jwtToken,true));
+        log.info("远程调用授权服务器成功，获取的token为{}", JSON.toJSONString(jwtToken, true));
         String token = jwtToken.getAccessToken();
         // 2.查询我们的菜单数据
         Jwt jwt = JwtHelper.decode(token);
@@ -66,11 +66,11 @@ public class SysLoginServiceImpl implements SysLoginService {
         // 3.权限数据怎么查询 --不需要查询，因为jwt里面已经携带的有权限数据
         JSONArray authoritiesJsonArray = jsonObject.getJSONArray("authorities");
         List<SimpleGrantedAuthority> authorities = authoritiesJsonArray.stream() //组装我们的权限数据
-                .map(authorityJson->new SimpleGrantedAuthority(authorityJson.toString()))
+                .map(authorityJson -> new SimpleGrantedAuthority(authorityJson.toString()))
                 .collect(Collectors.toList());
 
         //将token 存储redis里面， 配置网关做jwt验证的操作
         redisTemplate.opsForValue().set(token, "", jwtToken.getExpiresIn(), TimeUnit.SECONDS);
-        return new LoginResult(jwtToken.getTokenType()+ " " + token,menus,authorities);
+        return new LoginResult(jwtToken.getTokenType() + " " + token, menus, authorities);
     }
 }

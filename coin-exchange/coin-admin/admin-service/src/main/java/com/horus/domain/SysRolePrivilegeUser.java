@@ -11,36 +11,36 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
-* 用户权限配置
-*/
-@ApiModel(value="com-horus-domain-SysRolePrivilegeUser")
+ * 用户权限配置
+ */
+@ApiModel(value = "com-horus-domain-SysRolePrivilegeUser")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "sys_role_privilege_user")
 public class SysRolePrivilegeUser {
     @TableId(value = "id", type = IdType.INPUT)
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long id;
 
     /**
      * 角色Id
      */
     @TableField(value = "role_id")
-    @ApiModelProperty(value="角色Id")
+    @ApiModelProperty(value = "角色Id")
     private Long roleId;
 
     /**
      * 用户Id
      */
     @TableField(value = "user_id")
-    @ApiModelProperty(value="用户Id")
+    @ApiModelProperty(value = "用户Id")
     private Long userId;
 
     /**
      * 权限Id
      */
     @TableField(value = "privilege_id")
-    @ApiModelProperty(value="权限Id")
+    @ApiModelProperty(value = "权限Id")
     private Long privilegeId;
 }

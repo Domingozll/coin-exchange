@@ -26,15 +26,14 @@ public class TradeKLineEvent implements Event {
     private Source source;
 
     @Autowired
-    private MarketServiceFeign marketServiceFeign ;
-
+    private MarketServiceFeign marketServiceFeign;
 
 
     @Override
     public void handle() {
         // 查询行情数据
         List<MarketDto> marketDtos = marketServiceFeign.tradeMarkets();
-        if (CollectionUtils.isEmpty(marketDtos)){
+        if (CollectionUtils.isEmpty(marketDtos)) {
             return;
         }
         for (MarketDto marketDto : marketDtos) {
@@ -43,7 +42,7 @@ public class TradeKLineEvent implements Event {
             createKLineDto.setVolume(BigDecimal.ZERO);
             createKLineDto.setPrice(marketDto.getOpenPrice());
             createKLineDto.setSymbol(marketDto.getSymbol().toLowerCase());
-            TradeKlineService.queue.offer(createKLineDto) ;
+            TradeKlineService.queue.offer(createKLineDto);
         }
     }
 }

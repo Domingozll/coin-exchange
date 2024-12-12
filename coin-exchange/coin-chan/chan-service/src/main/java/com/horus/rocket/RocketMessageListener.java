@@ -20,19 +20,19 @@ public class RocketMessageListener {
     private TioWebSocketServerBootstrap bootstrap;
 
     @StreamListener("tio_group")
-    public void handlerMessage(MessagePayload message){
+    public void handlerMessage(MessagePayload message) {
         log.info("接收到rocketmq的消息=========>{}", JSON.toJSONString(message));
         ResponseEntity responseEntity = new ResponseEntity();
         responseEntity.setSubbed(message.getChannel());
-        responseEntity.put("result",message.getBody());
+        responseEntity.put("result", message.getBody());
         // 推送给某一用户就可以了
-        if(StringUtils.hasText(message.getUserId())){
+        if (StringUtils.hasText(message.getUserId())) {
 
-            Tio.sendToUser(bootstrap.getServerTioConfig(),message.getUserId(),responseEntity.build());
+            Tio.sendToUser(bootstrap.getServerTioConfig(), message.getUserId(), responseEntity.build());
             return;
         }
         // 推送给消息组
         @NonNull String group = message.getChannel();
-        Tio.sendToGroup(bootstrap.getServerTioConfig(),group,responseEntity.build());
+        Tio.sendToGroup(bootstrap.getServerTioConfig(), group, responseEntity.build());
     }
 }

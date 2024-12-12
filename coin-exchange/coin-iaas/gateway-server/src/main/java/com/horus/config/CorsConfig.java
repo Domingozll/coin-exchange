@@ -7,17 +7,17 @@ import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 /*
-*  解决跨域问题
-* */
+ *  解决跨域问题
+ * */
 @Configuration
 public class CorsConfig {
 
 
     /*
-    *  如果是zuul网关，则使用CorsFilter
-    * */
+     *  如果是zuul网关，则使用CorsFilter
+     * */
     @Bean
-    public CorsWebFilter corsWebFilter(){
+    public CorsWebFilter corsWebFilter() {
 
         // 跨域配置
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -29,7 +29,7 @@ public class CorsConfig {
         corsConfiguration.addAllowedMethod("*");
 
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**",corsConfiguration);
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsWebFilter(urlBasedCorsConfigurationSource);
     }
 }

@@ -16,7 +16,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class UserWalletServiceImpl extends ServiceImpl<UserWalletMapper, UserWallet> implements UserWalletService{
+public class UserWalletServiceImpl extends ServiceImpl<UserWalletMapper, UserWallet> implements UserWalletService {
 
     @Autowired
     private UserService userService;
@@ -26,7 +26,7 @@ public class UserWalletServiceImpl extends ServiceImpl<UserWalletMapper, UserWal
      * */
     @Override
     public Page<UserWallet> findByPage(Page<UserWallet> page, Long userId) {
-        return page(page,new LambdaQueryWrapper<UserWallet>().eq(UserWallet::getUserId,userId));
+        return page(page, new LambdaQueryWrapper<UserWallet>().eq(UserWallet::getUserId, userId));
     }
 
     /*
@@ -35,8 +35,8 @@ public class UserWalletServiceImpl extends ServiceImpl<UserWalletMapper, UserWal
     @Override
     public List<UserWallet> findUserWallets(Long userId, Long coinId) {
         return list(new LambdaQueryWrapper<UserWallet>()
-                .eq(UserWallet::getUserId,userId)
-                .eq(UserWallet::getCoinId,coinId));
+                .eq(UserWallet::getUserId, userId)
+                .eq(UserWallet::getCoinId, coinId));
     }
 
     /*
@@ -45,12 +45,12 @@ public class UserWalletServiceImpl extends ServiceImpl<UserWalletMapper, UserWal
     @Override
     public boolean add(Long userId, UserWallet userWallet) {
         User user = userService.getById(userId);
-        if (user == null){
+        if (user == null) {
             throw new IllegalArgumentException("该用户不存在");
         }
         // 校验交易密码
         String paypassword = user.getPaypassword();
-        if (StringUtils.isEmpty(paypassword) || !(new BCryptPasswordEncoder().matches(userWallet.getPayPassword(),paypassword))){
+        if (StringUtils.isEmpty(paypassword) || !(new BCryptPasswordEncoder().matches(userWallet.getPayPassword(), paypassword))) {
             throw new IllegalArgumentException("交易密码错误");
         }
         userWallet.setUserId(userId);
@@ -63,16 +63,16 @@ public class UserWalletServiceImpl extends ServiceImpl<UserWalletMapper, UserWal
     @Override
     public boolean delete(Long addressId, String payPassword) {
         UserWallet userWallet = getById(addressId);
-        if (userWallet == null){
+        if (userWallet == null) {
             throw new IllegalArgumentException("提现地址错误");
         }
         Long userId = userWallet.getUserId();
         User user = userService.getById(userId);
-        if (user == null){
+        if (user == null) {
             throw new IllegalArgumentException("该用户不存在");
         }
         String paypassword = user.getPaypassword();
-        if (StringUtils.isEmpty(paypassword) || !(new BCryptPasswordEncoder().matches(payPassword,paypassword))){
+        if (StringUtils.isEmpty(paypassword) || !(new BCryptPasswordEncoder().matches(payPassword, paypassword))) {
             throw new IllegalArgumentException("交易密码错误");
         }
         return super.removeById(addressId);

@@ -2,7 +2,7 @@ package com.horus.enums;
 
 import org.springframework.util.StringUtils;
 
-public enum  DepthMergeType {
+public enum DepthMergeType {
 
     DEFAULT("step0", 0),
     LOW("step1", 1),
@@ -17,22 +17,6 @@ public enum  DepthMergeType {
      * 值
      */
     private int value;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     DepthMergeType(String code, int value) {
         this.code = code;
@@ -58,5 +42,21 @@ public enum  DepthMergeType {
             }
         }
         return null;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class OrderEvent implements Serializable {
 
     /*
-    *  时间戳
-    * */
+     *  时间戳
+     * */
     private final long timestamp;
 
     /*
-    *  事件携带的数据
-    * */
+     *  事件携带的数据
+     * */
     protected transient Object source;
 
     public OrderEvent() {

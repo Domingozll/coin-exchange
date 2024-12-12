@@ -18,42 +18,40 @@ import java.util.Map;
 public class ResponseEntity {
 
     /*
-    *  订阅的组名
-    * */
+     *  订阅的组名
+     * */
     private String subbed;
 
     /*
-    *  取消订阅的组名
-    * */
+     *  取消订阅的组名
+     * */
     private String canceled;
 
     /*
-    *  发送的事件
-    * */
+     *  发送的事件
+     * */
     private String event;
 
     /*
-    *  推送的id
-    * */
+     *  推送的id
+     * */
     private String id;
 
     /*
-    * 推送的channel
-    * */
+     * 推送的channel
+     * */
     private String ch;
 
     /*
-    *  状态
-    * */
+     *  状态
+     * */
     private String status;
+    private Long ts;
+    private Map<String, Object> extend = new LinkedHashMap<>();
 
     public Long getTs() {
         return new DateTime().getMillis();
     }
-
-    private Long  ts;
-
-    private Map<String, Object> extend = new LinkedHashMap<>();
 
     public WsResponse build() {
         extend.put("id", this.getId());

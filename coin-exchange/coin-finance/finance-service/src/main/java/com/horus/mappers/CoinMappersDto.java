@@ -11,13 +11,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CoinMappersDto {
 
-    CoinMappersDto INSTANCE = Mappers.getMapper(CoinMappersDto.class) ;
+    CoinMappersDto INSTANCE = Mappers.getMapper(CoinMappersDto.class);
 
-    Coin toConvertEntity(CoinDto source) ;
+    Coin toConvertEntity(CoinDto source);
 
-    List<Coin> toConvertEntity(List<CoinDto> source) ;
+    List<Coin> toConvertEntity(List<CoinDto> source);
 
-    CoinDto toConvertDto(Coin source) ;
+    CoinDto toConvertDto(Coin source);
 
-    List<CoinDto> toConvertDto(List<Coin> source) ;
+    List<CoinDto> toConvertDto(List<Coin> source);
 }

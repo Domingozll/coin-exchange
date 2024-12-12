@@ -41,45 +41,45 @@ public class CashWithdrawalsController {
 
     @GetMapping("/records")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的条数"),
-            @ApiImplicitParam(name = "userId",value = "用户的ID"),
-            @ApiImplicitParam(name = "userName",value = "用户的名称"),
-            @ApiImplicitParam(name = "mobile",value = "用户的手机号"),
-            @ApiImplicitParam(name = "status",value = "充值的状态"),
-            @ApiImplicitParam(name = "numMin",value = "充值金额的最小值"),
-            @ApiImplicitParam(name = "numMax",value = "充值金额的最大值"),
-            @ApiImplicitParam(name = "startTime",value = "充值开始时间"),
-            @ApiImplicitParam(name = "endTime",value = "充值结束时间"),
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的条数"),
+            @ApiImplicitParam(name = "userId", value = "用户的ID"),
+            @ApiImplicitParam(name = "userName", value = "用户的名称"),
+            @ApiImplicitParam(name = "mobile", value = "用户的手机号"),
+            @ApiImplicitParam(name = "status", value = "充值的状态"),
+            @ApiImplicitParam(name = "numMin", value = "充值金额的最小值"),
+            @ApiImplicitParam(name = "numMax", value = "充值金额的最大值"),
+            @ApiImplicitParam(name = "startTime", value = "充值开始时间"),
+            @ApiImplicitParam(name = "endTime", value = "充值结束时间"),
     })
     public R<Page<CashWithdrawals>> findByPage(
             @ApiIgnore Page<CashWithdrawals> page,
             Long userId, String userName, String mobile,
             Byte status, String numMin, String numMax,
             String startTime, String endTime
-    ){
-        Page<CashWithdrawals> pageData = cashWithdrawalsService.findByPage(page,userId,userName,mobile,status,numMin,numMax,startTime,endTime);
+    ) {
+        Page<CashWithdrawals> pageData = cashWithdrawalsService.findByPage(page, userId, userName, mobile, status, numMin, numMax, startTime, endTime);
         return R.ok(pageData);
     }
 
     @GetMapping("/exportCNYWithDrawals")
     @ApiOperation(value = "导出GCN提现记录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name ="userId" ,value = "用户id"),
-            @ApiImplicitParam(name ="username" ,value = "用户名"),
-            @ApiImplicitParam(name ="mobile" ,value = "手机号"),
-            @ApiImplicitParam(name ="status" ,value = "状态"),
-            @ApiImplicitParam(name ="numMin" ,value = "提现金额下限"),
-            @ApiImplicitParam(name ="numMax" ,value = "提现金额上限"),
-            @ApiImplicitParam(name ="startTime" ,value = "开始时间"),
-            @ApiImplicitParam(name ="endTime" ,value = "终止时间"),
+            @ApiImplicitParam(name = "userId", value = "用户id"),
+            @ApiImplicitParam(name = "username", value = "用户名"),
+            @ApiImplicitParam(name = "mobile", value = "手机号"),
+            @ApiImplicitParam(name = "status", value = "状态"),
+            @ApiImplicitParam(name = "numMin", value = "提现金额下限"),
+            @ApiImplicitParam(name = "numMax", value = "提现金额上限"),
+            @ApiImplicitParam(name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(name = "endTime", value = "终止时间"),
     })
     public void exportCNYWithDrawals(Long userId, String userName, String mobile, Byte status,
                                      String numMin, String numMax, String startTime, String endTime) {
         Page<CashWithdrawals> cashWithdrawalsPage = new Page<>(1, 10000);
         Page<CashWithdrawals> pageData = cashWithdrawalsService.findByPage(cashWithdrawalsPage, userId, userName, mobile, status, numMin, numMax, startTime, endTime);
         List<CashWithdrawals> records = pageData.getRecords();
-        if (!CollectionUtils.isEmpty(records)){
+        if (!CollectionUtils.isEmpty(records)) {
             // 进行导出操作
             // 格式转换
             CellProcessorAdaptor longToStringAdapter = new CellProcessorAdaptor() {
@@ -91,7 +91,7 @@ public class CashWithdrawalsController {
             };
             // 对于金额，需要保留8位有效数字
             DecimalFormat decimalFormat = new DecimalFormat("0.00000000");
-            CellProcessorAdaptor moneyCellProcessorAdaptor = new CellProcessorAdaptor(){
+            CellProcessorAdaptor moneyCellProcessorAdaptor = new CellProcessorAdaptor() {
                 @Override
                 public <T> T execute(Object o, CsvContext csvContext) {
                     BigDecimal num = (BigDecimal) o;
@@ -105,7 +105,7 @@ public class CashWithdrawalsController {
                 public <T> T execute(Object o, CsvContext csvContext) {
                     String type = String.valueOf(o);
                     String typeName = "";
-                    switch (type){
+                    switch (type) {
                         case "alipay":
                             typeName = "支付宝";
                             break;
@@ -143,7 +143,7 @@ public class CashWithdrawalsController {
                 public <T> T execute(Object o, CsvContext csvContext) {
                     Byte status = (Byte) o;
                     String statusStr = "";
-                    switch (status){
+                    switch (status) {
                         case 0:
                             statusStr = "待审核";
                             break;
@@ -167,16 +167,16 @@ public class CashWithdrawalsController {
 
             // 对 headers和properties进行类型转化
             CellProcessor[] processors = new CellProcessor[]{
-                    longToStringAdapter,longToStringAdapter,null,moneyCellProcessorAdaptor,moneyCellProcessorAdaptor,
-                    moneyCellProcessorAdaptor,null,null,
-                    timeCellProcessorAdaptor,timeCellProcessorAdaptor,statusCellProcessorAdaptor,
-                    null,null
+                    longToStringAdapter, longToStringAdapter, null, moneyCellProcessorAdaptor, moneyCellProcessorAdaptor,
+                    moneyCellProcessorAdaptor, null, null,
+                    timeCellProcessorAdaptor, timeCellProcessorAdaptor, statusCellProcessorAdaptor,
+                    null, null
             };
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             try {
                 // 导出csv文件
                 ReportCsvUtils.reportList(requestAttributes.getResponse(), Constants.CASH_WITHDRAWS_HEADERS
-                        ,Constants.CASH_WITHDRAWS_PROPERTIES,"场外交易提现审核.csv",records,processors);
+                        , Constants.CASH_WITHDRAWS_PROPERTIES, "场外交易提现审核.csv", records, processors);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -188,34 +188,34 @@ public class CashWithdrawalsController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "cashWithdrawAuditRecord", value = "cashWithdrawAuditRecord json数据")
     })
-    public R updateWithdrawalsStatus(@RequestBody CashWithdrawAuditRecord cashWithdrawAuditRecord){
+    public R updateWithdrawalsStatus(@RequestBody CashWithdrawAuditRecord cashWithdrawAuditRecord) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        boolean isOk = cashWithdrawalsService.updateWithdrawalsStatus(userId,cashWithdrawAuditRecord);
-        return isOk ? R.ok():R.fail("审核失败");
+        boolean isOk = cashWithdrawalsService.updateWithdrawalsStatus(userId, cashWithdrawAuditRecord);
+        return isOk ? R.ok() : R.fail("审核失败");
     }
 
     @GetMapping("/user/records")
     @ApiOperation(value = "查询当前用户的提现(出售)记录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "current",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页显示的大小"),
-            @ApiImplicitParam(name = "status",value = "充值的状态")
+            @ApiImplicitParam(name = "current", value = "当前页"),
+            @ApiImplicitParam(name = "size", value = "每页显示的大小"),
+            @ApiImplicitParam(name = "status", value = "充值的状态")
     })
-    public R<Page<CashWithdrawals>> findUserCashWithdrawals(@ApiIgnore Page<CashWithdrawals> page,Byte status){
+    public R<Page<CashWithdrawals>> findUserCashWithdrawals(@ApiIgnore Page<CashWithdrawals> page, Byte status) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-        Page<CashWithdrawals> cashWithdrawalsPage = cashWithdrawalsService.findUserCashWithdrawals(page,userId,status);
+        Page<CashWithdrawals> cashWithdrawalsPage = cashWithdrawalsService.findUserCashWithdrawals(page, userId, status);
         return R.ok(cashWithdrawalsPage);
     }
 
     @PostMapping("/sell")
     @ApiOperation(value = "GCN卖出")
     @ApiImplicitParams({
-            @ApiImplicitParam(name ="cashSellParam" ,value = "cashSellParam json数据"),
+            @ApiImplicitParam(name = "cashSellParam", value = "cashSellParam json数据"),
     })
     public R<Object> sell(@RequestBody @Validated CashSellParam cashSellParam) {
         Long userId = Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         boolean isOk = cashWithdrawalsService.sell(userId, cashSellParam);
-        if (isOk){
+        if (isOk) {
             return R.ok("提交申请成功");
         }
         return R.fail("提交申请失败");

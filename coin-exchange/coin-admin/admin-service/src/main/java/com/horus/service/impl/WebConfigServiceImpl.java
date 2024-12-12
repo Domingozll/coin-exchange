@@ -12,9 +12,10 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class WebConfigServiceImpl extends ServiceImpl<WebConfigMapper, WebConfig> implements WebConfigService{
+public class WebConfigServiceImpl extends ServiceImpl<WebConfigMapper, WebConfig> implements WebConfigService {
     /**
      * <h2>分页查询我们的资源配置(webConfig)</h2>
+     *
      * @param page webConfig的名称
      * @param name webConfig的类型
      * @param type
@@ -34,8 +35,8 @@ public class WebConfigServiceImpl extends ServiceImpl<WebConfigMapper, WebConfig
     @Override
     public List<WebConfig> getPcBanner() {
         return list(new LambdaQueryWrapper<WebConfig>()
-                .eq(WebConfig::getType,"WEB_BANNER")
-                .eq(WebConfig::getStatus,1)
+                .eq(WebConfig::getType, "WEB_BANNER")
+                .eq(WebConfig::getStatus, 1)
                 .orderByAsc(WebConfig::getSort)
         );
     }

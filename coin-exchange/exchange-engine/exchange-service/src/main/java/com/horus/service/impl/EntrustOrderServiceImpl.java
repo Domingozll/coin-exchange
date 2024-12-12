@@ -35,7 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class EntrustOrderServiceImpl extends ServiceImpl<EntrustOrderMapper, EntrustOrder> implements EntrustOrderService{
+public class EntrustOrderServiceImpl extends ServiceImpl<EntrustOrderMapper, EntrustOrder> implements EntrustOrderService {
 
     @Autowired
     private MarketService marketService;
@@ -55,10 +55,10 @@ public class EntrustOrderServiceImpl extends ServiceImpl<EntrustOrderMapper, Ent
      * */
     @Override
     public Page<EntrustOrder> findByPage(Page<EntrustOrder> page, Long userId, String symbol, Integer type) {
-        return page(page,new LambdaQueryWrapper<EntrustOrder>()
-                .eq(EntrustOrder::getUserId,userId)
-                .eq( !StringUtils.isEmpty(symbol),EntrustOrder::getSymbol,symbol)
-                .eq(type!=null && type!=0,EntrustOrder::getType,type)
+        return page(page, new LambdaQueryWrapper<EntrustOrder>()
+                .eq(EntrustOrder::getUserId, userId)
+                .eq(!StringUtils.isEmpty(symbol), EntrustOrder::getSymbol, symbol)
+                .eq(type != null && type != 0, EntrustOrder::getType, type)
                 .orderByDesc(EntrustOrder::getCreated));
     }
 

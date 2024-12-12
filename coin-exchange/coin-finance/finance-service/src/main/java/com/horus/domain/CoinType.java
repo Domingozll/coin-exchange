@@ -12,9 +12,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
-    * 币种类型
-    */
-@ApiModel(value="com-horus-domain-CoinType")
+ * 币种类型
+ */
+@ApiModel(value = "com-horus-domain-CoinType")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,14 +24,14 @@ public class CoinType {
      * 主键
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="主键")
+    @ApiModelProperty(value = "主键")
     private Long id;
 
     /**
      * 代码
      */
     @TableField(value = "code")
-    @ApiModelProperty(value="代码")
+    @ApiModelProperty(value = "代码")
     @NotBlank
     private String code;
 
@@ -39,28 +39,28 @@ public class CoinType {
      * 描述
      */
     @TableField(value = "description")
-    @ApiModelProperty(value="描述")
+    @ApiModelProperty(value = "描述")
     private String description;
 
     /**
      * 状态：0-无效；1-有效；
      */
     @TableField(value = "status")
-    @ApiModelProperty(value="状态：0-无效；1-有效；")
+    @ApiModelProperty(value = "状态：0-无效；1-有效；")
     @NotNull
     private Byte status;
 
     /**
      * 创建时间
      */
-    @TableField(value = "created",fill = FieldFill.INSERT)
-    @ApiModelProperty(value="创建时间")
+    @TableField(value = "created", fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 
     /**
      * 更新时间
      */
-    @TableField(value = "last_update_time",fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value="更新时间")
+    @TableField(value = "last_update_time", fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "更新时间")
     private Date lastUpdateTime;
 }

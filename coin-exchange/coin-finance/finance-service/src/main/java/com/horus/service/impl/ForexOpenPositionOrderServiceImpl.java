@@ -5,7 +5,8 @@ import com.horus.domain.ForexOpenPositionOrder;
 import com.horus.mapper.ForexOpenPositionOrderMapper;
 import com.horus.service.ForexOpenPositionOrderService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class ForexOpenPositionOrderServiceImpl extends ServiceImpl<ForexOpenPositionOrderMapper, ForexOpenPositionOrder> implements ForexOpenPositionOrderService{
+public class ForexOpenPositionOrderServiceImpl extends ServiceImpl<ForexOpenPositionOrderMapper, ForexOpenPositionOrder> implements ForexOpenPositionOrderService {
 
 }

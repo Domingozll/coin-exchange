@@ -5,7 +5,8 @@ import com.horus.domain.CoinWithdrawAuditRecord;
 import com.horus.mapper.CoinWithdrawAuditRecordMapper;
 import com.horus.service.CoinWithdrawAuditRecordService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class CoinWithdrawAuditRecordServiceImpl extends ServiceImpl<CoinWithdrawAuditRecordMapper, CoinWithdrawAuditRecord> implements CoinWithdrawAuditRecordService{
+public class CoinWithdrawAuditRecordServiceImpl extends ServiceImpl<CoinWithdrawAuditRecordMapper, CoinWithdrawAuditRecord> implements CoinWithdrawAuditRecordService {
 
 }

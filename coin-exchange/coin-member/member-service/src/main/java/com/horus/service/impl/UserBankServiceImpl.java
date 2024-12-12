@@ -13,22 +13,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserBankServiceImpl extends ServiceImpl<UserBankMapper, UserBank> implements UserBankService{
+public class UserBankServiceImpl extends ServiceImpl<UserBankMapper, UserBank> implements UserBankService {
 
     @Autowired
     private UserService userService;
 
     /*
-    *  查询用户的银行卡信息
-    * */
+     *  查询用户的银行卡信息
+     * */
     @Override
     public Page<UserBank> findByPage(Page<UserBank> page, Long userId) {
-        return page(page,new LambdaQueryWrapper<UserBank>().eq(userId != null,UserBank::getUserId,userId));
+        return page(page, new LambdaQueryWrapper<UserBank>().eq(userId != null, UserBank::getUserId, userId));
     }
 
     /*
-    *  通过用户的id 查询用户的银行卡
-    * */
+     *  通过用户的id 查询用户的银行卡
+     * */
     @Override
     public UserBank getCurrentUserBank(Long userId) {
         UserBank userBank = getOne(
@@ -47,14 +47,14 @@ public class UserBankServiceImpl extends ServiceImpl<UserBankMapper, UserBank> i
         String payPassword = userBank.getPayPassword();
         User user = userService.getById(userId);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        if (!bCryptPasswordEncoder.matches(payPassword,user.getPaypassword())){
+        if (!bCryptPasswordEncoder.matches(payPassword, user.getPaypassword())) {
             throw new IllegalArgumentException("用户的支付密码错误");
         }
         Long id = userBank.getId();
         // 有Id 代表是修改操作
-        if (id!=0){
+        if (id != 0) {
             UserBank userBankDb = getById(id);
-            if (userBankDb==null){
+            if (userBankDb == null) {
                 throw new IllegalArgumentException("用户的银行卡的ID输入错误");
             }
             // 修改值

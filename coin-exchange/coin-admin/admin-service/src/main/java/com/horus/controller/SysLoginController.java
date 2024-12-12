@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /*
-*  登录的控制器
-* */
+ *  登录的控制器
+ * */
 @RestController
 @Api(tags = "登录的控制器")
 public class SysLoginController {
@@ -28,13 +28,13 @@ public class SysLoginController {
     @PostMapping("/login")
     @ApiOperation(value = "后台管理人员登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "username",value = "用户名称"),
-            @ApiImplicitParam(name = "password",value = "用户密码")
+            @ApiImplicitParam(name = "username", value = "用户名称"),
+            @ApiImplicitParam(name = "password", value = "用户密码")
     })
     public LoginResult loginResult(
             @RequestParam(required = true) String username,
-            @RequestParam(required = true) String password){
+            @RequestParam(required = true) String password) {
 
-        return loginService.login(username,password);
+        return loginService.login(username, password);
     }
 }

@@ -10,21 +10,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value="com-horus-domain-UserCoinFreeze")
+@ApiModel(value = "com-horus-domain-UserCoinFreeze")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "user_coin_freeze")
 public class UserCoinFreeze {
     @TableId(value = "user_id", type = IdType.INPUT)
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long userId;
 
     @TableField(value = "coin_id")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long coinId;
 
     @TableField(value = "freeze")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long freeze;
 }

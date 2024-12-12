@@ -11,9 +11,9 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
-* 网站配置信息
-*/
-@ApiModel(value="com-horus-domain-WebConfig")
+ * 网站配置信息
+ */
+@ApiModel(value = "com-horus-domain-WebConfig")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,14 +23,14 @@ public class WebConfig {
      * Id
      */
     @TableId(value = "id", type = IdType.INPUT)
-    @ApiModelProperty(value="Id")
+    @ApiModelProperty(value = "Id")
     private Long id;
 
     /**
      * 分组, LINK_BANNER ,WEB_BANNER
      */
     @TableField(value = "`type`")
-    @ApiModelProperty(value="分组, LINK_BANNER ,WEB_BANNER")
+    @ApiModelProperty(value = "分组, LINK_BANNER ,WEB_BANNER")
     @NotBlank
     private String type;
 
@@ -38,7 +38,7 @@ public class WebConfig {
      * 名称
      */
     @TableField(value = "`name`")
-    @ApiModelProperty(value="名称")
+    @ApiModelProperty(value = "名称")
     @NotBlank
     private String name;
 
@@ -46,7 +46,7 @@ public class WebConfig {
      * 值
      */
     @TableField(value = "`value`")
-    @ApiModelProperty(value="值")
+    @ApiModelProperty(value = "值")
     @NotBlank
     private String value;
 
@@ -54,27 +54,27 @@ public class WebConfig {
      * 权重
      */
     @TableField(value = "sort")
-    @ApiModelProperty(value="权重")
+    @ApiModelProperty(value = "权重")
     private Short sort;
 
     /**
      * 创建时间
      */
     @TableField(value = "created", fill = FieldFill.INSERT)
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 
     /**
      * 超链接地址
      */
     @TableField(value = "url")
-    @ApiModelProperty(value="超链接地址")
+    @ApiModelProperty(value = "超链接地址")
     private String url;
 
     /**
      * 是否使用 0 否 1是
      */
     @TableField(value = "`status`")
-    @ApiModelProperty(value="是否使用 0 否 1是")
+    @ApiModelProperty(value = "是否使用 0 否 1是")
     private short status;
 }

@@ -12,16 +12,16 @@ import java.util.List;
 public class UserTotalAccountVo {
 
     @ApiModelProperty(value = "用户的总金额CNY(人民币)")
-    private BigDecimal amount ;
+    private BigDecimal amount;
 
     @ApiModelProperty(value = "用户的总金额(USDT平台币)")
-    private BigDecimal amountUs ;
+    private BigDecimal amountUs;
 
 
     @ApiModelProperty(value = "账户的金额单位(USDT平台币)")
-    private String amountUsUnit ;
+    private String amountUsUnit;
 
 
     @ApiModelProperty(value = "资产列表")
-    private List<AccountVo> assertList ;
+    private List<AccountVo> assertList;
 }

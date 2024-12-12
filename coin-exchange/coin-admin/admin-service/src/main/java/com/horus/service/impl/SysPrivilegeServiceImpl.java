@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Service
 
-public class SysPrivilegeServiceImpl extends ServiceImpl<SysPrivilegeMapper, SysPrivilege> implements SysPrivilegeService{
+public class SysPrivilegeServiceImpl extends ServiceImpl<SysPrivilegeMapper, SysPrivilege> implements SysPrivilegeService {
 
     @Autowired
     private SysPrivilegeMapper sysPrivilegeMapper;
@@ -23,6 +23,7 @@ public class SysPrivilegeServiceImpl extends ServiceImpl<SysPrivilegeMapper, Sys
 
     /**
      * <h2>获取菜单下的所有权限数据</h2>
+     *
      * @param menuId 菜单id
      * @param roleId 角色id
      **/

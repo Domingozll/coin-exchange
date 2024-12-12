@@ -5,7 +5,8 @@ import com.horus.domain.TurnoverRecord;
 import com.horus.mapper.TurnoverRecordMapper;
 import com.horus.service.TurnoverRecordService;
 import org.springframework.stereotype.Service;
+
 @Service
-public class TurnoverRecordServiceImpl extends ServiceImpl<TurnoverRecordMapper, TurnoverRecord> implements TurnoverRecordService{
+public class TurnoverRecordServiceImpl extends ServiceImpl<TurnoverRecordMapper, TurnoverRecord> implements TurnoverRecordService {
 
 }

@@ -8,6 +8,7 @@ public class BeanUtils {
 
     /**
      * 将EntrustOrder 转化为我们的Order
+     *
      * @param entrustOrder
      * @return
      */
@@ -22,7 +23,7 @@ public class BeanUtils {
         order.setOrderDirection(OrderDirection.getOrderDirection(entrustOrder.getType().intValue()));
         order.setTime(entrustOrder.getCreated().getTime());
 
-        return order ;
+        return order;
 
     }
 }

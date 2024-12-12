@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public enum  ExceptionEnum {
+public enum ExceptionEnum {
 
     /**
      * 默认错误类型

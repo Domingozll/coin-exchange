@@ -13,57 +13,57 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
-    * 创新交易币种表
-    */
-@ApiModel(value="com-horus-domain-ForexCoin")
+ * 创新交易币种表
+ */
+@ApiModel(value = "com-horus-domain-ForexCoin")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "forex_coin")
 public class ForexCoin {
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long id;
 
     /**
      * 币种名称
      */
     @TableField(value = "name")
-    @ApiModelProperty(value="币种名称")
+    @ApiModelProperty(value = "币种名称")
     private String name;
 
     /**
      * 币种标题
      */
     @TableField(value = "title")
-    @ApiModelProperty(value="币种标题")
+    @ApiModelProperty(value = "币种标题")
     private String title;
 
     /**
      * 排序
      */
     @TableField(value = "sort")
-    @ApiModelProperty(value="排序")
+    @ApiModelProperty(value = "排序")
     private Byte sort;
 
     /**
      * 状态: 0禁用 1启用
      */
     @TableField(value = "status")
-    @ApiModelProperty(value="状态: 0禁用 1启用")
+    @ApiModelProperty(value = "状态: 0禁用 1启用")
     private Boolean status;
 
     /**
      * 修改时间
      */
     @TableField(value = "last_update_time")
-    @ApiModelProperty(value="修改时间")
+    @ApiModelProperty(value = "修改时间")
     private Date lastUpdateTime;
 
     /**
      * 创建时间
      */
     @TableField(value = "created")
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 }

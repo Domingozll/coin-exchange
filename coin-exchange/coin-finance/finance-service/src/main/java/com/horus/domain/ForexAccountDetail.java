@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-    * 持仓账户流水
-    */
-@ApiModel(value="com-horus-domain-ForexAccountDetail")
+ * 持仓账户流水
+ */
+@ApiModel(value = "com-horus-domain-ForexAccountDetail")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,41 +26,41 @@ public class ForexAccountDetail {
      * 主键
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="主键")
+    @ApiModelProperty(value = "主键")
     private Long id;
 
     /**
      * 持仓账户ID
      */
     @TableField(value = "account_id")
-    @ApiModelProperty(value="持仓账户ID")
+    @ApiModelProperty(value = "持仓账户ID")
     private Long accountId;
 
     /**
      * 收支类型：开仓；2-平仓；
      */
     @TableField(value = "type")
-    @ApiModelProperty(value="收支类型：开仓；2-平仓；")
+    @ApiModelProperty(value = "收支类型：开仓；2-平仓；")
     private Byte type;
 
     /**
      * 持仓量
      */
     @TableField(value = "amount")
-    @ApiModelProperty(value="持仓量")
+    @ApiModelProperty(value = "持仓量")
     private BigDecimal amount;
 
     /**
      * 备注
      */
     @TableField(value = "remark")
-    @ApiModelProperty(value="备注")
+    @ApiModelProperty(value = "备注")
     private String remark;
 
     /**
      * 创建时间
      */
     @TableField(value = "created")
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value = "创建时间")
     private Date created;
 }

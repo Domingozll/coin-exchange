@@ -8,14 +8,14 @@ spring:
       server-addr: nacos-server:8848
       config:
         file-extension: yaml
-# 拉取的配置文件的dataID = chan-service-dev.yaml
-  # rocketMQ的配置
+    # 拉取的配置文件的dataID = chan-service-dev.yaml
+    # rocketMQ的配置
     stream:
       rocketmq:
         binder:
           name-server: rocket-server:9876
       bindings:
-        tio_group: {destination: tio_group, content-type: application/plain, group: order-group, consumer.maxAttempts: 1}
+        tio_group: { destination: tio_group, content-type: application/plain, group: order-group, consumer.maxAttempts: 1 }
 
 # tio的配置文件
 tio:

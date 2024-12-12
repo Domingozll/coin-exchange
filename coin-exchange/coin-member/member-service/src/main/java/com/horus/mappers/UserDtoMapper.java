@@ -8,10 +8,10 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /*
-*  该mappers目的是为了 entity(对象实体)和Dto(数据传输对象)的高效转换，并不是和数据库对象的转换的通常的mapper
-*   用来做对象的映射转换
-*   entity -> Dto or Dto -> entity
-* */
+ *  该mappers目的是为了 entity(对象实体)和Dto(数据传输对象)的高效转换，并不是和数据库对象的转换的通常的mapper
+ *   用来做对象的映射转换
+ *   entity -> Dto or Dto -> entity
+ * */
 @Mapper(componentModel = "spring") // org.mapstruct.Mapper 注意别弄错了
 public interface UserDtoMapper {
 
@@ -19,13 +19,13 @@ public interface UserDtoMapper {
     UserDtoMapper INSTANCE = Mappers.getMapper(UserDtoMapper.class);
 
     /*
-    *  将entity转化为Dto
-    * */
+     *  将entity转化为Dto
+     * */
     UserDto convert2Dto(User source);
 
     /*
-    *  将Dto对象转化为entity对象
-    * */
+     *  将Dto对象转化为entity对象
+     * */
     User convert2Entity(UserDto source);
 
     /*

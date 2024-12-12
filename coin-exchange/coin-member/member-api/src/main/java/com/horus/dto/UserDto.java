@@ -14,7 +14,7 @@ public class UserDto {
      * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="自增id")
+    @ApiModelProperty(value = "自增id")
     private Long id;
 
 
@@ -22,21 +22,21 @@ public class UserDto {
      * 用户名
      */
     @TableField(value = "username")
-    @ApiModelProperty(value="用户名")
+    @ApiModelProperty(value = "用户名")
     private String username;
 
     /**
      * 国际电话区号
      */
     @TableField(value = "country_code")
-    @ApiModelProperty(value="国际电话区号")
+    @ApiModelProperty(value = "国际电话区号")
     private String countryCode;
 
     /**
      * 手机号
      */
     @TableField(value = "mobile")
-    @ApiModelProperty(value="手机号")
+    @ApiModelProperty(value = "手机号")
     private String mobile;
 
 
@@ -44,19 +44,19 @@ public class UserDto {
      * 邮箱
      */
     @TableField(value = "email")
-    @ApiModelProperty(value="邮箱")
+    @ApiModelProperty(value = "邮箱")
     private String email;
 
     /**
      * 真实姓名
      */
     @TableField(value = "real_name")
-    @ApiModelProperty(value="真实姓名")
+    @ApiModelProperty(value = "真实姓名")
     private String realName;
 
     /*
-    *  支付密码
-    * */
+     *  支付密码
+     * */
     @ApiModelProperty(value = "支付密码")
     private String paypassword;
 

@@ -12,15 +12,15 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class CoinTypeServiceImpl extends ServiceImpl<CoinTypeMapper, CoinType> implements CoinTypeService{
+public class CoinTypeServiceImpl extends ServiceImpl<CoinTypeMapper, CoinType> implements CoinTypeService {
 
     /*
      *  条件分页查询货币类型
      * */
     @Override
     public Page<CoinType> findByPage(Page<CoinType> page, String code) {
-        return page(page,new LambdaQueryWrapper<CoinType>()
-                .like(!StringUtils.isEmpty(code), CoinType::getCode,code));
+        return page(page, new LambdaQueryWrapper<CoinType>()
+                .like(!StringUtils.isEmpty(code), CoinType::getCode, code));
     }
 
     /*
@@ -28,6 +28,6 @@ public class CoinTypeServiceImpl extends ServiceImpl<CoinTypeMapper, CoinType> i
      * */
     @Override
     public List<CoinType> listByStatus(Byte status) {
-        return list(new LambdaQueryWrapper<CoinType>().eq(status!=null,CoinType::getStatus,status));
+        return list(new LambdaQueryWrapper<CoinType>().eq(status != null, CoinType::getStatus, status));
     }
 }

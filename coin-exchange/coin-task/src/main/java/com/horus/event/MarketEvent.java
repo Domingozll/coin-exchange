@@ -27,19 +27,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MarketEvent implements Event {
 
+    private static final String MARKET_GROUP = "market.%s.ticker"; // %s代表交易区域
+    private static final String MARKET_DETAIL_GROUP = "markets.%s.detail"; // 交易区域的详情交易数据
     @Autowired
     private Source source;
-
     @Autowired
     private TradingAreaServiceClient tradingAreaServiceClient;
-
-
     @Autowired
     private MarketServiceFeign marketServiceFeign;
-
-    private static final String MARKET_GROUP = "market.%s.ticker"; // %s代表交易区域
-
-    private static final String MARKET_DETAIL_GROUP = "markets.%s.detail" ; // 交易区域的详情交易数据
 
     @Override
     public void handle() {
@@ -53,9 +48,9 @@ public class MarketEvent implements Event {
             String marketIds = tradeAreaDto.getMarketIds();
             String[] split = marketIds.split(",");
             List<TradeMarketDto> tradeMarketDtos = null;
-            if (split == null){
+            if (split == null) {
                 tradeMarketDtos = marketServiceFeign.queryMarkesByIds(Arrays.asList(tradeAreaDto.getId()));
-            }else {
+            } else {
                 List<Long> list = Arrays.stream(split).map(s -> Long.valueOf(s)).collect(Collectors.toList());
                 tradeMarketDtos = marketServiceFeign.queryMarkesByIds(list);
             }
@@ -79,17 +74,17 @@ public class MarketEvent implements Event {
 
         // 获取所有的交易市场
         List<MarketDto> marketDtos = marketServiceFeign.tradeMarkets();
-        if(CollectionUtils.isEmpty(marketDtos)){
+        if (CollectionUtils.isEmpty(marketDtos)) {
             return;
         }
         for (MarketDto marketDto : marketDtos) {
             List<TradeMarketDto> tradeMarketDtos = marketServiceFeign.queryMarkesByIds(Arrays.asList(marketDto.getId()));
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("tick",tradeMarketDtos) ;
+            jsonObject.put("tick", tradeMarketDtos);
 
             MessagePayload messagePayload = new MessagePayload();
-            messagePayload.setChannel(String.format(MARKET_DETAIL_GROUP,marketDto.getSymbol().toLowerCase()));
+            messagePayload.setChannel(String.format(MARKET_DETAIL_GROUP, marketDto.getSymbol().toLowerCase()));
             messagePayload.setBody(jsonObject.toJSONString());
             source.subscribeGroupOutput()
                     .send(

@@ -23,8 +23,8 @@ public class DataLoaderCmdRunner implements CommandLineRunner {
     private DisruptorTemplate disruptorTemplate;
 
     /*
-    *  项目一启动就会执行该方法
-    * */
+     *  项目一启动就会执行该方法
+     * */
     @Override
     public void run(String... args) throws Exception {
         // 在项目启动后，对委托单的数据进行加载(数据库读取)
@@ -33,7 +33,7 @@ public class DataLoaderCmdRunner implements CommandLineRunner {
                         .eq(EntrustOrder::getStatus, 0)
                         .orderByAsc(EntrustOrder::getCreated)
         );
-        if (CollectionUtils.isEmpty(entrustOrders)){
+        if (CollectionUtils.isEmpty(entrustOrders)) {
             return;
         }
         StopWatch stopWatch = new StopWatch();
