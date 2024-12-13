@@ -5,14 +5,14 @@ spring:
     active: dev
   cloud:
     nacos:
-      server-addr: nacos-server:8848
+      server-addr: ${nacos-server:nacos-server}:8848
       config:
         file-extension: yaml
     #rocketMQ配置
     stream:
       rocketmq:
         binder:
-          name-server: rocketmq-server:9876
+          name-server: ${rocketmq-server:rocketmq-server}:9876
       bindings:
         order_in: { destination: order_in, content-type: application/plain, group: order-group, consumer.maxAttempts: 1 }
         trade_plate_out: { destination: trade_plate_out, content-type: application/plain }

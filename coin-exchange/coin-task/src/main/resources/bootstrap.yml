@@ -5,7 +5,7 @@ spring:
     active: dev
   cloud: #nacos地址 这里将会从nacos远程拉取配置信息
     nacos:
-      server-addr: nacos-server:8848
+      server-addr: ${nacos-server:nacos-server}:8848
       config:
         file-extension: yaml
     # 拉取的配置文件的dataID = task-service-dev.yaml
@@ -13,7 +13,7 @@ spring:
     stream:
       rocketmq:
         binder:
-          name-server: rocket-server:9876
+          name-server: ${rocket-server:rocket-server}:9876
       bindings:
         # 生产者
         group_message_out: { destination: tio_group, content-type: application/plain, group: order-group, consumer.maxAttempts: 1 }

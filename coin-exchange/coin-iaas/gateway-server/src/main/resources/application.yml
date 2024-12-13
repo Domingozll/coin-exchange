@@ -8,7 +8,7 @@ spring:
     nacos:
       discovery:
         # 修改本机的hosts文件即可
-        server-addr: nacos-server:8848
+        server-addr: ${nacos-server:nacos-server}:8848
     #网关配置
     gateway:
       discovery:
@@ -65,7 +65,7 @@ spring:
     # 通过网关来完成对2种维度的限流： 网关维度+API分组
     sentinel:
       transport:
-        dashboard: sentinel-server:8858
+        dashboard: ${sentinel-server:sentinel-server}:8858
         # 客户端ip和端口
         client-ip: 192.168.1.8
         port: 8719
@@ -74,19 +74,19 @@ spring:
         #          file: classpath:gw-flow.json #网关 + API分组的限流
         #          ruleType: gw_flow
         ds1.nacos:
-          serverAddr: nacos-server:8848
+          serverAddr: ${nacos-server:nacos-server}:8848
           dataId: gw-flow
           ruleType: gw_flow
         #        ds2.file:
         #          file: classpath:api-group.json
         #          ruleType: gw_api_group
         ds2.nacos:
-          serverAddr: nacos-server:8848
+          serverAddr: ${nacos-server:nacos-server}:8848
           dataId: api-group
           ruleType: gw_api_group
       eager: true
   redis:
-    host: redis-server
+    host: ${redis-server:redis-server}
     port: 6379
 #    password: 123456
 # 我们演示了sentinel-dashboard 的规则的定义，而且规则定义好了后，我们的网关立马能感知到（nacos感知不到），但是我们下次重启，会丢失规则。

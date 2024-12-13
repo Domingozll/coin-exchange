@@ -5,7 +5,7 @@ spring:
     active: dev
   cloud: #nacos地址 这里将会从nacos远程拉取配置信息
     nacos:
-      server-addr: nacos-server:8848
+      server-addr: ${nacos-server:nacos-server}:8848
       config:
         file-extension: yaml
 # 拉取的配置文件的dataID = finance-service-dev.yaml
