@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @EnableDiscoveryClient
-@MapperScan("com.horus.mapper")
+@MapperScan(value = "com.horus.mapper")
 public class AdminServiceApplication {
 
 

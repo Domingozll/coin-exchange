@@ -16,12 +16,12 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        id, `name`, code, description, create_by, modify_by, `status`, created, last_update_time
+        id, `name`, `code`, description, create_by, modify_by, `status`, created, last_update_time
     </sql>
 
 
     <!--根据用户id查询角色code-->
-    <select id="getUserRoleCode" resultType="java.lang.String">
+    <select id="getUserRoleCode" resultType="java.lang.String" parameterType="java.lang.Long">
         SELECT r.`code`
         FROM sys_role AS r
                  LEFT JOIN sys_user_role as ur on r.id = ur.role_id
