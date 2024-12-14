@@ -53,7 +53,7 @@ public class SysUserController {
         return success ? R.ok() : R.fail("新增失败");
     }
 
-    @PatchMapping("/update")
+    @PatchMapping()
     @ApiOperation(value = "修改员工")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sysUser", value = "sysUser 的json数据")
